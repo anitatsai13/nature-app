@@ -136,6 +136,21 @@ h3.sub .pgt{color:var(--muted);font-size:.78rem;font-weight:400}
 .figrow>.fig svg{max-width:185px}
 .ctab .fig{margin:0;border:none;padding:2px}
 .ctab .fig svg{max-width:195px}
+.c-red{background:#fbe0e0!important;color:#b0342f;font-weight:800}
+.c-orange{background:#fde8cf!important;color:#b5651d;font-weight:800}
+.c-yellow{background:#fdf3cf!important;color:#8f7415;font-weight:800}
+.c-green{background:#ddf0dd!important;color:#2e7d41;font-weight:800}
+.c-blue{background:#dceaf7!important;color:#2a5f9e;font-weight:800}
+.c-purple{background:#e9e0f3!important;color:#6a4a9e;font-weight:800}
+.c-pinkred{background:#efd9e8!important;color:#9b3d78;font-weight:800}
+.c-bluegreen{background:#d7efe9!important;color:#1f7d6e;font-weight:800}
+.c-brown{background:#f0ddd3!important;color:#8b4a2b;font-weight:800}
+.c-yellowgreen{background:#e8f0cf!important;color:#66841c;font-weight:800}
+.c-blueblack{background:#d9dde8!important;color:#2a3550;font-weight:800}
+.c-none{background:#fbfbfb!important;color:#7b8a82;font-weight:800}
+.ctab td.cc{text-align:center;white-space:nowrap}
+.res{display:inline-block;border-radius:6px;padding:2px 10px;font-weight:800}
+.arw{color:#3d9bd4;font-weight:900;margin:0 4px}
 .lb{display:inline-block;border-radius:5px;padding:0 7px;font-size:.74rem;font-weight:900;color:#fff;margin-right:5px;vertical-align:1px}
 .lb.r{background:#d94f5c}.lb.e{background:#3d7ea6}.lb.g{background:#2f8f5f}.lb.p{background:#7a5bb0}
 .cal{display:inline-block;color:#2b8f74;font-size:.76rem;font-weight:800;margin:0 4px}
@@ -536,16 +551,16 @@ const U7_3=`<div class="blk">
 <p>　① <b>金屬的燃燒</b></p>
 <div class="mtabwrap"><table class="ctab">
 <tr><th>金屬</th><th>燃燒的<br>難易度</th><th>火焰<br>顏色</th><th>燃燒後的<br>生成物</th><th>氧化物溶於<br>水後的生成物</th><th>氧化物溶於<br>水的酸鹼性</th><th>燃燒及氧化物溶於水的反應式</th></tr>
-<tr><td class="h">鈉 (Na)</td><td class="c">非常容易</td><td class="c">黃色</td><td class="c">氧化鈉</td><td class="c">氫氧化鈉</td><td class="c">鹼性</td><td>4Na＋O₂→2Na₂O<br>Na₂O＋H₂O→2NaOH</td></tr>
-<tr><td class="h">鎂 (Mg)</td><td class="c">容易</td><td class="c"><i class="hl">白色</i></td><td class="c">氧化鎂</td><td class="c">氫氧化鎂</td><td class="c">鹼性</td><td>2Mg＋O₂→2MgO<br>MgO＋H₂O→Mg(OH)₂</td></tr>
-<tr><td class="h">鋅 (Zn)</td><td class="c">不易</td><td class="c">黃綠色</td><td class="c">氧化鋅</td><td class="c">氫氧化鋅</td><td class="c">鹼性</td><td>2Zn＋O₂→2ZnO<br>ZnO＋H₂O→Zn(OH)₂</td></tr>
+<tr><td class="h">鈉 (Na)</td><td class="c">非常容易</td><td class="cc c-yellow">黃色</td><td class="c">氧化鈉</td><td class="c">氫氧化鈉</td><td class="c">鹼性</td><td>4Na＋O₂→2Na₂O<br>Na₂O＋H₂O→2NaOH</td></tr>
+<tr><td class="h">鎂 (Mg)</td><td class="c">容易</td><td class="cc" style="background:#fff;color:#5a6b62;border:1px solid var(--line);font-weight:800">白色</td><td class="c">氧化鎂</td><td class="c">氫氧化鎂</td><td class="c">鹼性</td><td>2Mg＋O₂→2MgO<br>MgO＋H₂O→Mg(OH)₂</td></tr>
+<tr><td class="h">鋅 (Zn)</td><td class="c">不易</td><td class="cc c-yellowgreen">黃綠色</td><td class="c">氧化鋅</td><td class="c">氫氧化鋅</td><td class="c">鹼性</td><td>2Zn＋O₂→2ZnO<br>ZnO＋H₂O→Zn(OH)₂</td></tr>
 <tr><td class="h">銅 (Cu)</td><td class="c">難</td><td class="c"><i class="hl">無火焰</i></td><td class="c">氧化銅</td><td class="c"><i class="hl">難溶於水</i></td><td class="c">難溶於水<br>故呈中性</td><td>2Cu＋O₂→2CuO</td></tr>
 </table></div>
 <p>　② <b>非金屬的燃燒</b></p>
 <div class="mtabwrap"><table class="ctab">
 <tr><th>非金屬</th><th>燃燒的<br>難易度</th><th>火焰<br>顏色</th><th>燃燒後的<br>生成物</th><th>氧化物溶於<br>水後的生成物</th><th>氧化物溶於<br>水的酸鹼性</th><th>燃燒及氧化物溶於水的反應式</th></tr>
-<tr><td class="h">硫 (S)</td><td class="c">容易</td><td class="c"><i class="hl">藍紫色</i></td><td class="c">二氧化硫</td><td class="c"><i class="hl">亞硫酸</i></td><td class="c">酸性</td><td>S＋O₂→SO₂<br>SO₂＋H₂O→H₂SO₃</td></tr>
-<tr><td class="h">碳 (C)</td><td class="c">容易</td><td class="c">黃色</td><td class="c">二氧化碳</td><td class="c"><i class="hl">碳酸</i></td><td class="c">酸性</td><td>C＋O₂→CO₂<br>CO₂＋H₂O→H₂CO₃</td></tr>
+<tr><td class="h">硫 (S)</td><td class="c">容易</td><td class="cc c-purple">藍紫色</td><td class="c">二氧化硫</td><td class="c"><i class="hl">亞硫酸</i></td><td class="c">酸性</td><td>S＋O₂→SO₂<br>SO₂＋H₂O→H₂SO₃</td></tr>
+<tr><td class="h">碳 (C)</td><td class="c">容易</td><td class="cc c-yellow">黃色</td><td class="c">二氧化碳</td><td class="c"><i class="hl">碳酸</i></td><td class="c">酸性</td><td>C＋O₂→CO₂<br>CO₂＋H₂O→H₂CO₃</td></tr>
 </table></div>
 <div class="box key"><span class="bt">得分關鍵</span><b>金屬</b>氧化物的水溶液呈<i class="hl">鹼性</i>，<b>非金屬</b>氧化物的水溶液呈<i class="hl">酸性</i>，而<b>難溶於水</b>的氧化物之水溶液呈<i class="hl">中性</i>。</div>
 </div>
@@ -765,9 +780,9 @@ const U8_3=`<div class="blk">
 <p>2. ⚠ 在 <b>25℃</b> 時，各種水溶液中 [H⁺]、[OH⁻] 的關係以及 pH 值大小：</p>
 <div class="mtabwrap"><table class="ctab">
 <tr><th>　</th><th>[H⁺] 與 [OH⁻] 關係</th><th>pH 值大小</th></tr>
-<tr><td class="h">酸性水溶液</td><td class="c">[H⁺] ＞ 10⁻⁷M ＞ [OH⁻]</td><td class="c"><i class="hl">pH ＜ 7</i><br>pH 值越小，酸性越強</td></tr>
-<tr><td class="h">中性水溶液</td><td class="c">[H⁺] ＝ 10⁻⁷M ＝ [OH⁻]</td><td class="c"><i class="hl">pH ＝ 7</i></td></tr>
-<tr><td class="h">鹼性水溶液</td><td class="c">[H⁺] ＜ 10⁻⁷M ＜ [OH⁻]</td><td class="c"><i class="hl">pH ＞ 7</i><br>pH 值越大，鹼性越強</td></tr>
+<tr><td class="h c-red">酸性水溶液</td><td class="c">[H⁺] ＞ 10⁻⁷M ＞ [OH⁻]</td><td class="c"><i class="hl">pH ＜ 7</i><br>pH 值越小，酸性越強</td></tr>
+<tr><td class="h c-green">中性水溶液</td><td class="c">[H⁺] ＝ 10⁻⁷M ＝ [OH⁻]</td><td class="c"><i class="hl">pH ＝ 7</i></td></tr>
+<tr><td class="h c-purple">鹼性水溶液</td><td class="c">[H⁺] ＜ 10⁻⁷M ＜ [OH⁻]</td><td class="c"><i class="hl">pH ＞ 7</i><br>pH 值越大，鹼性越強</td></tr>
 </table></div>
 <div class="act">0 ←—— 酸性漸強（[H⁺] 越大）　　<b>7 中性</b>　　鹼性漸強（[H⁺] 越小）——→ 14</div>
 <p><span class="nt"><b>註</b>pH 值可能小於 0 或大於 14。</span></p>
@@ -781,9 +796,9 @@ const U8_3=`<div class="blk">
 <p><b>判斷水溶液的酸鹼性</b></p>
 <div class="mtabwrap"><table class="ctab">
 <tr><th>不論溫度為何</th><th>溫度為 25℃ ①</th><th>溫度為 25℃ ②</th><th>結果</th></tr>
-<tr><td class="c">[H⁺] ＞ [OH⁻]</td><td class="c">[H⁺] ＞ 10⁻⁷M</td><td class="c">pH ＜ 7</td><td class="h">酸性水溶液</td></tr>
-<tr><td class="c">[H⁺] ＝ [OH⁻]</td><td class="c">[H⁺] ＝ 10⁻⁷M</td><td class="c">pH ＝ 7</td><td class="h">中性水溶液</td></tr>
-<tr><td class="c">[H⁺] ＜ [OH⁻]</td><td class="c">[H⁺] ＜ 10⁻⁷M</td><td class="c">pH ＞ 7</td><td class="h">鹼性水溶液</td></tr>
+<tr><td class="c">[H⁺] ＞ [OH⁻]</td><td class="c">[H⁺] ＞ 10⁻⁷M</td><td class="c">pH ＜ 7</td><td class="c"><span class="arw">→</span><span class="res c-red">酸性水溶液</span></td></tr>
+<tr><td class="c">[H⁺] ＝ [OH⁻]</td><td class="c">[H⁺] ＝ 10⁻⁷M</td><td class="c">pH ＝ 7</td><td class="c"><span class="arw">→</span><span class="res c-green">中性水溶液</span></td></tr>
+<tr><td class="c">[H⁺] ＜ [OH⁻]</td><td class="c">[H⁺] ＜ 10⁻⁷M</td><td class="c">pH ＞ 7</td><td class="c"><span class="arw">→</span><span class="res c-purple">鹼性水溶液</span></td></tr>
 </table></div>
 <p><span class="nt"><b>註</b>pH＞7 即表示 [H⁺]＜10⁻⁷M；根據 25℃ 時任何水溶液的 <b>[H⁺]×[OH⁻]＝10⁻¹⁴M²</b>，可得知 [H⁺]＜[OH⁻]，故這三個判斷方式其實是相同的。</span></p>
 </div>
@@ -791,13 +806,13 @@ const U8_3=`<div class="blk">
 <div class="blk">
 <h4>四、酸鹼指示劑</h4>
 <div class="mtabwrap"><table class="ctab">
-<tr><th>指示劑</th><th>酸性</th><th>中性</th><th>鹼性</th></tr>
-<tr><td class="h">⚠ 酚酞</td><td class="c">無色</td><td class="c">無色</td><td class="c"><i class="hl">紅色</i></td></tr>
-<tr><td class="h">廣用試紙</td><td class="c">紅色（強酸）← → 橙色（弱酸）</td><td class="c">綠色</td><td class="c">藍色（弱鹼）← → 紫色（強鹼）</td></tr>
-<tr><td class="h">石蕊試紙</td><td class="c">紅色</td><td class="c">不變色</td><td class="c">藍色</td></tr>
-<tr><td class="h">紅鳳菜</td><td class="c">紅色</td><td class="c">紫紅色</td><td class="c">藍綠色</td></tr>
-<tr><td class="h">紫甘藍</td><td class="c">紅色</td><td class="c">紫色</td><td class="c">綠色</td></tr>
-<tr><td class="h">蝶豆花</td><td class="c">紫色</td><td class="c">藍色</td><td class="c">綠色</td></tr>
+<tr><th>指示劑</th><th colspan="2">酸性</th><th>中性</th><th colspan="2">鹼性</th></tr>
+<tr><td class="h">⚠ 酚酞</td><td class="cc c-none" colspan="2">無色</td><td class="cc c-none">無色</td><td class="cc c-red" colspan="2">紅色</td></tr>
+<tr><td class="h">廣用試紙</td><td class="cc c-red">紅色<br><span style="font-size:.76rem;font-weight:400">強酸</span></td><td class="cc c-orange">橙色<br><span style="font-size:.76rem;font-weight:400">弱酸</span></td><td class="cc c-green">綠色</td><td class="cc c-blue">藍色<br><span style="font-size:.76rem;font-weight:400">弱鹼</span></td><td class="cc c-purple">紫色<br><span style="font-size:.76rem;font-weight:400">強鹼</span></td></tr>
+<tr><td class="h">石蕊試紙</td><td class="cc c-red" colspan="2">紅色</td><td class="cc c-none">不變色</td><td class="cc c-blue" colspan="2">藍色</td></tr>
+<tr><td class="h">紅鳳菜</td><td class="cc c-red" colspan="2">紅色</td><td class="cc c-pinkred">紫紅色</td><td class="cc c-bluegreen" colspan="2">藍綠色</td></tr>
+<tr><td class="h">紫甘藍</td><td class="cc c-red" colspan="2">紅色</td><td class="cc c-purple">紫色</td><td class="cc c-green" colspan="2">綠色</td></tr>
+<tr><td class="h">蝶豆花</td><td class="cc c-purple" colspan="2">紫色</td><td class="cc c-blue">藍色</td><td class="cc c-green" colspan="2">綠色</td></tr>
 </table></div>
 </div>`;
 const U8_4=`<div class="blk">
@@ -1040,13 +1055,13 @@ const U9_2=`<div class="blk">
 <tr><td>增加<b>反應物</b>（或減少生成物）的濃度</td><td>平衡往<b>生成物</b>的方向移動，<i class="hl">有利於正反應的進行</i></td></tr>
 <tr><td>減少<b>反應物</b>（或增加生成物）的濃度</td><td>平衡往<b>反應物</b>的方向移動，<i class="hl">有利於逆反應的進行</i></td></tr>
 </table></div>
-<p><span class="eg">例1</span>鉻酸根離子與二鉻酸根離子的平衡：<b>2CrO₄²⁻（黃色）＋ 2H⁺ ⇌ Cr₂O₇²⁻（橘紅色）＋ H₂O</b></p>
+<p><span class="eg">例1</span>鉻酸根離子與二鉻酸根離子的平衡：<b>2CrO₄²⁻（<span class="res c-yellow">黃色</span>）＋ 2H⁺ ⇌ Cr₂O₇²⁻（<span class="res c-orange">橘紅色</span>）＋ H₂O</b></p>
 <div class="mtabwrap"><table class="ctab">
 <tr><th>操作</th><th>平衡移動</th><th>結果</th></tr>
-<tr><td class="c">加入<b>酸</b>（H⁺ 增加）</td><td class="c">平衡向<i class="hl">右</i>移動</td><td>Cr₂O₇²⁻ 濃度增加，溶液顏色偏向<b>橘紅色</b></td></tr>
-<tr><td class="c">加入<b>鹼</b>（H⁺ 減少）</td><td class="c">平衡向<i class="hl">左</i>移動</td><td>CrO₄²⁻ 濃度增加，溶液顏色偏向<b>黃色</b></td></tr>
+<tr><td class="c">加入<b>酸</b>（H⁺ 增加）</td><td class="c">平衡向<i class="hl">右</i>移動</td><td>Cr₂O₇²⁻ 濃度增加，溶液顏色偏向 <span class="res c-orange">橘紅色</span></td></tr>
+<tr><td class="c">加入<b>鹼</b>（H⁺ 減少）</td><td class="c">平衡向<i class="hl">左</i>移動</td><td>CrO₄²⁻ 濃度增加，溶液顏色偏向 <span class="res c-yellow">黃色</span></td></tr>
 </table></div>
-<p><span class="eg">例2</span>溴水溶液的平衡：<b>Br₂（紅棕色）＋ H₂O ⇌ H⁺ ＋ Br⁻（無色）＋ HBrO（無色）</b></p>
+<p><span class="eg">例2</span>溴水溶液的平衡：<b>Br₂（<span class="res c-brown">紅棕色</span>）＋ H₂O ⇌ H⁺ ＋ Br⁻（<span class="res c-none">無色</span>）＋ HBrO（<span class="res c-none">無色</span>）</b></p>
 <div class="mtabwrap"><table class="ctab">
 <tr><th>操作</th><th>平衡移動</th><th>結果</th></tr>
 <tr><td class="c">加入<b>酸</b>（H⁺ 增加）</td><td class="c">平衡向<i class="hl">左</i>移動</td><td>Br₂ 濃度增加，溶液顏色<b>變深</b></td></tr>
@@ -1062,7 +1077,7 @@ const U9_2=`<div class="blk">
 <tr><td class="c">升高溫度</td><td><i class="hl">有利於吸熱反應</i>進行，反應往<b>吸熱</b>方向移動</td></tr>
 <tr><td class="c">降低溫度</td><td><i class="hl">有利於放熱反應</i>進行，反應往<b>放熱</b>方向移動</td></tr>
 </table></div>
-<p><span class="eg">例</span>二氧化氮與四氧化二氮的平衡：<b>2NO₂（紅棕色）⇌ N₂O₄（無色）＋ 熱</b></p>
+<p><span class="eg">例</span>二氧化氮與四氧化二氮的平衡：<b>2NO₂（<span class="res c-brown">紅棕色</span>）⇌ N₂O₄（<span class="res c-none">無色</span>）＋ 熱</b></p>
 <div class="mtabwrap"><table class="ctab">
 <tr><th>操作</th><th>平衡移動</th><th>結果</th></tr>
 <tr><td class="c">升高溫度</td><td class="c">平衡向<i class="hl">左</i>移動</td><td>NO₂ 濃度增加，顏色<b>變深</b></td></tr>
@@ -1282,7 +1297,7 @@ const U10_3=`<div class="blk">
 1. 由<i class="hl">葡萄糖</i>聚合而成，可經由<b>澱粉酶</b>水解成葡萄糖。<br>
 2. 屬於<b>醣類</b>的一種，醣類中氫、氧原子數目比與水相同，均為 <i class="hl">2：1</i>，故醣類又稱為<i class="hl">碳水化合物</i>。<br>
 <span class="eg">例</span>葡萄糖為碳水化合物，其化學式 C₆H₁₂O₆ 可寫成 C₆(H₂O)₆。<br>
-3. <b>澱粉的檢驗</b>：澱粉可使黃褐色的<b>碘液</b>呈<i class="hl">藍黑色</i>。
+3. <b>澱粉的檢驗</b>：澱粉可使<span class="res c-brown">黃褐色</span>的<b>碘液</b>呈 <span class="res c-blueblack">藍黑色</span>。
 </td></tr>
 <tr><td class="h">纖維素</td><td>
 1. 由<i class="hl">葡萄糖</i>聚合而成，但<b>聚合方式與澱粉不同</b>，人體<b>無法分解</b>纖維素，但纖維素可幫助消化。<br>
