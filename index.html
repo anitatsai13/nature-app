@@ -78,6 +78,20 @@ h3.sub .pgt{color:var(--muted);font-size:.78rem;font-weight:400}
 .box.myth{background:#fdf1f5;border:1px solid #f3cddb}.box.myth .bt{background:#c0507e}
 .box.hot{background:#f2f9ec;border:1px solid #cde5b8}.box.hot .bt{background:#6ea33c}
 .box.tip{background:#f5f1fb;border:1px solid #d8cdec}.box.tip .bt{background:#7a5bb0}
+.box.calc{background:#fdf3f7;border:1px solid #f3ccdf}.box.calc .bt{background:#d4548a}
+.cq{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 5px}
+.cq:first-of-type{margin-top:6px}
+.cq .tn{background:#d4548a;color:#fff;border-radius:7px;padding:1px 10px;font-size:.78rem;font-weight:900}
+.cq b{color:#b23a6e;font-size:.96rem}
+.cq .pair{margin-left:auto;font-size:.73rem;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1px 8px;white-space:nowrap}
+.sol{display:inline-block;background:#d4548a;color:#fff;border-radius:6px;padding:0 8px;font-size:.78rem;font-weight:900;margin-right:6px;vertical-align:1px}
+.ctab.rt{width:auto;min-width:0;margin:7px 0}
+.ctab.rt th{background:#fce9f2;color:#b23a6e;border-color:#efc3d8;padding:5px 12px}
+.ctab.rt td{border-color:#efc3d8;padding:5px 12px}
+.cb{display:inline-block;border:1.5px solid #4aa3b8;border-radius:7px;padding:2px 9px;margin:3px 2px;background:#fff;vertical-align:middle}
+.cal{display:inline-block;color:#2b8f74;font-size:.76rem;font-weight:800;margin:0 4px}
+.cal::before{content:"\21b3 ";font-weight:400}
+.stepline{margin:8px 0;line-height:2.2}
 .ctab{width:100%;border-collapse:collapse;background:var(--card);font-size:.88rem;min-width:480px}
 .ctab th,.ctab td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top;line-height:1.7}
 .ctab th{background:var(--gold);color:var(--brand);text-align:center;white-space:nowrap;font-size:.85rem}
@@ -318,9 +332,9 @@ const U7_1=`<div class="blk">
 (2) 計算時，<i class="hl">先求得莫耳數</i>，再轉換成質量或個數。</p>
 <p><b>2. 各種題型</b><br>
 (1) <b>個數與質量互換</b><br>
-　① 1.2×10²⁴ 個 H₂SO₄ 分子的質量 → <span class="fr"><i>1.2×10²⁴</i><i>6×10²³</i></span>＝2 mol → 2×98＝<b>196 g</b>　〔98＝1 莫耳的質量〕<br>
-　② 49 g H₂SO₄ 分子的個數 → <span class="fr"><i>49</i><i>98</i></span>＝0.5 mol → 0.5×（6×10²³）＝<b>3×10²³ 個</b><br>
-(2) <b>原子個數</b>：98 g H₂SO₄ 分子中氧原子個數 → <span class="fr"><i>98</i><i>98</i></span>＝1 mol → 1×<b>4</b>×（6×10²³）＝<b>2.4×10²⁴ 個</b>　〔1 個硫酸分子含有 4 個氧原子〕<br>
+　① 1.2×10²⁴ 個 H₂SO₄ 分子的質量 → <span class="cb"><span class="fr"><i>1.2×10²⁴</i><i>6×10²³</i></span>＝2 (mol)</span><span class="cal">先求得莫耳數</span> → 2×<b>98</b>＝<b>196 (g)</b><span class="cal">98＝1 莫耳的質量</span><br>
+　② 49 g H₂SO₄ 分子的個數 → <span class="cb"><span class="fr"><i>49</i><i>98</i></span>＝0.5 (mol)</span> → 0.5×<b>（6×10²³）</b>＝<b>3×10²³ 個</b><span class="cal">6×10²³＝1 莫耳的個數</span><br>
+(2) <b>原子個數</b>：98 g H₂SO₄ 分子中氧原子個數 → <span class="cb"><span class="fr"><i>98</i><i>98</i></span>＝1 (mol)</span> → 1×<b>4</b>×（6×10²³）＝<b>2.4×10²⁴ 個</b><span class="cal">1 個硫酸分子含有 4 個氧原子</span><br>
 (3) <b>相同質量時分子數的比較</b>：1 g H₂ 與 1 g O₂ 的分子數大小關係 → 分子數＝莫耳數×（6×10²³）＝<span class="fr"><i>質量</i><i>分子量</i></span>×（6×10²³）→ 質量相同時，<i class="hl">分子數與分子量成反比</i>，故 1 g H₂ 的分子數較多。</p>
 </div>`;
 const U7_2=`<div class="blk">
@@ -378,7 +392,7 @@ const U7_2=`<div class="blk">
 <div class="fb"><b>3</b>以完全消耗的反應物（<i class="hl">限量試劑</i>）作為基準，再利用「係數比＝莫耳數比」求得其他反應物消耗或生成物產生的莫耳數，再換算成質量。</div>
 </div>
 <p><span class="eg">例</span>將 16 g 的 H₂ 與 14 g 的 N₂ 進行反應，反應式為 H₂＋N₂→NH₃，則最多可生成多少 g 的氨氣？</p>
-<p><b>解</b>　1. 平衡反應式：3H₂＋N₂→2NH₃。<br>
+<p><span class="sol">解</span>1. 平衡反應式：3H₂＋N₂→2NH₃。<br>
 2. 質量轉換成莫耳數：H₂（分子量 2）→ <span class="fr"><i>16</i><i>2</i></span>＝8 mol；N₂（分子量 28）→ <span class="fr"><i>14</i><i>28</i></span>＝0.5 mol。<br>
 3. 以限量試劑為基準：</p>
 <div class="mtabwrap"><table class="ctab">
@@ -391,17 +405,32 @@ const U7_2=`<div class="blk">
 <p>由上述可知，1.5 mol H₂ 與 0.5 mol N₂ 反應，可產生 1 mol NH₃，NH₃ 的質量＝1×17＝<b>17 g</b>。</p>
 </div>
 
-<div class="box tip"><span class="bt">計算演練</span>
-<p><b>題型 1　化學計量</b><br>
-酒精燃燒的化學反應式如下：C₂H₅OH ＋ O₂ → CO₂ ＋ H₂O（未平衡），則 69 克的酒精完全燃燒後，會產生多少克的二氧化碳？（原子量：H＝1，C＝12，O＝16）</p>
-<p><b>解</b>　先平衡反應式：C₂H₅OH＋3O₂→2CO₂＋3H₂O。由「係數比＝莫耳數比」可知，1 莫耳的 C₂H₅OH 會產生 2 莫耳的 CO₂。<br>
-C₂H₅OH：CO₂＝1：2，酒精莫耳數＝<span class="fr"><i>69</i><i>46</i></span>＝1.5 莫耳<br>
-1：2＝1.5：X，X＝3 莫耳，故 CO₂ 的質量＝3×44＝<b>132 克</b>。</p>
-<p><b>題型 2　限量試劑</b><br>
-氫氣與氮氣反應會產生氨氣，化學反應式如下：H₂ ＋ N₂ → NH₃（未平衡）。若 6 克的氫氣與 56 克的氮氣反應，則最多可產生多少克的氨氣？（原子量：H＝1，N＝14）</p>
-<p><b>解</b>　先平衡反應式：3H₂＋N₂→2NH₃。<br>
-H₂：N₂：NH₃＝3：1：2；<span class="fr"><i>6</i><i>2</i></span>＝3 莫耳、<span class="fr"><i>56</i><i>28</i></span>＝2 莫耳。<br>
-H₂ 會完全消耗，為<i class="hl">限量試劑</i>，N₂ 則剩下 1 莫耳，並產生 2 莫耳的 NH₃，故 NH₃ 的質量＝2×17＝<b>34 克</b>。</p>
+<div class="box calc"><span class="bt">計算演練</span>
+<div class="cq"><span class="tn">題型 1</span><b>化學計量</b><span class="pair">搭配 重點演練第 3 題</span></div>
+<p>酒精燃燒的化學反應式如下：C₂H₅OH ＋ O₂ → CO₂ ＋ H₂O（未平衡）<br>
+則 69 克的酒精完全燃燒後，會產生多少克的二氧化碳？（原子量：H＝1，C＝12，O＝16）</p>
+<p class="stepline"><span class="sol">解</span>先平衡反應式：C₂H₅OH＋3O₂→2CO₂＋3H₂O，<br>
+由「<i class="hl">係數比＝莫耳數比</i>」可知，1 莫耳的 C₂H₅OH 會產生 2 莫耳的 CO₂。</p>
+<div class="mtabwrap"><table class="ctab rt">
+<tr><th>C₂H₅OH</th><th>　</th><th>CO₂</th></tr>
+<tr><td class="c">1</td><td class="c">：</td><td class="c">2</td></tr>
+<tr><td class="c"><span class="fr"><i>69</i><i>46</i></span>＝1.5 莫耳</td><td class="c">：</td><td class="c">X</td></tr>
+</table></div>
+<p>1：2＝1.5：X，X＝3 莫耳，<br>
+故 CO₂ 的質量＝3×44＝<b>132 克</b>。</p>
+
+<div class="cq"><span class="tn">題型 2</span><b>限量試劑</b><span class="pair">搭配 重點演練第 4 題</span></div>
+<p>氫氣與氮氣反應會產生氨氣，化學反應式如下：H₂ ＋ N₂ → NH₃（未平衡）<br>
+若 6 克的氫氣與 56 克的氮氣反應，則最多可產生多少克的氨氣？（原子量：H＝1，N＝14）</p>
+<p class="stepline"><span class="sol">解</span>先平衡反應式：3H₂＋N₂→2NH₃，</p>
+<div class="mtabwrap"><table class="ctab rt">
+<tr><th>H₂</th><th>　</th><th>N₂</th><th>　</th><th>NH₃</th></tr>
+<tr><td class="c">3</td><td class="c">：</td><td class="c">1</td><td class="c">：</td><td class="c">2</td></tr>
+<tr><td class="c"><span class="fr"><i>6</i><i>2</i></span>＝3 莫耳</td><td class="c">：</td><td class="c"><span class="fr"><i>56</i><i>28</i></span>＝2 莫耳</td><td class="c">：</td><td class="c">X</td></tr>
+</table></div>
+<p>H₂ 會完全消耗，為<i class="hl">限量試劑</i>，N₂ 則剩下 1 莫耳，<br>
+並產生 2 莫耳的 NH₃，<br>
+故 NH₃ 的質量＝2×17＝<b>34 克</b>。</p>
 </div>`;
 const U7_3=`<div class="blk">
 <h4>一、氧化與活性大小</h4>
