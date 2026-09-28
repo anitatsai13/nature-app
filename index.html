@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>自然科學習網｜生物・理化・地球科學</title>
+<style>
+:root{--bg:#f6f9f5;--card:#ffffff;--ink:#29342b;--muted:#74807a;--brand:#2f7a58;--brand2:#3d7ea6;--ok:#2e7d32;--bad:#c62828;--line:#dfe8dc;--chip:#ecf3ea;--gold:#e4efe0;--mark:#ffe08a;--todo:#f6a623}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.wrap{max-width:900px;margin:0 auto;padding:14px 14px 60px}
+header{text-align:center;padding:18px 0 6px}
+header h1{font-size:1.5rem;letter-spacing:.12em;color:var(--brand)}
+header .sub{color:var(--muted);font-size:.85rem;margin-top:4px;letter-spacing:.05em}
+.units{display:flex;gap:8px;justify-content:center;margin:14px 0 4px;flex-wrap:wrap}
+.unit{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 18px;font-size:.98rem;cursor:pointer;font-weight:800}
+.unit.active{background:var(--sub-c,var(--brand));border-color:var(--sub-c,var(--brand));color:#fff}
+.volhd{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:24px 0 2px;font-weight:900;color:var(--sub,var(--brand))}
+.volhd .vb{background:var(--sub,var(--brand));color:#fff;border-radius:9px;padding:3px 13px;font-size:.92rem}
+.volhd .vp{font-weight:400;font-size:.8rem;color:var(--muted)}
+.volhd .vbar{flex:1 1 120px;min-width:90px;height:7px;background:var(--chip);border-radius:99px;overflow:hidden}
+.volhd .vbar i{display:block;height:100%;background:var(--sub,var(--brand));border-radius:99px}
+.tabs{display:flex;gap:8px;justify-content:center;margin:10px 0 14px}
+.tab{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 18px;font-size:.95rem;cursor:pointer;font-weight:700}
+.tab.active{background:var(--brand2);border-color:var(--brand2);color:#fff}
+.pane{display:none}.pane.show{display:block}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+.chip{border:1.5px solid var(--line);background:var(--chip);border-radius:999px;padding:6px 14px;font-size:.88rem;cursor:pointer;color:var(--ink)}
+.chip.active{background:var(--brand2);border-color:var(--brand2);color:#fff;font-weight:700}
+.stat{color:var(--muted);font-size:.85rem}
+.btn{border:none;border-radius:12px;padding:11px 22px;font-size:1rem;font-weight:800;cursor:pointer;background:var(--chip);color:var(--ink)}
+.btn.primary{background:var(--brand);color:#fff}
+.btn.ghost{background:transparent;border:1.5px solid var(--line)}
+.btn.sm{padding:7px 14px;font-size:.88rem;border-radius:9px}
+h2.sec{margin:22px 0 8px;font-size:1.05rem;color:var(--brand2);letter-spacing:.06em}
+h2.sec .un{display:inline-block;background:var(--sub,var(--brand));color:#fff;border-radius:8px;padding:2px 10px;margin-right:8px;font-size:.92rem;letter-spacing:0}
+/* ===== 重點表格 ===== */
+.mtabwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.mtab{width:100%;min-width:620px;border-collapse:collapse;background:var(--card);font-size:.9rem}
+.mtab th,.mtab td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;line-height:1.75;text-align:left}
+.mtab th{background:var(--gold);color:var(--brand);text-align:center;white-space:nowrap}
+.mtab td.nm{background:var(--chip);white-space:nowrap;text-align:center;font-weight:900;width:64px}
+.mtab td.tt{white-space:nowrap;font-weight:800;width:1%}
+.mtab td.pg{background:#fbfdfe;text-align:center;color:var(--muted);white-space:nowrap;width:54px;font-size:.84rem}
+.mtab td .ln{display:block;margin:3px 0}
+.mtab td .nt{display:block;margin:6px 0 0;padding:4px 7px;background:#fbfdfe;border-left:3px solid var(--brand);border-radius:3px;font-size:.78rem;line-height:1.5;color:var(--muted)}
+.mtab td .nt b{color:var(--brand);margin-right:4px}
+.tg{display:inline-block;background:#fde7ef;color:#b3376a;border:1px solid #f6cada;border-radius:6px;padding:0 6px;font-size:.72rem;font-weight:800;margin:1px 3px 1px 0;white-space:nowrap}
+.tg.b{background:#e7f1fd;color:#2a5f9e;border-color:#cadcf6}
+.todo{color:var(--muted);font-size:.84rem}
+.todo b{color:var(--todo)}
+.warn{color:var(--todo);font-weight:900;cursor:help}
+.bkhd{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--sub,var(--brand));border-radius:12px;padding:11px 14px;margin:4px 0 6px;font-size:.88rem;line-height:1.8;color:var(--muted)}
+.bkhd b{color:var(--brand);font-size:1rem}
+.bar{height:8px;background:var(--chip);border-radius:99px;overflow:hidden;margin:7px 0 2px}
+.bar i{display:block;height:100%;background:var(--brand2);border-radius:99px}
+.hl{font-style:normal;font-weight:900;color:var(--brand);background:var(--mark);border-radius:4px;padding:0 3px;margin:0 1px}
+.fml{display:block;background:#fbfdfe;border:1px solid var(--line);border-radius:8px;padding:6px 10px;margin:6px 0;font-size:.92rem;letter-spacing:.03em}
+.mtab td.ct{text-align:center;white-space:nowrap;background:#fbfdfe;font-size:.82rem;width:1%}
+.hot5{color:#d1462f;letter-spacing:1px}
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 4px;line-height:1.32}
+.fr i{font-style:normal;padding:1px 6px;white-space:nowrap}
+.fr i+i{border-top:1.6px solid currentColor}
+.ovline{background:var(--gold);border:1px dashed var(--brand);border-radius:9px;padding:6px 11px;margin:6px 0 2px;font-size:.85rem;color:var(--brand);font-weight:700}
+.done{color:var(--ok);font-weight:800}
+h3.sub{margin:20px 0 8px;font-size:1rem;color:var(--brand);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+h3.sub .kp{background:var(--sub,var(--brand));color:#fff;border-radius:8px;padding:2px 10px;font-size:.85rem}
+h3.sub .pgt{color:var(--muted);font-size:.78rem;font-weight:400}
+.blk{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 15px;margin:9px 0;line-height:1.85;font-size:.92rem}
+.blk h4{font-size:.96rem;color:var(--brand2);margin:14px 0 7px;letter-spacing:.04em}
+.blk h4:first-child{margin-top:0}
+.blk p{margin:6px 0}
+.eg{display:inline-block;background:var(--brand2);color:#fff;border-radius:5px;padding:0 6px;font-size:.75rem;font-weight:800;margin-right:5px}
+.box{border-radius:12px;padding:11px 14px;margin:10px 0;line-height:1.8;font-size:.9rem}
+.box p{margin:5px 0}
+.box .bt{display:inline-block;border-radius:6px;padding:1px 9px;font-size:.78rem;font-weight:900;margin-bottom:5px;color:#fff}
+.box.key{background:#eef8f1;border:1px solid #bfe0cb}.box.key .bt{background:var(--brand2)}
+.box.myth{background:#fdf1f5;border:1px solid #f3cddb}.box.myth .bt{background:#c0507e}
+.box.hot{background:#f2f9ec;border:1px solid #cde5b8}.box.hot .bt{background:#6ea33c}
+.box.tip{background:#f5f1fb;border:1px solid #d8cdec}.box.tip .bt{background:#7a5bb0}
+.ctab{width:100%;border-collapse:collapse;background:var(--card);font-size:.88rem;min-width:480px}
+.ctab th,.ctab td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top;line-height:1.7}
+.ctab th{background:var(--gold);color:var(--brand);text-align:center;white-space:nowrap;font-size:.85rem}
+.ctab td.h{background:var(--chip);font-weight:800;white-space:nowrap;text-align:center}
+.ctab td.c{text-align:center}
+.flow{display:flex;flex-wrap:wrap;gap:7px;align-items:stretch;margin:9px 0}
+.flow .fb{flex:1 1 170px;background:var(--gold);border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:.85rem;line-height:1.6}
+.flow .fb b{display:block;color:var(--brand);margin-bottom:2px}
+.act{background:var(--card);border:2px solid var(--brand);border-radius:10px;padding:9px 11px;margin:9px 0;text-align:center;line-height:2.1;font-size:.9rem;overflow-x:auto}
+.act .big{font-weight:900;letter-spacing:.04em}
+/* ===== 搜尋 ===== */
+.sbar{display:flex;gap:6px;margin:0 0 10px;flex-wrap:wrap}
+.sbar input{flex:1 1 220px;min-width:0;padding:9px 12px;border:1px solid var(--line);border-radius:10px;
+  background:var(--card);color:var(--ink);font-size:.95rem;font-family:inherit}
+.sbar input:focus{outline:2px solid var(--brand);outline-offset:1px}
+.sbtn{padding:9px 14px;border:1px solid var(--line);border-radius:10px;background:var(--brand);color:#fff;
+  font-weight:700;cursor:pointer;font-family:inherit;font-size:.9rem;white-space:nowrap}
+.sbtn.ghost{background:var(--card);color:var(--muted)}
+.sbtn:hover{filter:brightness(1.08)}
+.sres{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:12px}
+.sres .shead{font-weight:900;color:var(--brand);margin-bottom:8px;font-size:.9rem}
+.sres .sgrp{font-weight:900;margin:10px 0 4px;color:var(--brand2);font-size:.86rem;
+  border-bottom:1px dashed var(--line);padding-bottom:3px}
+.sres .sitem{display:block;width:100%;text-align:left;background:var(--gold);border:1px solid var(--line);
+  border-radius:8px;padding:7px 10px;margin:5px 0;cursor:pointer;font-family:inherit;font-size:.86rem;
+  line-height:1.6;color:var(--ink)}
+.sres .sitem:hover{border-color:var(--brand)}
+.sres .sitem .swhere{display:block;color:var(--muted);font-size:.78rem;margin-bottom:2px}
+.sres .qcard{background:#fbfdfe;border:1px solid var(--line);border-left:3px solid var(--brand2);
+  border-radius:8px;padding:8px 10px;margin:5px 0;font-size:.86rem;line-height:1.7}
+.sres .qcard .qa{color:var(--ok);font-weight:900}
+.sres .qcard .qe{color:var(--muted);display:block;margin-top:3px}
+.sres mark{background:var(--mark);color:var(--brand);font-weight:900;border-radius:3px;padding:0 2px}
+.sres .snone{color:var(--muted);padding:6px 2px}
+@keyframes secflash{0%,100%{background:transparent}25%,75%{background:var(--mark)}}
+.secflash{animation:secflash 1.6s ease-in-out}
+/* ===== 測驗 ===== */
+.exam{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0}
+.exam .src{font-size:.72rem;background:var(--gold);color:var(--brand2);border-radius:6px;padding:2px 8px;margin-right:6px}
+.exam .topic{font-size:.72rem;background:var(--chip);color:var(--muted);border-radius:6px;padding:2px 8px}
+.exam .q{margin:10px 0;line-height:1.8;font-size:1.02rem}
+img.qi{max-width:min(440px,100%);display:block;margin:10px auto;border:1px solid var(--line);border-radius:10px;background:#fff}
+img.gi{display:inline-block;max-height:88px;max-width:160px;vertical-align:middle;border:1px solid var(--line);border-radius:6px;margin:2px;background:#fff}
+.eopts{display:grid;gap:8px}
+.eopt{display:flex;gap:8px;align-items:center;text-align:left;border:1.5px solid var(--line);background:#fbfdfe;border-radius:11px;padding:11px 13px;font-size:.98rem;cursor:pointer;line-height:1.7;color:var(--ink)}
+.eopt .k{font-weight:900;color:var(--brand2);flex:none}
+.eopt.correct{border-color:var(--ok);background:#eef7ee}
+.eopt.wrong{border-color:var(--bad);background:#fdeeee}
+.expl{display:none;margin-top:12px;border-top:1px dashed var(--line);padding-top:10px;line-height:1.75;font-size:.92rem}
+.expl.show{display:block}
+.expl .lbl{font-weight:900;color:var(--brand);margin-right:6px}
+.progress{height:8px;background:var(--chip);border-radius:99px;overflow:hidden;margin:8px 0}
+.progress i{display:block;height:100%;background:var(--brand);border-radius:99px;transition:width .25s}
+.counter{color:var(--muted);font-size:.85rem;text-align:center;margin-bottom:8px}
+.nav{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.scorebox{background:var(--card);border:1px solid var(--line);border-radius:16px;text-align:center;padding:26px 16px;margin:14px 0}
+.scorebox .big{font-size:2.2rem;font-weight:900;color:var(--brand)}
+.review .r{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0;font-size:.9rem;line-height:1.7}
+.qitem{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:10px 0}
+.qitem .q{line-height:1.8;margin:6px 0;font-size:.95rem}
+.qitem .o{color:var(--muted);font-size:.9rem;line-height:1.75;margin-top:4px}
+.qitem .a{display:none;margin-top:8px;font-size:.9rem;line-height:1.7;border-top:1px dashed var(--line);padding-top:8px}
+.qitem .a.show{display:block}
+.qitem .a b{color:var(--ok)}
+footer{text-align:center;color:var(--muted);font-size:.75rem;margin-top:34px;letter-spacing:.05em}
+@media(max-width:520px){header h1{font-size:1.25rem}.unit{padding:8px 12px;font-size:.9rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>🧪 自然科學習網</h1>
+  <div class="sub" id="subT">學習重點＋題庫測驗</div>
+</header>
+<div class="units" id="unitChips"></div>
+  <div class="sbar">
+    <input id="sq" type="search" placeholder="搜尋全站…例如：酵素、莫耳、板塊、滲透、鋒面" autocomplete="off">
+    <button id="sgo" class="sbtn">🔍 搜尋</button>
+    <button id="sx" class="sbtn ghost" hidden>✕ 清除</button>
+  </div>
+  <div id="sres" class="sres" hidden></div>
+
+<div class="tabs">
+  <button class="tab active" data-tab="learn">📚 學習重點</button>
+  <button class="tab" data-tab="quiz">📝 測驗</button>
+</div>
+
+<div class="pane show" id="pane-learn">
+  <div class="lpane" id="learn-bio"></div>
+  <div class="lpane" id="learn-phy"></div>
+  <div class="lpane" id="learn-ear"></div>
+</div>
+
+<div class="pane" id="pane-quiz">
+  <div class="row" id="secChips"></div>
+  <div class="row" id="diffChips"></div>
+  <div class="row"><span class="stat" id="poolStat"></span></div>
+  <div style="text-align:center;margin:12px 0"><button class="btn primary" id="startBtn">📝 開始測驗</button></div>
+  <div id="quizBox"></div>
+  <div id="qlist"></div>
+</div>
+
+<footer>自然科學習網・生物／理化／地球科學・自學用教材整理</footer>
+</div>
+
+<script>
+"use strict";
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const IM={};
+
+/* ===== 題庫（依冊分） ===== */
+const Q_BIO=[
+];
+const Q_EAR=[
+];
+const Q_PHY=[
+{"q":"阿土伯以種植水稻為生，他想要對 10 公頃的水稻田施加氮肥，已知每公頃水稻田所需的氮元素質量為 120 公斤，則阿土伯至少要購買多少公斤的硫酸銨（(NH₄)₂SO₄）才足夠施肥所需？（(NH₄)₂SO₄ 的分子量為 132，N 的原子量為 14）","opts":["120×⟬132|28⟭","120×⟬28|132⟭","120×10×⟬132|28⟭","120×10×⟬28|132⟭"],"ans":2,"sec":"質量守恆","diff":"中","src":"重點演練・素養題","exp":"(NH₄)₂SO₄ 中 N 所占的質量比為 ⟬28|132⟭（2 個 N，原子量 14×2＝28），故須購買肥料 120×10×⟬132|28⟭（kg）。注意田有 <b>10 公頃</b>，需求量要先乘 10。"},
+{"q":"毒理學之父——帕拉賽瑟斯曾說過：「依使用劑量的多寡，可決定物質是否有毒」，例如喝水時人體會自動調節水及鈉的平衡，但若在短時間內攝取大量水分，就可能會發生低血鈉症而造成頭暈、嘔吐，甚至昏迷等症狀。則下列不同分量的水中，何者的質量最大？","opts":["1 分子的水","1 莫耳的水","1 毫克的水","1 公克的水"],"ans":1,"sec":"質量守恆","diff":"易","src":"重點演練・素養題","exp":"1 莫耳水的質量為 <b>18 公克</b>，故質量大小為：1 莫耳的水 ＞ 1 公克的水 ＞ 1 毫克的水 ＞ 1 分子的水，故選(B)。"},
+{"q":"臺灣的「毒澱粉事件」源自於不肖業者將未經核准的順丁烯二酸酐（C₄H₂O₃）調製成修飾澱粉，以增加食品的口感，則 490 克的順丁烯二酸酐為多少莫耳？（原子量：H＝1，C＝12，O＝16）","opts":["2","3","4","5"],"ans":3,"sec":"質量守恆","diff":"中","src":"重點演練・素養題","exp":"順丁烯二酸酐的分子量＝4×12＋2×1＋3×16＝<b>98</b>，490 克相當於 ⟬490|98⟭＝<b>5 莫耳</b>。"},
+{"q":"在適當的條件下，H₂S 和 SO₂ 會發生反應，生成 H₂O 和 S。小如記錄某一反應裝置內反應前、反應後各物質的質量如下：<br>　H₂S：反應前 70 g，反應後 <b>甲</b><br>　SO₂：反應前 64 g，反應後 <b>乙</b><br>　H₂O：反應前 0 g，反應後 <b>丙</b><br>　S：反應前 2 g，反應後 <b>丁</b><br>下列何組數據最可能是上述反應後各物質的質量？","opts":["甲 64、乙 70、丙 2、丁 0","甲 2、乙 0、丙 36、丁 98","甲 20、乙 48、丙 0、丁 68","甲 0、乙 32、丙 54、丁 48"],"ans":1,"sec":"質量守恆","diff":"難","src":"會考114（通過率 47%）","exp":"解題關鍵：<b>反應物的質量會減少，生成物的質量會增加，且遵守質量守恆定律</b>。(A)反應物 SO₂ 在反應後的質量反而增加，不合理。(C)生成物 H₂O 在反應後的質量並未增加，不合理。(D)反應後的總質量為 32＋54＋48＝134 g，與反應前的總質量 70＋64＋2＝136 g 不同，不合理。故選(B)。"},
+{"q":"已知甲、乙兩種不同的金屬元素分別與同濃度的鹽酸反應，反應後只會產生氫氣與金屬的氯化物。取甲金屬 24.3 g 與鹽酸反應，另取乙金屬 65.4 g 與鹽酸反應，兩個反應的金屬都完全耗盡，且產生的氫氣質量均為 2.0 g，則比較兩個反應的反應物與產物的質量，下列何者正確？（前項為「兩反應的鹽酸消耗質量」，後項為「兩反應的產物總質量」）","opts":["相同／相同","相同／不同","不同／相同","不同／不同"],"ans":1,"sec":"質量守恆","diff":"難","src":"會考113（通過率 37%）","exp":"解題關鍵：由產生的氫氣質量推論鹽酸消耗質量，再根據質量守恆推論產物總質量。氫氣是由鹽酸中的 H 所產生，因兩反應產生的氫氣質量相同，可推論兩反應的<b>鹽酸消耗質量也相同</b>。根據質量守恆定律，乙金屬消耗的質量較大（65.4 g ＞ 24.3 g），因此<b>產物的總質量也會較大</b>，故選(B)。"},
+{"q":"小明響應環保團體所宣導的「中秋節不烤肉」，在中秋節時只賞月，不烤肉。若小明減少消耗 10 公斤的木炭，且木炭的含碳量為 96％，則他最多減少產生多少公斤的二氧化碳？（反應式為 C＋O₂→CO₂，原子量：C＝12，O＝16）","opts":["10×1000×96%","⟬10×1000×96%|12⟭","800×44","⟬800×44|1000⟭"],"ans":3,"sec":"化學反應的微觀世界","diff":"中","src":"重點演練・素養題","exp":"碳的莫耳數＝⟬10×1000×96%|12⟭＝<b>800 mol</b>，由係數比可知可產生 800 mol 的二氧化碳，故二氧化碳質量＝⟬800×44|1000⟭＝<b>35.2 kg</b>。注意題目問的單位是<b>公斤</b>，所以最後要除以 1000。"},
+{"q":"已知呼吸作用的化學反應為「C₆H₁₂O₆＋O₂→CO₂＋H₂O（未平衡）」，若平衡此反應式，則係數總和應為下列何者？","opts":["4","12","18","19"],"ans":3,"sec":"化學反應的微觀世界","diff":"易","src":"重點演練","exp":"平衡後的反應式為 <b>C₆H₁₂O₆＋6O₂→6CO₂＋6H₂O</b>，故係數總和為 1＋6＋6＋6＝<b>19</b>。"},
+{"q":"已知鈉在氧氣中燃燒會生成氧化鈉，反應式為「Na＋O₂→Na₂O（未平衡）」，今取 34.5 克的鈉在足量的氧氣中完全燃燒，則會生成多少克的氧化鈉？（原子量：O＝16，Na＝23）","opts":["34.5","46.5","58.5","62.5"],"ans":1,"sec":"化學反應的微觀世界","diff":"中","src":"重點演練","exp":"先平衡反應式：<b>4Na＋O₂→2Na₂O</b>。鈉的莫耳數＝⟬34.5|23⟭＝1.5 莫耳，由係數比可知鈉與氧化鈉的莫耳數比為 <b>2：1</b>，故可生成 1.5×⟬1|2⟭＝0.75 莫耳的氧化鈉；Na₂O 的分子量＝23×2＋16＝62，則質量＝0.75×62＝<b>46.5 克</b>。"},
+{"q":"鎂在空氣中燃燒的反應式為「2Mg＋O₂→2MgO」，若將 18 克的鎂與 16 克的氧氣混合後點火燃燒，則最多會產生多少克的氧化鎂？（原子量：O＝16，Mg＝24）","opts":["30","32","36","40"],"ans":0,"sec":"化學反應的微觀世界","diff":"中","src":"重點演練","exp":"鎂的莫耳數＝⟬18|24⟭＝0.75 莫耳，氧氣的莫耳數＝⟬16|32⟭＝0.5 莫耳。由係數比可知鎂與氧的莫耳數比為 2：1，若 0.75 莫耳鎂完全反應只需 0.375 莫耳氧氣，故<b>鎂為限量試劑</b>。鎂與氧化鎂的莫耳數比為 1：1，MgO 分子量＝40，則氧化鎂的質量＝0.75×40＝<b>30 克</b>。"},
+{"q":"小佩在家烘焙麵包，他加入化合物 X，使麵團在烘烤過程中膨脹且變得鬆軟，反應式為：2X → Na₂CO₃ ＋ CO₂ ＋ H₂O，則 X 的分子量應為何？","opts":["21","42","84","168"],"ans":2,"sec":"化學反應的微觀世界","diff":"中","src":"重點演練","exp":"反應前、後原子的<b>種類及數目不變</b>：右側共有 Na 2、C 2、O 6、H 2，除以 2 即為 1 個 X，故 X 為 <b>NaHCO₃</b>（小蘇打），分子量＝23＋1＋12＋3×16＝<b>84</b>。"},
+{"q":"關於反應「Mg ＋ 2HCl → H₂ ＋ MgCl₂」的敘述，下列何者<b>錯誤</b>？","opts":["1 個 Mg 原子可與 2 個 HCl 分子反應","1 克 Mg 可與 2 克 HCl 分子反應","1 莫耳 Mg 原子可與 2 莫耳 HCl 分子反應","6×10²³ 個 Mg 原子可與 2×6×10²³ 個 HCl 分子反應"],"ans":1,"sec":"化學反應的微觀世界","diff":"易","src":"重點演練","exp":"反應式的<b>係數比＝個數比＝莫耳數比</b>，但<i class=\"hl\">不等於質量比</i>，故(B)錯誤。"},
+{"q":"已知甲烷和甲醇與足量的氧氣反應，生成物皆為二氧化碳和水，反應式如下：<br>　反應一　CH₄＋2O₂→CO₂＋2H₂O<br>　反應二　2CH₃OH＋3O₂→2CO₂＋4H₂O<br>若分別進行此兩種反應，且完全反應後所得到的生成物總質量相同，則關於反應物的比較，下列敘述何者正確？（原子量：H＝1、C＝12、O＝16）","opts":["甲烷消耗的質量較甲醇少","兩種反應氧氣消耗的質量相同","甲烷和甲醇兩者消耗的質量相同","反應一的氧氣消耗質量較反應二少"],"ans":0,"sec":"化學反應的微觀世界","diff":"難","src":"會考112大題考區","exp":"解題關鍵：思考「生成物總質量相同」的背後含意。每 1 莫耳 CH₄ 與每 1 莫耳 CH₃OH 產生的生成物都是 1 CO₂＋2 H₂O，故生成物總質量相同 → 兩者<b>消耗的莫耳數相同</b>。分子量 CH₄＝16、CH₃OH＝32，故消耗<b>質量比為 16：32＝1：2</b>，甲烷消耗的質量較少，(A)正確。氧氣方面，每莫耳燃料耗氧為 2 mol 對 1.5 mol，比為 4：3，故反應一耗氧較多，(B)(D)皆錯。"},
+{"q":"鎂離子為海水中含量第二多的金屬離子，從海水中提取鎂離子為工業上製造鎂的方法之一，其步驟如下：<br>　步驟一：在濃縮的海水中加入氫氧化鈉，會產生氫氧化鎂而沉澱析出。Mg²⁺ ＋ 2NaOH → 2Na⁺ ＋ Mg(OH)₂<br>　步驟二：之後再加入鹽酸，經處理後可得到固態的氯化鎂。Mg(OH)₂ ＋ 2HCl → MgCl₂ ＋ 2H₂O<br>　步驟三：電解熔融狀態的氯化鎂即可得到鎂。MgCl₂ —〔電解〕→ Mg ＋ Cl₂<br>依據上述方法，在某次製鎂的反應後，共產生鎂 960 公克，則該次製鎂反應中，理論上會消耗重量百分濃度為 80% 的鹽酸共多少公克？（鎂的原子量為 24，氯化氫的分子量為 36.5）","opts":["1825","2400","2920","3650"],"ans":3,"sec":"化學反應的微觀世界","diff":"難","src":"會考109（通過率 29%）","exp":"解題關鍵：計算出鎂的莫耳數後，再由係數比推得所需 HCl 的莫耳數，最後計算出消耗的鹽酸質量。由步驟二、三可知，產生 1 莫耳 Mg 需要 1 莫耳 MgCl₂，而產生 1 莫耳 MgCl₂ 需消耗 <b>2 莫耳</b> HCl。960 g Mg 的莫耳數＝⟬960|24⟭＝40 莫耳，故需消耗 80 莫耳 HCl，質量＝80×36.5＝2920 g。鹽酸（溶液）質量＝⟬溶質質量|重量百分濃度⟭＝⟬2920|80%⟭＝<b>3650 g</b>。"},
+{"q":"目前臺灣的中藥材大部分都是進口，這些進口的中藥材在加工過程中常會使用二氧化硫，達到漂白的功效，也因此常有二氧化硫殘留量超標的情形。因二氧化硫可溶於水形成 X 物質，食藥署建議在烹煮中藥材前應先以清水沖洗，以保障食用安全。上文中利用二氧化硫漂白時會進行何種反應？且 X 物質最可能為何種物質？","opts":["氧化還原反應，酸性物質","氧化還原反應，鹼性物質","酸鹼中和反應，酸性物質","酸鹼中和反應，鹼性物質"],"ans":0,"sec":"氧化與還原反應","diff":"中","src":"重點演練・素養題","exp":"二氧化硫是利用<b>氧化還原反應</b>進行漂白；SO₂ 溶於水會形成<b>亞硫酸（H₂SO₃）</b>，屬<b>酸性</b>物質（非金屬氧化物的水溶液呈酸性），故選(A)。"},
+{"q":"關於反應「2Al ＋ 3CuO → Al₂O₃ ＋ 3Cu」的敘述，下列何者正確？","opts":["Al 被氧化，進行氧化反應","CuO 被氧化，進行還原反應","Al 對氧的活性比 Cu 小","若進行燃燒試驗，則 Cu 較 Al 容易氧化"],"ans":0,"sec":"氧化與還原反應","diff":"中","src":"重點演練","exp":"Al 得到氧（Al→Al₂O₃），進行<b>氧化</b>反應，(A)正確。(B)CuO <b>失去氧</b>，進行還原反應。(C)(D)Al 能把 Cu 從 CuO 中還原出來，表示 <b>Al 對氧的活性較大</b>，進行燃燒試驗時也會較容易氧化。"},
+{"q":"將 X、Y、Z、W 四種金屬與 XO、YO、ZO、WO 四種氧化物分別進行反應，「○」代表有反應、「×」代表無反應，結果如下：<br>　XO ＋ Y → ×　　XO ＋ Z → ○<br>　ZO ＋ Y → <b>甲</b>　　WO ＋ X → <b>乙</b>　　WO ＋ Z → ×<br>則甲、乙之符號應分別為何？","opts":["甲為○，乙為×","甲為×，乙為○","甲、乙均為○","甲、乙均為×"],"ans":3,"sec":"氧化與還原反應","diff":"難","src":"重點演練","exp":"由「XO＋Z」有反應可知活性 <b>Z＞X</b>；由「Z＋WO」無反應可知活性 <b>W＞Z</b>；由「Y＋XO」無反應可知活性 <b>X＞Y</b>。綜合上述，活性大小為 <i class=\"hl\">W＞Z＞X＞Y</i>。甲（ZO＋Y）因 Y 活性最小，無法搶走 Z 的氧 → ×；乙（WO＋X）因 W 活性大於 X → ×，故選(D)。"},
+{"q":"由於食品中有一些成分容易被氧化，而產生變色或變質，故常添加抗氧化劑。抗氧化劑分為天然抗氧化劑與化學抗氧化劑，天然抗氧化劑如維生素 E 等，化學抗氧化劑較天然抗氧化劑穩定，如丁基羥基甲氧苯（BHA）等，經常食用化學抗氧化劑可能會有罹癌風險。則關於 BHA 在食品中發揮作用時的敘述，下列何者正確？","opts":["BHA 失去氧，進行氧化反應","BHA 失去氧，進行還原反應","BHA 得到氧，進行氧化反應","BHA 得到氧，進行還原反應"],"ans":2,"sec":"氧化與還原反應","diff":"中","src":"重點演練・素養題","exp":"抗氧化劑本身具有<b>易與氧作用</b>的特性，會<b>代替食品被氧化而得到氧</b>，進行<b>氧化反應</b>，故選(C)。"},
+{"q":"有些物質可使棕色的碘液進行還原反應，反應後溶液呈無色，例如許多水果所含有的維生素 C。以維生素 C 和綠茶茶水分別進行實驗：<br>　甲試管：維生素 C 溶液　乙試管：水　丙試管：綠茶茶水<br>三支試管都滴入數滴碘液並搖晃後——<br>　甲：棕色消失　乙：液體呈棕色　丙：棕色消失<br>僅依據本實驗結果，下列推論何者最合理？","opts":["綠茶茶水中必定含有維生素 C","綠茶茶水中必定含有能被氧化的物質","綠茶茶水進行氧化反應，維生素 C 進行還原反應","因實驗結果溶液顏色改變，故綠茶茶水可做為酸鹼指示劑"],"ans":1,"sec":"氧化與還原反應","diff":"中","src":"會考114（通過率 57%）","exp":"解題關鍵：<b>碘液進行還原反應時，必有另一物質進行氧化反應</b>。(A)不一定，可能是含有其他可使碘液進行還原反應的物質。(C)兩者都是<b>進行氧化反應</b>。(D)酸鹼指示劑須在不同酸鹼性的溶液中變色，本實驗並未改變酸鹼性。故選(B)。"},
+{"q":"某篇關於氫應用的報導說明如下：「金屬多以氧化物的形式封藏於岩石礦物中，可利用氫和氧易起反應的特性，<b>將氧從礦物中移除，留下可用的純金屬和水</b>。」關於上述畫線處提及的反應，下列說明何者最合理？","opts":["因為氫被氧化，所以是氧化還原反應","因為礦物被氧化，所以是氧化還原反應","因為金屬氧化物溶於水呈酸性，所以是酸鹼中和反應","因為金屬氧化物溶於水呈鹼性，所以是酸鹼中和反應"],"ans":0,"sec":"氧化與還原反應","diff":"中","src":"會考113（通過率 59%）","exp":"解題關鍵：判斷何者得到氧，何者失去氧。氫將氧從礦物中移除，形成純金屬與水，則<b>氫得到氧被氧化</b>、<b>礦物失去氧被還原</b>，屬於氧化還原反應，故選(A)。"},
+{"q":"小凱在家中廚房找到下列物品，則這些物品中，何者<b>不含</b>有電解質？","opts":["手工釀醋","天然海鹽","萬用小蘇打粉","手工砂糖"],"ans":3,"sec":"認識電解質","diff":"易","src":"重點演練・素養題","exp":"(A)食醋中的醋酸為<b>酸</b>類，屬於電解質。(B)食鹽為<b>鹽</b>類，屬於電解質。(C)小蘇打粉為<b>鹽</b>類，屬於電解質。(D)砂糖（蔗糖）在水中<i class=\"hl\">不會解離</i>，水溶液無法導電，不屬於電解質。"},
+{"q":"將氫氧化鈣溶於水中，其解離反應式為「Ca(OH)₂→Ca²⁺＋2OH⁻」，則關於氫氧化鈣水溶液的敘述，下列何者正確？","opts":["導電時，Ca²⁺ 移向負極，OH⁻ 移向正極","導電時，兩極不一定會發生化學反應","Ca²⁺ 的總個數與 OH⁻ 的總個數相等","Ca²⁺ 的總帶電量為 OH⁻ 總帶電量的兩倍"],"ans":0,"sec":"認識電解質","diff":"中","src":"重點演練","exp":"通電後<b>陽離子往負極</b>、<b>陰離子往正極</b>移動，(A)正確。(B)導電時兩極<b>必會</b>發生化學反應。(C)(D)水溶液必為電中性，Ca²⁺ 的總帶電量<b>等於</b> OH⁻ 的總帶電量，但兩者的<i class=\"hl\">個數不相等</i>（OH⁻ 個數是 Ca²⁺ 的兩倍）。"},
+{"q":"若質量數 40、原子序 20 的鈣原子失去兩個電子形成鈣離子，則關於鈣離子的敘述，下列何者正確？","opts":["質子數為 18","電子數為 18","中子數為 22","質量數為 38"],"ans":1,"sec":"認識電解質","diff":"中","src":"重點演練","exp":"該鈣原子的質子數、電子數均為 20，中子數＝質量數－質子數＝40－20＝20。失去兩個電子後：質子數仍為 <b>20</b>、中子數仍為 <b>20</b>、質量數仍為 <b>40</b>（電子質量極小不計），只有電子數變成 20－2＝<b>18</b>，故選(B)。"},
+{"q":"下列化合物各取 1 莫耳並完全溶於等量的水中，則哪一水溶液中所含離子總莫耳數最多？","opts":["NaCl","HCl","CaCl₂","NH₄OH"],"ans":2,"sec":"認識電解質","diff":"中","src":"重點演練","exp":"解離式分別為：(A)NaCl→Na⁺＋Cl⁻（2 個）；(B)HCl→H⁺＋Cl⁻（2 個）；(C)CaCl₂→Ca²⁺＋2Cl⁻（<b>3 個</b>）；(D)NH₄OH→NH₄⁺＋OH⁻（2 個）。故選(C)。"},
+{"q":"西元 2011 年 3 月 11 日，日本外海發生大地震，造成核電廠機組損壞爆炸，釋出放射性物質「碘-129」、「碘-131」而造成恐慌，相關單位提醒當地民眾可適時的服用「碘化鉀」來防止甲狀腺大量吸收這些放射性物質。則下列關於碘-129、碘-131 以及碘化鉀的敘述，何者<b>錯誤</b>？","opts":["碘-129、碘-131 的質量數不同","碘-129、碘-131 為元素，而碘化鉀為化合物","碘-129、碘-131 與碘化鉀溶於水後，水溶液均為電中性","碘化鉀溶於水所解離出來的碘離子與碘-129、碘-131 的化學性質相同"],"ans":3,"sec":"認識電解質","diff":"中","src":"重點演練・素養題","exp":"(D)錯誤。<b>碘離子（I⁻）與碘原子（I）的電子數不同，化學性質也不同</b>。原子與其離子只有質子數、中子數相同，電子數與化學性質皆不同。"},
+{"q":"已知 Ca 和 Cl 的原子序分別為 20、17，Ca²⁺ 和 Cl⁻ 的質子數和電子數如下：<br>　Ca²⁺：質子數 <b>w</b>、電子數 <b>y</b><br>　Cl⁻：質子數 <b>x</b>、電子數 <b>z</b><br>則 w、x、y、z 的數值大小比較，下列何者正確？","opts":["w＞z","x＞y","x＞z","y＞w"],"ans":0,"sec":"認識電解質","diff":"中","src":"會考114（通過率 66%）","exp":"解題關鍵：<b>電中性原子的原子序＝質子數＝電子數</b>。Ca²⁺ 表示失去 2 個電子，故 w＝20、y＝20－2＝18；Cl⁻ 表示得到 1 個電子，故 x＝17、z＝17＋1＝18。則 w(20)＞z(18)，故選(A)。"},
+{"q":"有一個帶電的離子含有 X、Y、Z 三種粒子（質子、電子、中子，未依照順序排列），且 X、Y、Z 的粒子數目依序為 Nx、Ny、Nz。已知 X 粒子的質量最小，關於此離子的說明，下列何者最合理？","opts":["若為陽離子，且 Ny＞Nx＝Nz，則 Z 為質子","若為陽離子，且 Ny＞Nx＝Nz，則 Z 為電子","若為陰離子，且 Nx＝Ny＞Nz，則 Z 為質子","若為陰離子，且 Nx＞Ny＝Nz，則 Z 為電子"],"ans":2,"sec":"認識電解質","diff":"難","src":"會考111（通過率 45%）","exp":"解題關鍵：<b>陽離子則質子數＞電子數，陰離子則質子數＜電子數</b>。三種粒子中<i class=\"hl\">電子的質量最小</i>，故 X 為電子。(A)(B)若為陽離子，則質子數＞電子數（Nx），但選項中 Ny＞Nx，故 Y 才是質子。(C)若為陰離子，電子數（Nx）＞質子數，Nx＝Ny＞Nz，則 Z 可為質子，成立。(D)若為陰離子，電子數須大於質子數，但 Nx＞Ny＝Nz，Y 或 Z 為質子而非電子。故選(C)。"},
+{"q":"家中電熱水瓶使用一段時間後，內壁常會出現白色的「水垢」，已知水垢的主要成分為碳酸鎂與碳酸鈣，則使用下列何種物質對去除水垢最有幫助？","opts":["熱水","燒鹼","檸檬酸","石灰"],"ans":2,"sec":"常見的酸、鹼性物質","diff":"易","src":"重點演練・素養題","exp":"<b>酸性物質</b>的水溶液可與碳酸鹽類反應，使其溶解。(B)燒鹼（氫氧化鈉）與(D)石灰（氧化鈣）均為<b>鹼性</b>物質，故選(C)檸檬酸。"},
+{"q":"下列哪一項為酸與鹼的<b>共同</b>性質？","opts":["兩者皆可溶解油脂","兩者的水溶液皆可導電","兩者的水溶液皆可使酚酞呈紅色","兩者皆可使活性大的金屬產生氫氣"],"ans":1,"sec":"常見的酸、鹼性物質","diff":"易","src":"重點演練","exp":"酸類與鹼類<b>都是電解質</b>，水溶液皆可導電，(B)正確。(A)<b>鹼</b>才可溶解油脂。(C)酚酞遇酸性溶液呈<b>無色</b>、遇鹼性溶液才呈紅色。(D)<b>酸</b>才可使活性大的金屬產生氫氣。"},
+{"q":"關於酸性物質特性的敘述，下列何者<b>錯誤</b>？","opts":["濃硫酸具有強脫水性，可使碳水化合物失去水分","醋酸又稱為蟻酸，具有刺激性氣味","鹽酸應為無色，但是工業用的鹽酸含有雜質，故呈淡黃色","稀釋濃硫酸時，應將濃硫酸緩慢加入大量水中，並不斷攪拌"],"ans":1,"sec":"常見的酸、鹼性物質","diff":"中","src":"重點演練","exp":"(B)錯誤。醋酸又稱為<i class=\"hl\">乙酸</i>；<b>蟻酸</b>則是<b>甲酸</b>，兩者不同。"},
+{"q":"牡蠣殼的主要成分為碳酸鈣，牡蠣殼經過高溫煅燒後的煅燒牡蠣殼粉具有抗菌性，可抑制大腸桿菌、沙門氏菌與金黃色葡萄球菌等。若阿達想要研究煅燒牡蠣殼粉的抗菌性與 pH 值之相關性，而非與成分的相關性，則他可研究下列何種物質的抗菌性？","opts":["鹽酸","碳酸","食鹽","燒鹼"],"ans":3,"sec":"常見的酸、鹼性物質","diff":"中","src":"重點演練・素養題","exp":"碳酸鈣高溫煅燒會分解成<b>氧化鈣</b>（CaCO₃ →〔△〕→ CaO＋CO₂），氧化鈣為<b>鹼性</b>物質。若要研究抗菌性與 pH 值的相關性（而非成分），應選擇成分不同但同為<b>鹼性</b>的物質，故選(D)燒鹼（氫氧化鈉）。"},
+{"q":"閱讀下文後回答：「為了減少溫室氣體，地質學家將二氧化碳變成岩石的一部分——將發電廠產生的二氧化碳灌入大量的水中，以管線將這些氣泡水輸送到數公里遠的區域，接著透過高壓將氣泡水注入地下一千公尺深的岩層中，這些氣泡水會和鈣、鎂等離子反應而『固化』，並填充岩層空隙。」上述二氧化碳變成岩石一部分的過程，是利用下列二氧化碳（水溶液）的何種性質？","opts":["密度大於空氣","溶於水呈酸性","可與鈣離子反應產生難溶於水的碳酸鹽","可與鈉離子反應產生易溶於水的碳酸鹽"],"ans":2,"sec":"常見的酸、鹼性物質","diff":"中","src":"會考114（通過率 60%）","exp":"解題關鍵：藉由二氧化碳的檢驗方式判斷。由題目可知，二氧化碳水溶液會與<b>鈣、鎂離子</b>反應，形成<i class=\"hl\">難溶於水</i>的碳酸鈣而「固化」，與密度、酸鹼性無關，故選(C)。"},
+{"q":"虎門銷煙為清朝銷毀鴉片的歷史事件。把海水引入浸泡池浸泡鴉片，之後再加入石灰等物質，石灰遇水會改變水溫，此改變也利於將鴉片溶於水中，等退潮時再排入海中。關於上述銷毀鴉片的說明，下列何者最合理？","opts":["石灰溶於水為放熱反應，而高溫使鴉片更易溶於水中","石灰溶於水為吸熱反應，而高溫使鴉片更易溶於水中","鴉片浸泡海水後會使水溫上升，使其與石灰反應速率加快","鴉片浸泡海水後會使水溫下降，使其與石灰反應速率加快"],"ans":0,"sec":"常見的酸、鹼性物質","diff":"中","src":"會考113（通過率 74%）","exp":"解題關鍵：思考石灰遇水會如何改變水溫。石灰（CaO）溶於水會<i class=\"hl\">放熱</i>，使水溫升高；由題目「此改變也利於將鴉片溶於水中」可推論高溫會使鴉片更易溶於水中，故選(A)。"},
+{"q":"人體會自動將血液的 pH 值調節在 7.35 到 7.45 之間，若血液的 pH 值低於 7.35，即為「酸中毒」；若血液的 pH 值高於 7.45，則為「鹼中毒」。試問下列敘述何者正確？","opts":["人體酸中毒時的血液必呈酸性，且 [H⁺]＞[OH⁻]","人體酸中毒時的血液必呈酸性，且 [H⁺]＜[OH⁻]","人體鹼中毒時的血液必呈鹼性，且 [H⁺]＞[OH⁻]","人體鹼中毒時的血液必呈鹼性，且 [H⁺]＜[OH⁻]"],"ans":3,"sec":"水溶液的酸鹼性","diff":"中","src":"重點演練・素養題","exp":"酸中毒只要 pH 低於 7.35 即成立，例如 pH＝7.2 仍<b>大於 7</b>，血液<i class=\"hl\">可能仍呈鹼性</i>，故(A)(B)的「必呈酸性」不成立。鹼中毒時 pH 高於 7.45，<b>必定大於 7</b>，故血液必呈鹼性，且鹼性表示 [H⁺]＜[OH⁻]，故選(D)。"},
+{"q":"小黃計畫假日要去泡溫泉，正在考慮下列四個地點。若小黃的皮膚較為敏感，不宜浸泡過酸或過鹼的溫泉，否則皮膚容易出現乾、癢等症狀，則小黃應選擇哪一地點的溫泉最為適當？","opts":["新北投，溫泉 pH 值 1.2","陽明山，溫泉 pH 值 2.3","礁溪，溫泉 pH 值 7.5","關子嶺，溫泉 pH 值 10.2"],"ans":2,"sec":"水溶液的酸鹼性","diff":"易","src":"重點演練・素養題","exp":"pH 值小於 7 為酸性，且數值越小酸性越強；pH 值大於 7 為鹼性，且數值越大鹼性越強。<b>pH 7.5 最接近中性 7</b>，故選(C)礁溪。"},
+{"q":"將 1M、50 mL 的 HCl 水溶液加水稀釋到 100 mL，則關於稀釋過程的敘述，下列何者正確？","opts":["莫耳濃度變大","[H⁺] 變大","pH 值變大","重量百分率濃度變大"],"ans":2,"sec":"水溶液的酸鹼性","diff":"中","src":"重點演練","exp":"加水稀釋後，溶質的莫耳數與質量<b>不變</b>，但溶液的體積與質量<b>變大</b>，故(A)莫耳濃度與(D)重量百分率濃度均<b>變小</b>。(B)酸性減弱，[H⁺] <b>變小</b>。[H⁺] 變小則 pH 值<i class=\"hl\">變大</i>（趨近 7），故選(C)。"},
+{"q":"牙齒酸蝕是指酸性物質會使牙齒外層的琺瑯質軟化，而容易損耗。<br><b>實驗一</b>：選用形狀大小很相近的豬牙齒，分別浸泡不同濃度的鹽酸數日，結果如下——<br>　鹽酸 X：pH 2.4，重量減少百分比 1 日後 6.82%、2 日後 7.87%<br>　鹽酸 Y：pH 3.7，重量減少百分比 1 日後 4.15%、2 日後 4.92%<br>　鹽酸 Z：pH 3.1，重量減少百分比 1 日後 5.95%、2 日後 6.76%<br><b>實驗二</b>：取形狀大小很相近的豬牙齒，分別浸泡在 pH 值介於 2～4 之間的甲、乙、丙三杯飲料中數日，發現牙齒重量減少百分比為丙＜甲＜乙。<br>若實驗二只考慮 pH 值的影響，則依實驗一的結果，關於甲、乙、丙三杯飲料的推測，下列何者最合理？","opts":["乙杯最酸，其 pH 值最大","乙杯最酸，其 pH 值最小","丙杯最酸，其 pH 值最大","丙杯最酸，其 pH 值最小"],"ans":1,"sec":"水溶液的酸鹼性","diff":"中","src":"會考113（通過率 70%）","exp":"解題關鍵：先由表中數據推論 pH 值與牙齒損耗的關係。由實驗一可見 <b>pH 值越小（酸性越強），牙齒重量減少越多</b>（X 的 pH 2.4 減少最多）。實驗二中重量減少百分比為丙＜甲＜乙，表示<b>乙杯使牙齒損耗最大 → 乙杯最酸 → pH 值最小</b>，故選(B)。"},
+{"q":"閱讀下文後回答：「新聞報導某處養殖的白蝦大量暴斃，調查後初步推測是高溫與暴雨，使養殖池的溶氧量和 pH 值劇烈變化，導致水質改變所造成的。專家建議為避免白蝦大量死亡，應注意水溫變化，可先用水車調整水中的溶氧量，並監控水中的 pH 值，投放熟石灰（氫氧化鈣）調整至合適的 pH 值。」關於上述專家建議的方法，下列說明何者最合理？（溶氧量：溶解於水中的氧氣量）","opts":["使水中的溶氧量增加，pH 值增加","使水中的溶氧量增加，pH 值減少","使水中的溶氧量減少，pH 值增加","使水中的溶氧量減少，pH 值減少"],"ans":0,"sec":"水溶液的酸鹼性","diff":"中","src":"會考111（通過率 51%）","exp":"解題關鍵：思考高溫對水中溶氧量的影響，以及熟石灰水溶液的酸鹼性。<b>高溫會使水中的溶氧量減少</b>，故用水車的目的是使溶氧量<i class=\"hl\">增加</i>；熟石灰（氫氧化鈣）為<b>鹼性</b>物質，投放後會使水的 pH 值<i class=\"hl\">增加</i>，故選(A)。"},
+{"q":"阿珍因胃酸分泌過多而服用胃藥（主要成分為碳酸鈉），則服用此胃藥後的敘述，下列何者<b>錯誤</b>？","opts":["胃部可能會有熱熱的感覺","會使胃內液體的 pH 值下降","胃內會進行酸鹼中和反應","會使胃內液體的 [H⁺] 下降"],"ans":1,"sec":"酸鹼中和","diff":"中","src":"重點演練・素養題","exp":"碳酸鈉（鹼性）會與胃內的鹽酸進行<b>酸鹼中和反應</b>，屬放熱反應（故(A)正確），並使胃內液體的 [H⁺] <b>下降</b>（故(D)正確）。[H⁺] 下降代表酸性減弱，pH 值應<i class=\"hl\">上升</i>，故(B)錯誤。"},
+{"q":"在錐形瓶內裝入 1M、20 mL 的氫氧化鈣水溶液和數滴酚酞，再慢慢滴入 1M 的鹽酸，則下列敘述何者<b>錯誤</b>？","opts":["滴入鹽酸前，錐形瓶內的溶液顏色為無色","滴入鹽酸的過程中，錐形瓶內溶液的溫度會上升","滴入鹽酸的過程中，錐形瓶內溶液的 pH 值會下降","實驗完成後，將錐形瓶內的溶液蒸乾，可得到氯化鈣"],"ans":0,"sec":"酸鹼中和","diff":"中","src":"重點演練","exp":"(A)錯誤。氫氧化鈣水溶液為<b>鹼性</b>，而酚酞在鹼性溶液中呈<i class=\"hl\">紅色</i>，不是無色。(B)酸鹼中和為放熱反應。(C)加入酸使 pH 值下降。(D)Ca(OH)₂＋2HCl→CaCl₂＋2H₂O，蒸乾可得氯化鈣。"},
+{"q":"取硫粉和鎂帶分別在空氣中燃燒，燃燒後的產物依序於 X、Y 兩瓶密閉容器內與水充分混合。在室溫下先以石蕊試紙檢測 X、Y 兩瓶水溶液，再將兩瓶水溶液混合並測量溫度變化。已知實驗結果兩瓶的石蕊試紙皆有變色，則下列哪一個代號最可能是實驗結果的紀錄？<br>　甲：X 瓶變紅色、Y 瓶變藍色，混合後溫度下降<br>　乙：X 瓶變紅色、Y 瓶變藍色，混合後溫度上升<br>　丙：X 瓶變藍色、Y 瓶變紅色，混合後溫度上升<br>　丁：X 瓶變藍色、Y 瓶變紅色，混合後溫度下降","opts":["甲","乙","丙","丁"],"ans":1,"sec":"酸鹼中和","diff":"難","src":"會考110補考","exp":"解題關鍵：<b>非金屬氧化物的水溶液呈酸性，金屬氧化物的水溶液呈鹼性</b>。硫為非金屬，X 瓶（SO₂ 溶於水成亞硫酸）呈<b>酸性</b>，會使藍色石蕊試紙<b>變紅色</b>；鎂為金屬，Y 瓶（MgO 溶於水成氫氧化鎂）呈<b>鹼性</b>，會使紅色石蕊試紙<b>變藍色</b>。酸性與鹼性水溶液混合會進行酸鹼中和，為<i class=\"hl\">放熱反應</i>，溫度<b>上升</b>，故選(B)乙。"}
+];
+
+const UNITS={
+  bio:{name:"生物",qs:Q_BIO,pfx:"bio:",icon:"\ud83c\udf3f",color:"#2c7a4b"},
+  phy:{name:"理化",qs:Q_PHY,pfx:"phy:",icon:"\ud83d\udd2c",color:"#0f6f8c"},
+  ear:{name:"地科",qs:Q_EAR,pfx:"ear:",icon:"\ud83c\udf0f",color:"#9a5b28"}
+};
+let unit="bio";
+
+/* 文字內 ⟦imageN⟧ 標記 → <img>；stem 用大圖(qi)、選項/詳解用行內圖(gi) */
+const REP_TAGS=[["br","<br>"],["b","<b>"],["[/]b","</b>"],['i class="hl"','<i class="hl">'],["[/]i","</i>"]];
+function rep(t,big){
+  let s=esc(t).replace(/⟦([^⟧]+)⟧/g,(m,n)=>{
+    const src=IM[UNITS[unit].pfx+n]||IM[n];
+    if(!src)return "";
+    return '<img class="'+(big?"qi":"gi")+'" src="'+src+'" alt="\u5716">';
+  });
+  REP_TAGS.forEach(a=>{s=s.replace(new RegExp("&lt;"+a[0]+"&gt;","g"),a[1]);});
+  return s
+    .replace(/⟬([^|⟭]*)[|]([^⟭]*)⟭/g,(m,a,b)=>'<span class="fr"><i>'+a+'</i><i>'+b+'</i></span>')
+    .replace(/□/g,'<i class="hl">□</i>');
+}
+
+/* ===== 課本架構 =====
+   每個「重點」的欄位：
+     n   重點編號
+     t   重點名稱
+     p   課本頁碼
+     tg  課本上的實驗／補充標籤
+     un  true = 這一筆是從目錄照片判讀的，字太小尚未確認
+     c   內容（HTML 字串）；null 代表還沒收錄
+   要補內容時，只需把該筆的 c 從 null 改成內容字串。            */
+/* ===== 各單元學習內容 ===== */
+const U7_1=`<div class="blk">
+<h4>一、質量守恆</h4>
+<p><b>質量守恆</b>：一般化學反應，其<i class="hl">反應前所有物質的總質量＝反應後所有物質的總質量</i>。</p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>反應</th><th>碳酸鈉＋氯化鈣 → 碳酸鈣＋氯化鈉</th><th>鐵＋氧氣 → 氧化鐵</th></tr>
+<tr><td class="h">現象</td><td>兩溶液混合後產生白色沉澱（碳酸鈣）</td><td>鋼絲絨生鏽後，質量變大</td></tr>
+<tr><td class="h">說明</td><td>雖然反應產生沉澱，但<i class="hl">錐形瓶內的物質總質量不變</i>。</td><td>雖然鋼絲絨質量變大，但<i class="hl">試管內的物質總質量不變</i>。</td></tr>
+</table></div>
+<div class="box myth"><span class="bt">迷思問答</span>
+<p><b>Q　密閉容器內的反應才會遵守質量守恆定律？</b></p>
+<p><b>A</b>　在開放容器中進行反應，若有容器外的氣體參與反應，或反應產生的氣體逸散至容器外，則<b>容器內</b>的物質總質量可能會改變；但若<i class="hl">計算進入容器或從容器逸散的氣體質量</i>，則反應仍遵守質量守恆定律。</p>
+</div>
+</div>
+
+<div class="blk">
+<h4>二、原子量、分子量與莫耳數</h4>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>說明</th></tr>
+<tr><td class="h">原子量</td><td>
+1. 原子的質量極小，很難直接測得 1 個原子的實際質量，故以原子量表示原子間的<i class="hl">相對質量</i>。<br>
+2. 國際上使用<b>碳原子（碳-12）</b>作為比較標準，將其原子量訂為 <b>12</b>。<br>
+3. 若得知相同數目時，某原子質量與碳原子質量的比值，便可以求得該原子的原子量。<br>
+<span class="eg">例</span>若 C、O 原子數目相同時的質量比為 3：4，則 3：4＝12（碳的原子量）：氧的原子量 → 氧的原子量＝16。
+</td></tr>
+<tr><td class="h">分子量</td><td>
+1. 分子是由原子組成的，故某分子的分子量即為該分子所含各原子的<i class="hl">原子量總和</i>。<br>
+<span class="eg">例</span>水的化學式為 H₂O，分子量＝1×2＋16＝18。<br>
+2. 原子量與分子量作為粒子間質量的比較時，<i class="hl">沒有單位</i>。
+</td></tr>
+<tr><td class="h">莫耳數</td><td>
+1. 由於原子、分子等粒子的體積非常小，無法以一般的單位（顆、粒）來計數，所以科學上便訂定<b>莫耳</b>作為表示物質粒子數的單位。<br>
+2. 將 <b>12 公克碳-12</b> 中所含的碳原子數目訂為 <b>1 莫耳</b>。<br>
+3. 經實驗測得，1 莫耳的粒子數約為 <i class="hl">6×10²³</i> 個。<br>
+<span class="eg">例</span>「1 打」雞蛋有 12 顆，「1 莫耳」雞蛋有 6×10²³ 顆。
+</td></tr>
+<tr><td class="h">公式換算</td><td>
+<span class="fml"><span class="fr"><i>質量</i><i>原子量或分子量</i></span>　＝　<b>莫耳數</b>　＝　<span class="fr"><i>原子個數或分子個數</i><i>6×10²³</i></span></span>
+<span class="fml"><b>莫耳數</b>　＝　莫耳濃度（M）× 溶液體積（L）</span>
+</td></tr>
+</table></div>
+</div>
+
+<div class="box hot"><span class="bt">麻辣私房菜</span>
+<p><b>原子量、分子量與莫耳數的計算</b></p>
+<p><b>1. 必備觀念</b><br>
+(1) 物質的原子量或分子量加上單位「克（g）」，就等於<i class="hl">一莫耳</i>該物質的質量。<span class="eg">例</span>H₂SO₄ 的分子量為 98，則一莫耳 H₂SO₄ 的質量為 98 g。<br>
+(2) 計算時，<i class="hl">先求得莫耳數</i>，再轉換成質量或個數。</p>
+<p><b>2. 各種題型</b><br>
+(1) <b>個數與質量互換</b><br>
+　① 1.2×10²⁴ 個 H₂SO₄ 分子的質量 → <span class="fr"><i>1.2×10²⁴</i><i>6×10²³</i></span>＝2 mol → 2×98＝<b>196 g</b>　〔98＝1 莫耳的質量〕<br>
+　② 49 g H₂SO₄ 分子的個數 → <span class="fr"><i>49</i><i>98</i></span>＝0.5 mol → 0.5×（6×10²³）＝<b>3×10²³ 個</b><br>
+(2) <b>原子個數</b>：98 g H₂SO₄ 分子中氧原子個數 → <span class="fr"><i>98</i><i>98</i></span>＝1 mol → 1×<b>4</b>×（6×10²³）＝<b>2.4×10²⁴ 個</b>　〔1 個硫酸分子含有 4 個氧原子〕<br>
+(3) <b>相同質量時分子數的比較</b>：1 g H₂ 與 1 g O₂ 的分子數大小關係 → 分子數＝莫耳數×（6×10²³）＝<span class="fr"><i>質量</i><i>分子量</i></span>×（6×10²³）→ 質量相同時，<i class="hl">分子數與分子量成反比</i>，故 1 g H₂ 的分子數較多。</p>
+</div>`;
+const U7_2=`<div class="blk">
+<h4>一、化學反應式</h4>
+<p>1. <b>化學反應式</b>：用來表達化學反應的式子，必須根據<i class="hl">實驗結果</i>加以記錄，不可憑空杜撰。</p>
+<p>2. <b>化學反應式的書寫</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><td class="h">反應式</td><td class="c">A ＋ B　—〔反應方向與反應條件〕→　C ＋ D<br><span style="color:var(--muted);font-size:.82rem">反應物　　　　　　　　　　　　　生成物（產物）</span></td></tr>
+<tr><td class="h">說明</td><td>
+(1) 反應物寫在<b>左側</b>，生成物寫在<b>右側</b>，中間則以「→」號連接，表示反應進行的方向。<br>
+(2) 若反應物或生成物不只一種，則以「＋」號連接。<br>
+(3) 在「→」上方或下方可用文字或符號來表示反應所需的條件，如催化劑、加熱（符號為 △）。
+</td></tr>
+<tr><td class="h">舉例</td><td class="c">2H₂O₂ —〔MnO₂〕→ 2H₂O ＋ O₂　（MnO₂ 為催化劑）</td></tr>
+</table></div>
+<p>3. <b>化學反應式的平衡</b></p>
+<div class="flow">
+<div class="fb"><b>① Na ＋ O₂ → Na₂O</b>列出反應物與生成物的化學式。</div>
+<div class="fb"><b>② Na ＋ O₂ → 1Na₂O</b>將<i class="hl">最複雜分子</i>的係數定為 1。</div>
+<div class="fb"><b>③ 2Na ＋ ½O₂ → 1Na₂O</b>箭頭兩邊的原子種類及數目相同，求得其他分子的係數。</div>
+<div class="fb"><b>④ 4Na ＋ O₂ → 2Na₂O</b>將係數化為<i class="hl">最簡單整數</i>，若係數為 1，可省略不寫。</div>
+</div>
+<p>4. <b>常見的化學反應式</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>化學反應式</th></tr>
+<tr><td class="h">氧氣的製備</td><td>2H₂O₂ —〔MnO₂〕→ 2H₂O ＋ O₂<br><span style="color:var(--muted)">雙氧水 —〔二氧化錳〕→ 水＋氧氣</span></td></tr>
+<tr><td class="h">二氧化碳的製備</td><td>CaCO₃ ＋ 2HCl → CaCl₂ ＋ CO₂ ＋ H₂O<br><span style="color:var(--muted)">碳酸鈣＋稀鹽酸 → 氯化鈣＋二氧化碳＋水</span></td></tr>
+<tr><td class="h">鹼金屬與水的反應</td><td>2Na ＋ 2H₂O → H₂ ＋ 2NaOH<br><span style="color:var(--muted)">鈉＋水 → 氫氣＋氫氧化鈉</span></td></tr>
+<tr><td class="h">活性大金屬與稀酸的反應</td><td>Mg ＋ 2HCl → H₂ ＋ MgCl₂<br><span style="color:var(--muted)">鎂帶＋鹽酸 → 氫氣＋氯化鎂</span></td></tr>
+<tr><td class="h">酸鹼中和</td><td>NaOH ＋ HCl → NaCl ＋ H₂O<br><span style="color:var(--muted)">氫氧化鈉＋鹽酸 → 氯化鈉＋水</span></td></tr>
+<tr><td class="h">酯化反應</td><td>CH₃COOH ＋ C₂H₅OH —〔H₂SO₄〕→ CH₃COOC₂H₅ ＋ H₂O<br><span style="color:var(--muted)">乙酸＋乙醇 —〔濃硫酸〕→ 乙酸乙酯＋水</span></td></tr>
+</table></div>
+</div>
+
+<div class="blk">
+<h4>二、化學計量</h4>
+<p>1. <b>意義</b>：利用化學反應式去推算產物的量或是所需反應物的量。</p>
+<p>2. ⚠ <b>化學反應式的係數關係</b>：<i class="hl">係數比＝分子數比＝莫耳數比</i>。</p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>化學反應式</th><th>2H₂</th><th>＋</th><th>O₂</th><th>→</th><th>2H₂O</th></tr>
+<tr><td class="h">平衡係數比</td><td class="c">2</td><td class="c">：</td><td class="c">1</td><td class="c">：</td><td class="c">2</td></tr>
+<tr><td class="h">分子數比</td><td class="c">2</td><td class="c">：</td><td class="c">1</td><td class="c">：</td><td class="c">2</td></tr>
+<tr><td class="h">莫耳數比</td><td class="c">2</td><td class="c">：</td><td class="c">1</td><td class="c">：</td><td class="c">2</td></tr>
+<tr><td class="h">質量比<br><span style="font-weight:400;color:var(--muted);font-size:.8rem">（莫耳數×分子量）</span></td><td class="c">1<br><span style="color:var(--muted);font-size:.8rem">(2×2)</span></td><td class="c">：</td><td class="c">8<br><span style="color:var(--muted);font-size:.8rem">(1×32)</span></td><td class="c">：</td><td class="c">9<br><span style="color:var(--muted);font-size:.8rem">(2×18)</span></td></tr>
+</table></div>
+<p><span class="nt" style="display:block"><b>註1</b>上述的分子數比與莫耳數比是指分子數與莫耳數的<b>變化量</b>比。</span>
+<span class="nt" style="display:block"><b>註2</b>反應式的係數比 <i class="hl">≠</i> 質量比。</span></p>
+</div>
+
+<div class="box hot"><span class="bt">麻辣私房菜</span>
+<p><b>化學計量的解題步驟</b></p>
+<div class="flow">
+<div class="fb"><b>1</b>先確認反應式<i class="hl">是否已平衡</i>。</div>
+<div class="fb"><b>2</b>將<i class="hl">質量轉換成莫耳數</i>。</div>
+<div class="fb"><b>3</b>以完全消耗的反應物（<i class="hl">限量試劑</i>）作為基準，再利用「係數比＝莫耳數比」求得其他反應物消耗或生成物產生的莫耳數，再換算成質量。</div>
+</div>
+<p><span class="eg">例</span>將 16 g 的 H₂ 與 14 g 的 N₂ 進行反應，反應式為 H₂＋N₂→NH₃，則最多可生成多少 g 的氨氣？</p>
+<p><b>解</b>　1. 平衡反應式：3H₂＋N₂→2NH₃。<br>
+2. 質量轉換成莫耳數：H₂（分子量 2）→ <span class="fr"><i>16</i><i>2</i></span>＝8 mol；N₂（分子量 28）→ <span class="fr"><i>14</i><i>28</i></span>＝0.5 mol。<br>
+3. 以限量試劑為基準：</p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>反應式</th><th>3H₂</th><th>N₂（限量試劑）</th><th>2NH₃</th></tr>
+<tr><td class="h">係數比</td><td class="c">3</td><td class="c">1</td><td class="c">2</td></tr>
+<tr><td class="h">反應前莫耳數</td><td class="c">8 mol</td><td class="c">0.5 mol</td><td class="c">—</td></tr>
+<tr><td class="h">消耗的莫耳數</td><td class="c">0.5×3＝1.5 mol</td><td class="c">0.5 mol</td><td class="c">—</td></tr>
+<tr><td class="h">反應後莫耳數</td><td class="c">6.5 mol</td><td class="c">0</td><td class="c">0.5×2＝1 mol</td></tr>
+</table></div>
+<p>由上述可知，1.5 mol H₂ 與 0.5 mol N₂ 反應，可產生 1 mol NH₃，NH₃ 的質量＝1×17＝<b>17 g</b>。</p>
+</div>
+
+<div class="box tip"><span class="bt">計算演練</span>
+<p><b>題型 1　化學計量</b><br>
+酒精燃燒的化學反應式如下：C₂H₅OH ＋ O₂ → CO₂ ＋ H₂O（未平衡），則 69 克的酒精完全燃燒後，會產生多少克的二氧化碳？（原子量：H＝1，C＝12，O＝16）</p>
+<p><b>解</b>　先平衡反應式：C₂H₅OH＋3O₂→2CO₂＋3H₂O。由「係數比＝莫耳數比」可知，1 莫耳的 C₂H₅OH 會產生 2 莫耳的 CO₂。<br>
+C₂H₅OH：CO₂＝1：2，酒精莫耳數＝<span class="fr"><i>69</i><i>46</i></span>＝1.5 莫耳<br>
+1：2＝1.5：X，X＝3 莫耳，故 CO₂ 的質量＝3×44＝<b>132 克</b>。</p>
+<p><b>題型 2　限量試劑</b><br>
+氫氣與氮氣反應會產生氨氣，化學反應式如下：H₂ ＋ N₂ → NH₃（未平衡）。若 6 克的氫氣與 56 克的氮氣反應，則最多可產生多少克的氨氣？（原子量：H＝1，N＝14）</p>
+<p><b>解</b>　先平衡反應式：3H₂＋N₂→2NH₃。<br>
+H₂：N₂：NH₃＝3：1：2；<span class="fr"><i>6</i><i>2</i></span>＝3 莫耳、<span class="fr"><i>56</i><i>28</i></span>＝2 莫耳。<br>
+H₂ 會完全消耗，為<i class="hl">限量試劑</i>，N₂ 則剩下 1 莫耳，並產生 2 莫耳的 NH₃，故 NH₃ 的質量＝2×17＝<b>34 克</b>。</p>
+</div>`;
+const U7_3=`<div class="blk">
+<h4>一、氧化與活性大小</h4>
+<p>1. <b>氧化</b>：物質與<i class="hl">氧結合</i>的反應。<br>
+　(1) 劇烈的氧化反應：燃燒、爆炸。<br>
+　(2) 溫和的氧化反應：呼吸作用、生鏽。</p>
+<p>2. <b>活性</b>　(1) 元素對氧的活性大小：</p>
+<div class="act">
+<span class="big">鉀 &gt; 鈉 &gt; 鈣 &gt; 鎂 &gt; 鋁 &gt; 錳 &gt; <i class="hl">碳</i> &gt; 鋅 &gt; 鉻 &gt; 鐵 &gt; 鈷 &gt; 鎳 &gt; 錫 &gt; 鉛 &gt; <i class="hl">氫</i> &gt; 銅 &gt; 汞 &gt; 銀 &gt; 鉑 &gt; 金</span><br>
+<span style="color:var(--muted);letter-spacing:.08em">K　Na　Ca　Mg　Al　Mn　C　Zn　Cr　Fe　Co　Ni　Sn　Pb　H　Cu　Hg　Ag　Pt　Au</span>
+</div>
+<div class="box tip"><span class="bt">背誦口訣</span>甲娜蓋美女，猛嘆息割鐵，姑娘洗干琴，銅共一百斤。</div>
+<p>　① 鉀、鈉對氧的活性大，容易氧化，但又易與水反應，故須儲存於<i class="hl">礦物油</i>中。<br>
+　② 金、銀對氧的活性小，不易氧化，在自然界中常以<i class="hl">元素狀態</i>存在。</p>
+<p>　(2) <b>燃燒實驗</b>：依物質在空氣中燃燒的難易程度，比較物質對氧的活性大小。</p>
+<p>　① <b>金屬的燃燒</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>金屬</th><th>燃燒的<br>難易度</th><th>火焰<br>顏色</th><th>燃燒後的<br>生成物</th><th>氧化物溶於<br>水後的生成物</th><th>氧化物溶於<br>水的酸鹼性</th><th>燃燒及氧化物溶於水的反應式</th></tr>
+<tr><td class="h">鈉 (Na)</td><td class="c">非常容易</td><td class="c">黃色</td><td class="c">氧化鈉</td><td class="c">氫氧化鈉</td><td class="c">鹼性</td><td>4Na＋O₂→2Na₂O<br>Na₂O＋H₂O→2NaOH</td></tr>
+<tr><td class="h">鎂 (Mg)</td><td class="c">容易</td><td class="c"><i class="hl">白色</i></td><td class="c">氧化鎂</td><td class="c">氫氧化鎂</td><td class="c">鹼性</td><td>2Mg＋O₂→2MgO<br>MgO＋H₂O→Mg(OH)₂</td></tr>
+<tr><td class="h">鋅 (Zn)</td><td class="c">不易</td><td class="c">黃綠色</td><td class="c">氧化鋅</td><td class="c">氫氧化鋅</td><td class="c">鹼性</td><td>2Zn＋O₂→2ZnO<br>ZnO＋H₂O→Zn(OH)₂</td></tr>
+<tr><td class="h">銅 (Cu)</td><td class="c">難</td><td class="c"><i class="hl">無火焰</i></td><td class="c">氧化銅</td><td class="c"><i class="hl">難溶於水</i></td><td class="c">難溶於水<br>故呈中性</td><td>2Cu＋O₂→2CuO</td></tr>
+</table></div>
+<p>　② <b>非金屬的燃燒</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>非金屬</th><th>燃燒的<br>難易度</th><th>火焰<br>顏色</th><th>燃燒後的<br>生成物</th><th>氧化物溶於<br>水後的生成物</th><th>氧化物溶於<br>水的酸鹼性</th><th>燃燒及氧化物溶於水的反應式</th></tr>
+<tr><td class="h">硫 (S)</td><td class="c">容易</td><td class="c"><i class="hl">藍紫色</i></td><td class="c">二氧化硫</td><td class="c"><i class="hl">亞硫酸</i></td><td class="c">酸性</td><td>S＋O₂→SO₂<br>SO₂＋H₂O→H₂SO₃</td></tr>
+<tr><td class="h">碳 (C)</td><td class="c">容易</td><td class="c">黃色</td><td class="c">二氧化碳</td><td class="c"><i class="hl">碳酸</i></td><td class="c">酸性</td><td>C＋O₂→CO₂<br>CO₂＋H₂O→H₂CO₃</td></tr>
+</table></div>
+<div class="box key"><span class="bt">得分關鍵</span><b>金屬</b>氧化物的水溶液呈<i class="hl">鹼性</i>，<b>非金屬</b>氧化物的水溶液呈<i class="hl">酸性</i>，而<b>難溶於水</b>的氧化物之水溶液呈<i class="hl">中性</i>。</div>
+</div>
+
+<div class="blk">
+<h4>二、氧化與還原</h4>
+<p>氧化與還原<i class="hl">必相伴發生</i>。</p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>氧化</th><th>還原</th></tr>
+<tr><td class="h">定義</td><td class="c">物質<i class="hl">得到</i>氧</td><td class="c">物質<i class="hl">失去</i>氧</td></tr>
+<tr><td class="h">舉例</td><td colspan="2" class="c">Mg ＋ CuO → MgO ＋ Cu<br>
+Mg 得到氧（Mg→MgO），故 Mg 進行<b>氧化</b>反應<br>
+CuO 失去氧（CuO→Cu），故 CuO 進行<b>還原</b>反應</td></tr>
+</table></div>
+<div class="box key"><span class="bt">得分關鍵</span>
+<p>試題常以下表判斷元素的活性大小（「－」代表不反應）：</p>
+<div class="mtabwrap"><table class="ctab" style="min-width:260px">
+<tr><th>　</th><th>X</th><th>Y</th><th>Z</th></tr>
+<tr><td class="h">XO</td><td class="c">　</td><td class="c">－</td><td class="c">乙</td></tr>
+<tr><td class="h">YO</td><td class="c">甲</td><td class="c">　</td><td class="c">丁</td></tr>
+<tr><td class="h">ZO</td><td class="c">－</td><td class="c">丙</td><td class="c">　</td></tr>
+</table></div>
+<p>表中 XO 與 Y 不反應，表示 X 對 O 的活性較大、Y 無法搶奪，因而可推測 YO 與 X 必會發生反應，故<b>甲的符號應為＋</b>；同理推測 Z 的活性大於 X，<b>乙的符號應為＋</b>。所以活性大小為 <i class="hl">Z &gt; X &gt; Y</i>，故<b>丙為－、丁為＋</b>。</p>
+</div>
+</div>
+
+<div class="blk">
+<h4>三、金屬冶煉</h4>
+<p>1. <b>原因</b>：大多數的金屬，都以<i class="hl">化合物</i>的狀態存在於自然界中。</p>
+<p>2. <b>冶煉原理</b>：利用<i class="hl">對氧活性較大</i>的物質將氧化物中的金屬還原出來。</p>
+<div class="box tip"><span class="bt">概念補給</span>因<b>碳</b>活性大，且價格便宜，故常用來還原金屬礦。</div>
+</div>
+
+<div class="blk">
+<h4>四、日常生活中的氧化還原反應</h4>
+<p>1. <b>抗氧化劑</b>：食品中常利用抗氧化劑來<i class="hl">減緩</i>食物和氧氣的反應速率，延長保存期限。<br>
+<span class="eg">例</span>胡蘿蔔素、維他命 C、維他命 E 為常見的抗氧化劑。<br>
+<span class="nt"><b>註</b>食品抗氧化劑是指防止或延緩食品氧化的添加劑，本身應具有<b>易與氧作用</b>的特性，才能防止氧與食品作用。</span></p>
+<p>2. <b>漂白劑</b><br>
+　(1) 洗衣常用的漂白劑可清除沾染在白色衣物上的汙漬，例如：<i class="hl">次氯酸鈉（NaClO）</i>。<br>
+　(2) 有些業者會使用<i class="hl">二氧化硫</i>漂白竹筷、紙漿，以增進產品的美觀，但殘留的二氧化硫可能會引起人體過敏。</p>
+<p>3. <b>光合作用與呼吸作用</b>。</p>
+</div>`;
+
+const U8_1=`<div class="blk">
+<h4>一、電解質</h4>
+<p>1. <b>定義</b>：<i class="hl">化合物</i>溶於水形成水溶液，其<i class="hl">水溶液可導電</i>者。</p>
+<div class="box tip"><span class="bt">概念補給</span>化合物若不溶於水，可加熱將其熔化，<b>熔化後可導電</b>者也稱為電解質。</div>
+<p>2. <b>種類</b>：可分為酸、鹼、鹽。</p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>酸</th><th>鹼</th><th>鹽</th></tr>
+<tr><td class="h">簡易判斷</td><td>中文名稱最後一個字為<i class="hl">酸</i></td><td>中文名稱中有<i class="hl">氫氧</i>兩字</td><td>化學式為「XₘYₙ」<br>X 為金屬離子或銨根<br>Y 為非金屬離子或酸根<br><span class="nt"><b>註</b>m、n 代表離子的個數。</span></td></tr>
+<tr><td class="h">離子判斷</td><td class="c">解離出的離子含有 <i class="hl">H⁺</i></td><td class="c">解離出的離子含有 <i class="hl">OH⁻</i></td><td class="c">—</td></tr>
+<tr><td class="h">舉例</td><td class="c">硫酸（H₂SO₄）<br>硝酸（HNO₃）</td><td class="c">氫氧化鈉（NaOH）<br>氫氧化銨（NH₄OH）</td><td class="c">NH₄Cl（銨根＋非金屬離子）<br>CaCO₃（金屬離子＋酸根）</td></tr>
+<tr><td class="h">水溶液酸鹼性</td><td class="c">酸性</td><td class="c">鹼性</td><td class="c"><i class="hl">酸性、中性、鹼性皆有可能</i></td></tr>
+</table></div>
+<p>3. <b>非電解質</b>：化合物溶於水形成水溶液，但水溶液<i class="hl">無法導電</i>者。<br>
+<span class="eg">例</span>C₆H₁₂O₆（葡萄糖）、C₁₂H₂₂O₁₁（蔗糖）、C₂H₅OH（酒精）雖可溶於水中，但水溶液皆無法導電，且水溶液均呈<b>中性</b>。</p>
+<div class="box myth"><span class="bt">迷思問答</span>
+<p><b>Q　酒精（C₂H₅OH）含有 OH 原子團，故溶於水後會解離出 OH⁻，屬於電解質？</b></p>
+<p><b>A</b>　酒精雖含有 OH 原子團，但溶於水中<i class="hl">不會解離</i>，仍以<b>分子狀態</b>存在，故屬於非電解質。</p>
+</div>
+</div>
+
+<div class="blk">
+<h4>二、阿瑞尼斯的電解質解離說（電離說）</h4>
+<p>1. <b>內容</b>：電解質在水中會分解成帶正電的<b>陽離子</b>與帶負電的<b>陰離子</b>，靠著<i class="hl">陽、陰離子的移動</i>使水溶液導電。<br>
+<span class="eg">例</span>氯化氫在水中會分解成氫離子與氯離子（HCl → H⁺ ＋ Cl⁻）。</p>
+<p>2. <b>電解質水溶液的特性</b><br>
+(1) 電解質水溶液必為<i class="hl">電中性</i>，即<b>陽離子的總帶電量＝陰離子的總帶電量</b> → 每個陽離子帶電量×陽離子數目＝每個陰離子帶電量×陰離子數目。<br>
+<span class="eg">例</span>CaCl₂ 水溶液中，離子數目比 Ca²⁺：Cl⁻＝1：2，總帶電量比 Ca²⁺：Cl⁻＝2×1：1×2＝<b>1：1</b>。<br>
+<span class="nt"><b>註</b>電解質水溶液必為電中性，但<b>酸鹼性則不一定為中性</b>。</span><br>
+(2) 通電前，離子可以往四面八方自由移動；通電後，<i class="hl">陽離子往負極</i>移動，<i class="hl">陰離子往正極</i>移動。</p>
+<div class="box key"><span class="bt">得分關鍵</span>電解質水溶液中，陽、陰離子的<b>總電量必相等</b>，但陽離子的總個數與陰離子的總個數<i class="hl">不一定相等</i>。</div>
+</div>
+
+<div class="blk">
+<h4>三、離子</h4>
+<p>1. <b>陽、陰離子與帶電原子團</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>陽離子</th><th>陰離子</th><th>帶電原子團（根）</th></tr>
+<tr><td class="h">成因</td><td>原子<i class="hl">失去</i>電子，形成帶正電的陽離子。</td><td>原子<i class="hl">得到</i>電子，形成帶負電的陰離子。</td><td>數個原子結合成的原子團亦可帶電，又稱為<b>根</b>。</td></tr>
+<tr><td class="h">舉例</td><td>Ca（鈣原子）失去 2 個電子而形成帶 2 個正電的 <b>Ca²⁺</b>（鈣離子）。</td><td>Cl（氯原子）得到 1 個電子而形成帶 1 個負電的 <b>Cl⁻</b>（氯離子）。</td><td>(1) 帶正電：NH₄⁺<br>(2) 帶負電：OH⁻、SO₄²⁻</td></tr>
+</table></div>
+<p>2. <b>同一種元素的原子與離子比較</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>舉例</th><th>質子數</th><th>電子數</th><th>電性</th><th>活性</th><th>顏色</th></tr>
+<tr><td class="h">原子</td><td class="c">Na</td><td class="c">11</td><td class="c">11</td><td class="c">電中性</td><td class="c">大</td><td class="c">鈉金屬為銀灰色</td></tr>
+<tr><td class="h">↓陽離子</td><td class="c">Na⁺</td><td class="c">11</td><td class="c">10<br><span style="color:var(--bad);font-size:.78rem">失去電子</span></td><td class="c">帶正電</td><td class="c">小</td><td class="c">無色</td></tr>
+<tr><td class="h">原子</td><td class="c">Cl</td><td class="c">17</td><td class="c">17</td><td class="c">電中性</td><td class="c">大</td><td class="c">氯氣為黃綠色</td></tr>
+<tr><td class="h">↓陰離子</td><td class="c">Cl⁻</td><td class="c">17</td><td class="c">18<br><span style="color:var(--bad);font-size:.78rem">得到電子</span></td><td class="c">帶負電</td><td class="c">小</td><td class="c">無色</td></tr>
+</table></div>
+<p>(1) <b>不同處</b>：<i class="hl">電子數</i>不同，<i class="hl">化學性質</i>不同。<br>
+(2) <b>相同處</b>：<i class="hl">質子數、中子數</i>相同。</p>
+</div>`;
+const U8_2=`<div class="blk">
+<h4>一、酸與鹼的特性</h4>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>酸</th><th>鹼</th></tr>
+<tr><td class="h">定義</td><td>溶於水中可增加<i class="hl">氫離子（H⁺）</i>濃度者</td><td>溶於水中可增加<i class="hl">氫氧根離子（OH⁻）</i>濃度者</td></tr>
+<tr><td class="h">特性</td><td>
+1. 酸類都是<b>電解質</b>。<br>
+2. 濃酸加入水中稀釋為<i class="hl">放熱反應</i>。<br>
+3. 大多數的稀酸都會與<b>活性大的金屬</b>（如鎂、鋁等）反應，產生<i class="hl">氫氣</i>。<br>
+4. 稀酸會與<b>碳酸鹽類</b>（如 CaCO₃）反應，產生<i class="hl">二氧化碳</i>。
+</td><td>
+1. 鹼類都是<b>電解質</b>。<br>
+2. 鹼類水溶液可<i class="hl">溶解油脂</i>，摸起來有滑膩感，嘗起來有澀味。
+</td></tr>
+</table></div>
+<div class="box key"><span class="bt">得分關鍵</span>NH₃ 溶於水會解離出 <b>OH⁻</b>，屬於<i class="hl">鹼</i>。</div>
+</div>
+
+<div class="blk">
+<h4>二、常見的酸</h4>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>性質與用途</th></tr>
+<tr><td class="h">硫酸<br>(H₂SO₄)</td><td>
+<b>性質</b><br>
+(1) 沸點高、腐蝕性很強的無色油狀液體。<br>
+(2) 濃硫酸具有<i class="hl">脫水性</i>，可使碳水化合物失去水分，形成黑色的碳。<br>
+(3) 稀釋時，<i class="hl">將濃硫酸緩慢加入大量水中</i>，避免溶液溫度快速上升而造成噴濺。<br>
+<b>用途</b>　可用於製造醫藥、染料、肥料、造紙以及鉛蓄電池等。
+</td></tr>
+<tr><td class="h">鹽酸<br>(HCl)</td><td>
+<b>性質</b><br>
+(1) 實驗室中常用的鹽酸是重量百分率濃度 <i class="hl">37%</i> 的氯化氫水溶液。<br>
+(2) 鹽酸應為<b>無色</b>，但工業用的鹽酸含有<b>鐵離子</b>，呈淡黃色。<br>
+(3) 打開濃鹽酸瓶蓋時，逸出的氯化氫氣體會與水氣結合，形成白色<i class="hl">酸霧</i>。<br>
+<b>用途</b>　可用來清洗金屬表面，及作為浴室的清潔劑，也是<i class="hl">胃液</i>的主要成分。
+</td></tr>
+<tr><td class="h">醋酸<br>(CH₃COOH)</td><td>
+<b>性質</b><br>
+(1) 又稱為<i class="hl">乙酸</i>，易溶於水，為無色具刺激性味道的液體。<br>
+(2) 高純度的醋酸會在 16.7℃ 時凝固，稱為<i class="hl">冰醋酸</i>。<br>
+<b>用途</b>　常應用於食品工業，例如市售的食用醋含有醋酸。
+</td></tr>
+</table></div>
+</div>
+
+<div class="blk">
+<h4>三、常見的鹼</h4>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>性質與用途</th></tr>
+<tr><td class="h">氫氧化鈉<br>(NaOH)</td><td>
+<b>性質</b><br>
+(1) 白色固體，溶於水會放出大量的熱，有強烈的腐蝕性，俗稱<i class="hl">燒鹼</i>或<i class="hl">苛性鈉</i>。<br>
+(2) 暴露在空氣中時，易吸收<b>水氣</b>和<b>二氧化碳</b>而變質。<br>
+<b>用途</b>　製造肥皂、清潔劑、人造絲等。
+</td></tr>
+<tr><td class="h">氧化鈣<br>(CaO)</td><td>
+<b>性質</b><br>
+(1) 白色粉末，俗稱<i class="hl">石灰</i>或<i class="hl">生石灰</i>。<br>
+(2) 溶於水中後會形成氫氧化鈣（俗稱<i class="hl">熟石灰</i>，Ca(OH)₂）；氫氧化鈣水溶液（俗稱<b>石灰水</b>）與二氧化碳作用會產生碳酸鈣（俗稱<b>灰石</b>，CaCO₃），故<i class="hl">澄清石灰水可用來檢驗二氧化碳</i>的存在。<br>
+<b>用途</b>　乾燥劑、檳榔的添加物。
+</td></tr>
+<tr><td class="h">氨<br>(NH₃)</td><td>
+<b>性質</b><br>
+(1) <i class="hl">易溶於水</i>，為無色、比空氣輕、具刺激性味道的氣體。<br>
+(2) 溶於水後的水溶液稱為<i class="hl">氨水</i>，稀釋後可作為清潔劑。<br>
+<b>用途</b>　可用於製造肥料。
+</td></tr>
+</table></div>
+<div class="box key"><span class="bt">得分關鍵</span>
+<p>石灰的三角循環：</p>
+<div class="flow">
+<div class="fb"><b>CaO　氧化鈣</b>石灰、生石灰　—<i class="hl">加水</i>→</div>
+<div class="fb"><b>Ca(OH)₂　氫氧化鈣</b>熟石灰　—<i class="hl">水溶液通入 CO₂</i>→</div>
+<div class="fb"><b>CaCO₃　碳酸鈣</b>灰石　—<i class="hl">高溫分解</i>→ 回到 CaO</div>
+</div>
+</div>
+<div class="box tip"><span class="bt">概念補給</span>在水溶液中幾乎能<b>完全解離</b>的酸稱為<i class="hl">強酸</i>，例如氯化氫；只能<b>部分解離</b>的酸稱為<i class="hl">弱酸</i>，例如醋酸。同樣的，鹼也可分為強鹼與弱鹼。</div>
+</div>`;
+const U8_3=`<div class="blk">
+<h4>一、體積莫耳濃度</h4>
+<p>1. <b>定義</b>：每 1 公升溶液中所含溶質的莫耳數，簡稱<i class="hl">莫耳濃度</i>，單位為莫耳／升，或以「<b>M</b>」表示。<br>
+<span class="nt"><b>註</b>可用中括號 [ ] 表示莫耳濃度，例如 0.5M 葡萄糖溶液的莫耳濃度可寫成 [C₆H₁₂O₆]＝0.5M。</span></p>
+<p>2. <b>公式</b></p>
+<span class="fml">莫耳濃度　＝　<span class="fr"><i>溶質莫耳數</i><i>溶液體積（升）</i></span></span>
+<div class="box tip"><span class="bt">概念補給</span>溶質莫耳數求法：1. <span class="fr"><i>溶質質量(g)</i><i>分子量</i></span>　2. <span class="fr"><i>溶質粒子數</i><i>6×10²³</i></span></div>
+<p>3. <b>計算示範</b>：將 49 g 硫酸（H₂SO₄，分子量 98）配製成 2 L 的水溶液，則 [H₂SO₄]＝<span class="fr"><i>49</i><i>98</i></span>÷2＝<b>0.25M</b>。</p>
+</div>
+
+<div class="box hot"><span class="bt">麻辣比一比</span>
+<p><b>常用濃度的表示法</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>重量百分率濃度</th><th>體積百分率濃度</th></tr>
+<tr><td class="h">定義</td><td>每 100 <b>公克溶液</b>中所含溶質的公克數，以百分比（%）表示。</td><td>每 100 <b>毫升溶液</b>中所含溶質的毫升數，以百分比（%）表示。</td></tr>
+<tr><td class="h">公式</td><td class="c"><span class="fr"><i>溶質質量</i><i>溶液質量</i></span> × 100%</td><td class="c"><span class="fr"><i>溶質體積</i><i>溶液體積</i></span> × 100%</td></tr>
+</table></div>
+</div>
+
+<div class="blk">
+<h4>二、純水的解離</h4>
+<p>1. 純水雖然<b>並非電解質</b>，但也會解離出極微量的氫離子與氫氧根離子。</p>
+<span class="fml">解離反應式：H₂O → H⁺ ＋ OH⁻</span>
+<p>2. 常溫 <b>25℃</b> 時，純水中的 <i class="hl">[H⁺]＝[OH⁻]＝10⁻⁷M</i>。</p>
+<div class="box tip"><span class="bt">概念補給</span>根據「莫耳濃度＝溶質莫耳數／溶液體積(L)」，可得知在 25℃ 下，1 公升的純水中含有 1×10⁻⁷ 莫耳的 H⁺ 與 1×10⁻⁷ 莫耳的 OH⁻。</div>
+</div>
+
+<div class="blk">
+<h4>三、pH 值</h4>
+<p>1. <b>意義</b>：即酸鹼值，由溶液中<i class="hl">氫離子的莫耳濃度</i>換算而得，可用來判斷溶液的酸鹼性。</p>
+<p>2. ⚠ 在 <b>25℃</b> 時，各種水溶液中 [H⁺]、[OH⁻] 的關係以及 pH 值大小：</p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>[H⁺] 與 [OH⁻] 關係</th><th>pH 值大小</th></tr>
+<tr><td class="h">酸性水溶液</td><td class="c">[H⁺] ＞ 10⁻⁷M ＞ [OH⁻]</td><td class="c"><i class="hl">pH ＜ 7</i><br>pH 值越小，酸性越強</td></tr>
+<tr><td class="h">中性水溶液</td><td class="c">[H⁺] ＝ 10⁻⁷M ＝ [OH⁻]</td><td class="c"><i class="hl">pH ＝ 7</i></td></tr>
+<tr><td class="h">鹼性水溶液</td><td class="c">[H⁺] ＜ 10⁻⁷M ＜ [OH⁻]</td><td class="c"><i class="hl">pH ＞ 7</i><br>pH 值越大，鹼性越強</td></tr>
+</table></div>
+<div class="act">0 ←—— 酸性漸強（[H⁺] 越大）　　<b>7 中性</b>　　鹼性漸強（[H⁺] 越小）——→ 14</div>
+<p><span class="nt"><b>註</b>pH 值可能小於 0 或大於 14。</span></p>
+<div class="box myth"><span class="bt">迷思問答</span>
+<p><b>Q　鹼性水溶液中，沒有 H⁺ 存在？</b></p>
+<p><b>A</b>　<i class="hl">任何水溶液中皆含有 H⁺ 與 OH⁻</i>，只是鹼性水溶液中的濃度關係為 [OH⁻]＞[H⁺]。</p>
+</div>
+</div>
+
+<div class="box hot"><span class="bt">麻辣私房菜</span>
+<p><b>判斷水溶液的酸鹼性</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>不論溫度為何</th><th>溫度為 25℃ ①</th><th>溫度為 25℃ ②</th><th>結果</th></tr>
+<tr><td class="c">[H⁺] ＞ [OH⁻]</td><td class="c">[H⁺] ＞ 10⁻⁷M</td><td class="c">pH ＜ 7</td><td class="h">酸性水溶液</td></tr>
+<tr><td class="c">[H⁺] ＝ [OH⁻]</td><td class="c">[H⁺] ＝ 10⁻⁷M</td><td class="c">pH ＝ 7</td><td class="h">中性水溶液</td></tr>
+<tr><td class="c">[H⁺] ＜ [OH⁻]</td><td class="c">[H⁺] ＜ 10⁻⁷M</td><td class="c">pH ＞ 7</td><td class="h">鹼性水溶液</td></tr>
+</table></div>
+<p><span class="nt"><b>註</b>pH＞7 即表示 [H⁺]＜10⁻⁷M；根據 25℃ 時任何水溶液的 <b>[H⁺]×[OH⁻]＝10⁻¹⁴M²</b>，可得知 [H⁺]＜[OH⁻]，故這三個判斷方式其實是相同的。</span></p>
+</div>
+
+<div class="blk">
+<h4>四、酸鹼指示劑</h4>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>指示劑</th><th>酸性</th><th>中性</th><th>鹼性</th></tr>
+<tr><td class="h">⚠ 酚酞</td><td class="c">無色</td><td class="c">無色</td><td class="c"><i class="hl">紅色</i></td></tr>
+<tr><td class="h">廣用試紙</td><td class="c">紅色（強酸）← → 橙色（弱酸）</td><td class="c">綠色</td><td class="c">藍色（弱鹼）← → 紫色（強鹼）</td></tr>
+<tr><td class="h">石蕊試紙</td><td class="c">紅色</td><td class="c">不變色</td><td class="c">藍色</td></tr>
+<tr><td class="h">紅鳳菜</td><td class="c">紅色</td><td class="c">紫紅色</td><td class="c">藍綠色</td></tr>
+<tr><td class="h">紫甘藍</td><td class="c">紅色</td><td class="c">紫色</td><td class="c">綠色</td></tr>
+<tr><td class="h">蝶豆花</td><td class="c">紫色</td><td class="c">藍色</td><td class="c">綠色</td></tr>
+</table></div>
+</div>`;
+const U8_4=`<div class="blk">
+<h4>一、酸鹼中和反應</h4>
+<div class="mtabwrap"><table class="ctab">
+<tr><td class="h">定義</td><td>酸性與鹼性溶液混合後，發生的化學變化稱為<i class="hl">酸鹼中和</i>，又稱<b>中和反應</b>。</td></tr>
+<tr><td class="h">反應式</td><td>
+1. 反應通式：<b>酸 ＋ 鹼 → 鹽 ＋ 水 ＋ 熱量</b><br>
+2. 離子反應式：<b>H⁺ ＋ OH⁻ → H₂O ＋ 熱量</b>
+</td></tr>
+<tr><td class="h">中和時<br>伴隨的現象</td><td>
+1. 酸鹼中和時，溶液溫度上升，故其為<i class="hl">放熱</i>的化學反應。<br>
+2. 中和後的鹽類為電解質，故水溶液<b>可導電</b>，但其酸鹼性<i class="hl">不一定呈中性</i>。
+</td></tr>
+<tr><td class="h">應用</td><td>
+1. 自來水中含有鈣、鎂等礦物質，常會在容器中形成鹼性的水垢，此時可利用酸性的<b>檸檬酸</b>或<b>醋</b>與水垢中和，去除水垢。<br>
+2. 胃藥含有<b>制酸劑</b>（例如碳酸氫鈉、碳酸鎂），可用來中和分泌過多的胃酸。<br>
+3. 有些昆蟲叮咬人體時會分泌酸性物質，可適當塗抹<b>氨水</b>或<b>肥皂水</b>進行酸鹼中和，來減輕紅腫疼痛。
+</td></tr>
+</table></div>
+<div class="box tip"><span class="bt">概念補給</span>若中和後產生的鹽類<b>難溶於水</b>（例如碳酸鈣），則中和後的溶液<i class="hl">不易導電</i>。</div>
+<div class="box key"><span class="bt">得分關鍵</span>
+<p><b>酸鹼中和的現象</b><br>
+1. 為<i class="hl">放熱反應</i>：酸鹼中和時水溶液的溫度會上升。<br>
+2. 會產生<i class="hl">鹽類</i>：酸的陰離子與鹼的陽離子會形成鹽類。<br>
+3. 實際上參與酸鹼中和的粒子<b>只有 H⁺ 與 OH⁻</b>。</p>
+</div>
+</div>
+
+<div class="box hot"><span class="bt">麻辣私房菜</span>
+<p><b>酸鹼中和相關曲線</b>（橫軸為加入的體積，縱軸為 pH 值）</p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>情況</th><th>起點</th><th>曲線走向</th><th>終點極限</th></tr>
+<tr><td class="h">酸性溶液中<br>逐漸加入鹼性溶液</td><td class="c">酸性溶液的 pH＜7</td><td class="c">上升</td><td>最後溶液的 pH 值<i class="hl">不大於</i>鹼性溶液的 pH 值</td></tr>
+<tr><td class="h">鹼性溶液中<br>逐漸加入酸性溶液</td><td class="c">鹼性溶液的 pH＞7</td><td class="c">下降</td><td>最後溶液的 pH 值<i class="hl">不小於</i>酸性溶液的 pH 值</td></tr>
+<tr><td class="h">酸性溶液中<br>逐漸加水</td><td class="c">酸性溶液的 pH＜7</td><td class="c">上升，趨近 7</td><td>最後溶液的 pH 值<i class="hl">不大於</i>水的 pH 值</td></tr>
+<tr><td class="h">鹼性溶液中<br>逐漸加水</td><td class="c">鹼性溶液的 pH＞7</td><td class="c">下降，趨近 7</td><td>最後溶液的 pH 值<i class="hl">不小於</i>水的 pH 值</td></tr>
+</table></div>
+</div>
+
+<div class="blk">
+<h4>二、鹽類</h4>
+<p>1. <b>鹽類</b>：由一種<i class="hl">金屬離子</i>或<i class="hl">銨根離子（NH₄⁺）</i>與另一種<i class="hl">非金屬離子</i>或<i class="hl">酸根離子</i>所結合而成的化合物，寫成 XₘYₙ（m、n 代表離子的個數）。<br>
+<span class="eg">例</span>MgCl₂、NH₄Cl、CaSO₄。</p>
+<p>2. <b>常見的鹽類</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>性質與用途</th></tr>
+<tr><td class="h">氯化鈉<br>(NaCl)</td><td>
+<b>性質</b>　為透明無色晶體，<b>易溶於水</b>。<br>
+<b>用途</b>　(1) 可用於調味或保存食物，為<i class="hl">食鹽</i>的主要成分。(2) 因為價格便宜，在工業上常用來製造金屬鈉、氯氣以及氫氧化鈉。
+</td></tr>
+<tr><td class="h">硫酸鈣<br>(CaSO₄)</td><td>
+<b>性質</b>　<i class="hl">微溶於水</i>的白色固體。<br>
+<b>用途</b>　為<b>石膏</b>的主要成分，可用來作石膏像或用來固定骨折的石膏模。
+</td></tr>
+<tr><td class="h">碳酸鈣<br>(CaCO₃)</td><td>
+<b>性質</b>　<i class="hl">難溶於水</i>的白色固體，<b>加熱或遇酸</b>時，會分解出二氧化碳。<br>
+　(1) 加熱：CaCO₃ —〔△〕→ CaO ＋ CO₂<br>
+　(2) 遇酸：CaCO₃ ＋ 2HCl → CaCl₂ ＋ CO₂ ＋ H₂O<br>
+<b>用途</b>　為石灰岩、大理石、貝殼及雞蛋殼的主要成分，常作為建築和雕塑的材料。
+</td></tr>
+<tr><td class="h">碳酸鈉<br>(Na₂CO₃)</td><td>
+<b>性質</b>　(1) <b>可溶於水</b>的白色固體，俗稱<i class="hl">洗滌鹼</i>，又稱為<i class="hl">蘇打</i>。(2) 水溶液呈<b>鹼性</b>，遇酸時會分解出二氧化碳。<br>
+　Na₂CO₃ ＋ 2HCl → 2NaCl ＋ CO₂ ＋ H₂O<br>
+<b>用途</b>　常作為清潔劑的成分。
+</td></tr>
+<tr><td class="h">碳酸氫鈉<br>(NaHCO₃)</td><td>
+<b>性質</b>　(1) <b>可溶於水</b>的白色固體，俗稱<i class="hl">小蘇打</i>。(2) 水溶液呈<b>鹼性</b>，加熱或遇酸時會分解出二氧化碳和水。<br>
+　① 加熱：2NaHCO₃ —〔△〕→ Na₂CO₃ ＋ CO₂ ＋ H₂O<br>
+　② 遇酸：NaHCO₃ ＋ HCl → NaCl ＋ CO₂ ＋ H₂O<br>
+<b>用途</b>　(1) 乾粉滅火器的主要成分為碳酸氫鈉，其遇熱產生的 CO₂ 可以阻隔空氣而達到滅火的效果。(2) 臺灣傳統美食「椪糖」，是利用小蘇打遇熱產生的 CO₂ 使糖漿膨大。
+</td></tr>
+</table></div>
+<div class="box key"><span class="bt">得分關鍵</span><i class="hl">碳酸鹽類遇酸時，會分解出二氧化碳。</i></div>
+</div>`;
+
+const SUBJECTS=[
+{k:"bio",name:"生物",icon:"\ud83c\udf3f",color:"#2c7a4b",vols:[
+{name:"第一冊",us:[
+ {n:1,t:"生命世界",ps:[
+  {n:1,t:"科學方法與實驗設計",p:6,tg:[],c:null},
+  {n:2,t:"顯微鏡的使用",p:8,tg:["實驗1","實驗2"],c:null},
+  {n:3,t:"生命現象與細胞",p:10,tg:["實驗3"],c:null},
+  {n:4,t:"物質進出細胞的方式",p:13,tg:[],c:null},
+  {n:5,t:"生物體的組成層次",p:15,tg:[],c:null}]},
+ {n:2,t:"養分",ps:[
+  {n:1,t:"食物中的養分",p:22,tg:["實驗1"],c:null},
+  {n:2,t:"酵素（酶）",p:24,tg:["實驗2"],c:null},
+  {n:3,t:"植物如何獲得養分",p:26,tg:["實驗3"],c:null},
+  {n:4,t:"動物如何獲得養分",p:29,tg:[],c:null}]},
+ {n:3,t:"生物的運輸與防禦",ps:[
+  {n:1,t:"植物的運輸構造",p:37,tg:[],c:null},
+  {n:2,t:"植物體內物質的運輸",p:39,tg:["實驗1"],c:null},
+  {n:3,t:"人體內物質的運輸",p:43,tg:["實驗2","實驗3"],c:null},
+  {n:4,t:"人體的防禦作用",p:48,tg:[],c:null}]},
+ {n:4,t:"生物的協調作用",ps:[
+  {n:1,t:"神經系統",p:54,tg:["實驗1","實驗2","實驗3"],c:null},
+  {n:2,t:"內分泌系統",p:59,tg:[],c:null},
+  {n:3,t:"動物的行為",p:62,tg:[],c:null},
+  {n:4,t:"植物對環境的感應",p:62,tg:["實驗4"],un:1,c:null}]},
+ {n:5,t:"生物的恆定性",ps:[
+  {n:1,t:"體溫的恆定",p:72,tg:[],c:null},
+  {n:2,t:"呼吸與氣體的恆定",p:74,tg:["實驗1","實驗2"],c:null},
+  {n:3,t:"血糖的恆定",p:79,tg:[],c:null},
+  {n:4,t:"排泄作用與水分的恆定",p:80,tg:[],c:null}]}
+]},
+{name:"第二冊",us:[
+ {n:6,t:"生殖",ps:[
+  {n:1,t:"生殖作用與細胞分裂方式",p:90,tg:[],c:null},
+  {n:2,t:"無性生殖",p:93,tg:["實驗1"],c:null},
+  {n:3,t:"有性生殖",p:95,tg:["實驗2","實驗3"],c:null}]},
+ {n:7,t:"遺傳",ps:[
+  {n:1,t:"基因與遺傳",p:105,tg:[],c:null},
+  {n:2,t:"遺傳法則",p:106,tg:[],c:null},
+  {n:3,t:"人類的遺傳",p:109,tg:["實驗1"],c:null},
+  {n:4,t:"突變與遺傳性疾病",p:111,tg:[],c:null},
+  {n:5,t:"生物技術",p:113,tg:[],c:null}]},
+ {n:8,t:"地球上的生物",ps:[
+  {n:1,t:"生物演化與化石",p:120,tg:[],c:null},
+  {n:2,t:"生物的命名與分類",p:122,tg:["實驗1"],c:null},
+  {n:3,t:"原核生物與原生生物",p:126,tg:[],c:null},
+  {n:4,t:"真菌界",p:128,tg:[],c:null},
+  {n:5,t:"植物界",p:129,tg:["實驗2"],c:null},
+  {n:6,t:"動物界",p:133,tg:[],c:null}]},
+ {n:9,t:"生物與環境",ps:[
+  {n:1,t:"生物圈與生態系",p:143,tg:["實驗1"],c:null},
+  {n:2,t:"能量流動與物質循環",p:146,tg:[],c:null},
+  {n:3,t:"生物間的交互關係",p:149,tg:[],c:null},
+  {n:4,t:"生態系的類型",p:150,tg:[],c:null},
+  {n:5,t:"人類與環境",p:152,tg:[],c:null}]}
+]}
+]},
+{k:"phy",name:"理化",icon:"\ud83d\udd2c",color:"#0f6f8c",vols:[
+{name:"第三冊",us:[
+ {n:1,t:"進入實驗室和基本測量",ps:[
+  {n:1,t:"實驗器材的使用方法與控制變因法",p:6,tg:["實驗1"],c:null},
+  {n:2,t:"基本測量",p:9,tg:["實驗1","補充1"],un:1,c:null},
+  {n:3,t:"密度",p:12,tg:["實驗2","補充2"],c:null}]},
+ {n:2,t:"物質的世界",ps:[
+  {n:1,t:"認識物質",p:20,tg:["實驗1~2"],c:null},
+  {n:2,t:"水溶液",p:23,tg:["實驗3"],c:null},
+  {n:3,t:"空氣的組成",p:26,tg:["實驗3~4"],c:null}]},
+ {n:3,t:"波動與聲音",ps:[
+  {n:1,t:"波的傳播",p:35,tg:["實驗1","補充1"],c:null},
+  {n:2,t:"聲波的產生與傳播",p:39,tg:["實驗2"],c:null},
+  {n:3,t:"多變的聲音",p:42,tg:["補充2"],c:null}]},
+ {n:4,t:"光",ps:[
+  {n:1,t:"光的傳播與光速",p:50,tg:["實驗1~2"],c:null},
+  {n:2,t:"光的反射與面鏡",p:52,tg:["實驗3"],c:null},
+  {n:3,t:"光的折射與透鏡",p:55,tg:["實驗4"],c:null},
+  {n:4,t:"光學儀器",p:58,tg:[],c:null},
+  {n:5,t:"光與顏色",p:61,tg:["補充1"],c:null}]},
+ {n:5,t:"溫度與熱",ps:[
+  {n:1,t:"溫度與溫度計",p:70,tg:["實驗1"],c:null},
+  {n:2,t:"熱量與比熱",p:72,tg:["實驗2"],c:null},
+  {n:3,t:"熱對物質的影響",p:76,tg:["補充1~2"],c:null},
+  {n:4,t:"熱的傳播方式",p:79,tg:["實驗3"],c:null}]},
+ {n:6,t:"探索物質組成",ps:[
+  {n:1,t:"元素的探索",p:88,tg:["實驗1"],c:null},
+  {n:2,t:"元素週期表",p:91,tg:["補充1"],c:null},
+  {n:3,t:"化合物與原子概念的發展",p:94,tg:[],c:null},
+  {n:4,t:"分子與化學式",p:96,tg:[],c:null}]}
+]},
+{name:"第四冊",us:[
+ {n:7,t:"化學反應與氧化還原",ps:[
+  {n:1,t:"質量守恆",p:105,tg:["實驗1","補充1"],hot:5,c:U7_1},
+  {n:2,t:"化學反應的微觀世界",p:107,tg:[],hot:5,c:U7_2},
+  {n:3,t:"氧化與還原反應",p:111,tg:["實驗2~3","補充2"],hot:2,c:U7_3}]},
+ {n:8,t:"電解質及酸鹼反應",ps:[
+  {n:1,t:"認識電解質",p:120,tg:["實驗1"],hot:4,c:U8_1},
+  {n:2,t:"常見的酸、鹼性物質",p:122,tg:["實驗2~3"],hot:5,un:1,c:U8_2},
+  {n:3,t:"水溶液的酸鹼性",p:125,tg:[],hot:5,un:1,c:U8_3},
+  {n:4,t:"酸鹼中和",p:127,tg:["實驗4~5"],hot:4,un:1,c:U8_4}]},
+ {n:9,t:"反應速率與平衡",ps:[
+  {n:1,t:"反應速率",p:137,tg:["實驗1~3"],c:null},
+  {n:2,t:"可逆反應與化學平衡",p:140,tg:["補充1~2"],c:null}]},
+ {n:10,t:"有機化合物",ps:[
+  {n:1,t:"認識有機化合物",p:150,tg:["實驗1"],c:null},
+  {n:2,t:"常見的有機化合物",p:153,tg:["實驗2~3"],c:null},
+  {n:3,t:"生活中的有機化合物",p:156,tg:[],c:null}]},
+ {n:11,t:"力與壓力",ps:[
+  {n:1,t:"力與平衡",p:165,tg:["實驗1"],c:null},
+  {n:2,t:"摩擦力",p:168,tg:["實驗2"],c:null},
+  {n:3,t:"壓力",p:170,tg:["實驗3"],c:null},
+  {n:4,t:"浮力",p:174,tg:["實驗4~5"],c:null}]}
+]},
+{name:"第五冊",us:[
+ {n:12,t:"直線運動",ps:[
+  {n:1,t:"時間、位移與路徑長",p:185,tg:["實驗1"],c:null},
+  {n:2,t:"速率與速度",p:187,tg:[],c:null},
+  {n:3,t:"加速度與等加速度運動",p:189,tg:["實驗2"],c:null}]},
+ {n:13,t:"力與運動",ps:[
+  {n:1,t:"牛頓第一運動定律",p:202,tg:["實驗1"],c:null},
+  {n:2,t:"牛頓第二運動定律",p:204,tg:["實驗2"],c:null},
+  {n:3,t:"牛頓第三運動定律",p:208,tg:["實驗3","補充1"],c:null}]},
+ {n:14,t:"功與能",ps:[
+  {n:1,t:"功與功率",p:216,tg:[],c:null},
+  {n:2,t:"動能、位能與能量守恆",p:218,tg:[],c:null},
+  {n:3,t:"槓桿原理與簡單機械",p:220,tg:["實驗1~2"],c:null}]}
+]},
+{name:"第六冊",us:[
+ {n:15,t:"基本的靜電現象與電路",ps:[
+  {n:1,t:"靜電現象",p:232,tg:["實驗1"],c:null},
+  {n:2,t:"電流與電壓",p:235,tg:["實驗2","補充1"],c:null},
+  {n:3,t:"電阻與歐姆定律",p:239,tg:["實驗3"],c:null}]},
+ {n:16,t:"電的應用",ps:[
+  {n:1,t:"電流的熱效應與電能",p:248,tg:[],c:null},
+  {n:2,t:"電與生活",p:251,tg:[],un:1,c:null},
+  {n:3,t:"電流的化學效應",p:253,tg:[],c:null},
+  {n:4,t:"電池與生活",p:256,tg:[],un:1,c:null}]},
+ {n:17,t:"電流與磁現象",ps:[
+  {n:1,t:"磁鐵與磁場",p:267,tg:[],c:null},
+  {n:2,t:"電流的磁效應",p:270,tg:["實驗1~2"],c:null},
+  {n:3,t:"電磁感應",p:273,tg:["實驗3"],c:null}]}
+]},
+{name:"跨科主題",us:[
+ {n:"能源",t:"能源",ps:[
+  {n:1,t:"認識能源",p:282,tg:[],c:null},
+  {n:2,t:"能源的發展與應用",p:285,tg:[],c:null}]}
+]}
+]},
+{k:"ear",name:"地科",icon:"\ud83c\udf0f",color:"#9a5b28",vols:[
+{name:"第五冊",us:[
+ {n:1,t:"水與陸地",ov:5,ps:[
+  {n:1,t:"地球上的水",p:6,tg:[],c:null},
+  {n:2,t:"地貌的改變與平衡",p:9,tg:[],c:null},
+  {n:3,t:"岩石與礦物",p:14,tg:["實驗1","實驗2"],c:null}]},
+ {n:2,t:"板塊運動與地球歷史",ov:26,ps:[
+  {n:1,t:"地球的構造",p:27,tg:[],c:null},
+  {n:2,t:"板塊運動",p:29,tg:[],c:null},
+  {n:3,t:"岩層記錄的地球歷史",p:32,tg:["實驗1"],c:null},
+  {n:4,t:"臺灣的板塊和地震",p:36,tg:[],c:null}]},
+ {n:3,t:"運動中的天體",ov:53,ps:[
+  {n:1,t:"宇宙的結構",p:54,tg:["實驗1"],c:null},
+  {n:2,t:"地球的自轉與公轉",p:58,tg:[],c:null},
+  {n:3,t:"日地月相對運動",p:63,tg:["實驗2"],c:null},
+  {n:4,t:"潮汐",p:67,tg:[],c:null}]}
+]},
+{name:"第六冊",us:[
+ {n:4,t:"千變萬化的天氣",ov:82,ps:[
+  {n:1,t:"大氣的組成和結構",p:83,tg:[],c:null},
+  {n:2,t:"天氣變化",p:85,tg:[],c:null},
+  {n:3,t:"氣團與季風",p:88,tg:[],c:null},
+  {n:4,t:"鋒面",p:90,tg:["實驗1"],c:null},
+  {n:5,t:"臺灣的氣象災害",p:91,tg:[],c:null}]},
+ {n:5,t:"全球氣候變遷與因應（跨科主題）",ov:111,ps:[
+  {n:1,t:"海洋與大氣的交互作用",p:112,tg:[],c:null},
+  {n:2,t:"溫室效應與全球暖化",p:115,tg:[],c:null},
+  {n:3,t:"氣候變遷與因應",p:117,tg:[],c:null}]}
+]}
+]}
+];
+
+/* ===== 由 BOOKS 生成「學習重點」各頁 ===== */
+function tags(a){
+  return (a||[]).map(x=>'<span class="tg'+(/補充/.test(x)?' b':'')+'">'+esc(x)+'</span>').join("");
+}
+function hotBar(h){
+  if(!h) return '<span style="color:var(--line)">\u2014</span>';
+  return '<span class="hot5">'+'\u25cf'.repeat(h)+'</span><span style="color:var(--line)">'+'\u25cf'.repeat(5-h)+'</span>';
+}
+function tally(us){
+  const all=us.reduce((n,u)=>n+u.ps.length,0);
+  const done=us.reduce((n,u)=>n+u.ps.filter(p=>p.c).length,0);
+  return {all:all,done:done,pct:all?Math.round(done/all*100):0};
+}
+function unitBlock(u){
+  let h='<h2 class="sec"><span class="un">'+esc(typeof u.n==="number"?"\u7b2c "+u.n+" \u55ae\u5143":u.n)+'</span> '+esc(u.t)+'</h2>';
+  if(u.ov) h+='<div class="ovline">\ud83d\udcce \u55ae\u5143\u7d9c\u89bd\u5716\uff1a\u8ab2\u672c p.'+esc(String(u.ov))+'</div>';
+  h+='<div class="mtabwrap"><table class="mtab">'+
+     '<tr><th>\u91cd\u9ede</th><th>\u540d\u7a31</th><th>\u6703\u8003\u91cd\u8981\u5ea6</th><th>\u5167\u5bb9</th><th>\u9801</th></tr>'+
+     u.ps.map(p=>
+       '<tr><td class="nm">'+esc(String(p.n))+'</td>'+
+       '<td class="tt">'+esc(p.t)+(p.un?' <span class="warn" title="\u76ee\u9304\u7167\u7247\u5b57\u592a\u5c0f\uff0c\u540d\u7a31\u6216\u9801\u78bc\u5c1a\u672a\u78ba\u8a8d">\u26a0</span>':'')+
+         (p.tg&&p.tg.length?'<div style="margin-top:4px">'+tags(p.tg)+'</div>':'')+'</td>'+
+       '<td class="ct">'+hotBar(p.hot)+'</td>'+
+       '<td class="ct">'+(p.c?'<span class="done">\u2713 \u5df2\u6536\u9304</span>':'<span class="todo"><b>\u5f85\u88dc</b></span>')+'</td>'+
+       '<td class="pg">'+esc(String(p.p))+'</td></tr>').join("")+
+     '</table></div>';
+  u.ps.forEach(p=>{
+    if(!p.c) return;
+    h+='<h3 class="sub"><span class="kp">\u91cd\u9ede '+esc(String(p.n))+'</span>'+esc(p.t)+
+       '<span class="pgt">\u8ab2\u672c p.'+esc(String(p.p))+'</span></h3>'+p.c;
+  });
+  return h;
+}
+function buildLearn(){
+  SUBJECTS.forEach(sj=>{
+    const pane=$("#learn-"+sj.k); if(!pane) return;
+    pane.style.setProperty("--sub",sj.color);
+    const allU=sj.vols.reduce((a,v)=>a.concat(v.us),[]);
+    const s=tally(allU);
+    let h='<div class="bkhd"><b>'+sj.icon+' '+esc(sj.name)+'</b>\u3000'+sj.vols.length+' \u518a\u3001'+allU.length+
+          ' \u500b\u55ae\u5143\u3001'+s.all+' \u500b\u91cd\u9ede'+
+          '<div class="bar"><i style="width:'+s.pct+'%"></i></div>'+
+          '\u5df2\u6536\u9304\u5167\u5bb9 '+s.done+' / '+s.all+'\uff08'+s.pct+'%\uff09'+
+          (s.done<s.all?'\u3000\u5c1a\u672a\u6536\u9304\u7684\u91cd\u9ede\u6703\u6a19\u793a <b style="color:var(--todo)">\u5f85\u88dc</b>\u3002':'')+
+          '</div>';
+    sj.vols.forEach(v=>{
+      const q=tally(v.us);
+      h+='<div class="volhd"><span class="vb">'+esc(v.name)+'</span>'+
+         '<span class="vbar"><i style="width:'+q.pct+'%"></i></span>'+
+         '<span class="vp">'+v.us.length+' \u55ae\u5143\u3001'+q.all+' \u91cd\u9ede\uff5c\u5df2\u6536\u9304 '+q.done+'</span></div>';
+      v.us.forEach(u=>{ h+=unitBlock(u); });
+    });
+    pane.innerHTML=h;
+  });
+}
+buildLearn();
+
+/* ===== 單元與分頁 ===== */
+function renderUnits(){
+  const box=$("#unitChips");box.innerHTML="";
+  Object.keys(UNITS).forEach(k=>{
+    const b=document.createElement("button");
+    b.className="unit"+(unit===k?" active":"");
+    b.textContent=(UNITS[k].icon?UNITS[k].icon+" ":"")+UNITS[k].name;
+    if(UNITS[k].color) b.style.setProperty("--sub-c",UNITS[k].color);
+    b.onclick=()=>{if(unit===k)return;unit=k;secSel="all";diffSel="all";qQuit();renderUnits();renderLearn();renderChips();renderList();};
+    box.appendChild(b);
+  });
+  $("#subT").textContent="學習重點＋題庫測驗｜"+UNITS[unit].name+"（"+UNITS[unit].qs.length+" 題）";
+}
+function renderLearn(){
+  document.querySelectorAll(".lpane").forEach(p=>p.style.display="none");
+  $("#learn-"+unit).style.display="";
+}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");
+  document.querySelectorAll(".pane").forEach(p=>p.classList.remove("show"));
+  $("#pane-"+t.dataset.tab).classList.add("show");
+});
+
+/* ===== 測驗 ===== */
+let secSel="all", diffSel="all", QZ=null;
+const bank=()=>UNITS[unit].qs;
+const pool=()=>bank().filter(q=>(secSel==="all"||q.sec===secSel)&&(diffSel==="all"||q.diff===diffSel));
+function chips(box,cur,items,fn){
+  const b=$(box);b.innerHTML="";
+  items.forEach(it=>{const c=document.createElement("button");c.className="chip"+(cur===it.v?" active":"");
+    c.textContent=it.t;c.onclick=()=>{fn(it.v);renderChips();renderList();};b.appendChild(c);});
+}
+function renderChips(){
+  const qs=bank(), cnt=f=>qs.filter(f).length;
+  if(!qs.length){
+    $("#secChips").innerHTML="";$("#diffChips").innerHTML="";
+    $("#startBtn").style.display="none";
+    $("#poolStat").textContent="此科目尚無題庫，先到「學習重點」複習吧 🌱";
+    if(QZ)qQuit();
+    return;
+  }
+  $("#startBtn").style.display="";
+  const secs=[...new Set(qs.map(q=>q.sec))];
+  if(secs.length>1){
+    chips("#secChips",secSel,[{v:"all",t:"全部（"+qs.length+" 題）"}]
+      .concat(secs.map(s=>({v:s,t:s+"（"+cnt(q=>q.sec===s)+"）"}))),v=>{secSel=v;});
+  }else{$("#secChips").innerHTML="";secSel="all";}
+  const diffs=["易","中","難"].filter(d=>cnt(q=>q.diff===d)>0);
+  if(diffs.length){
+    chips("#diffChips",diffSel,[{v:"all",t:"所有難度"}]
+      .concat(diffs.map(d=>({v:d,t:d+"（"+cnt(q=>q.diff===d)+"）"}))),v=>{diffSel=v;});
+  }else{$("#diffChips").innerHTML="";diffSel="all";}
+  $("#startBtn").textContent="📝 開始測驗（"+pool().length+" 題）";
+  let best=0;try{best=+localStorage.getItem("nat_best_"+unit+"_"+secSel+"_"+diffSel)||0;}catch(e){}
+  $("#poolStat").textContent=best?("此範圍最佳答對率 "+best+"%"):"";
+  if(QZ)qQuit();
+}
+function renderList(){
+  const arr=pool();
+  $("#qlist").innerHTML=arr.map((q,i)=>
+    '<div class="qitem"><span class="topic">'+q.sec+(q.diff?'・'+q.diff:'')+'</span>'+(q.src?' <span class="topic">'+esc(q.src)+'</span>':'')+
+    '<div class="q">'+(i+1)+'. '+rep(q.q,true)+'</div>'+
+    '<div class="o">'+q.opts.map((o,k)=>"（"+"ＡＢＣＤ"[k]+"）"+rep(o,false)).join("　")+'</div>'+
+    '<button class="btn ghost sm" onclick="tglA(this)">👁 看答案</button>'+
+    '<div class="a"><b>正解（'+"ＡＢＣＤ"[q.ans]+'）'+rep(q.opts[q.ans],false)+'</b>'+(q.exp?'<div style="margin-top:4px">詳解：'+rep(q.exp,false)+'</div>':'')+'</div></div>'
+  ).join("");
+}
+window.tglA=function(btn){btn.nextElementSibling.classList.toggle("show");};
+function qStart(list){
+  QZ={list:shuffle((list||pool()).slice()),i:0,score:0,wrong:[],full:!list,u:unit,scope:secSel+"_"+diffSel};
+  if(!QZ.list.length){alert("此範圍沒有題目。");QZ=null;return;}
+  $("#qlist").style.display="none";$("#startBtn").style.display="none";
+  qRender();
+}
+function qQuit(){$("#quizBox").innerHTML="";$("#qlist").style.display="";$("#startBtn").style.display="";QZ=null;}
+function qRender(){
+  const q=QZ.list[QZ.i],n=QZ.list.length;
+  let s='<div class="progress"><i style="width:'+(QZ.i/n*100)+'%"></i></div>';
+  s+='<div class="counter">第 '+(QZ.i+1)+' / '+n+' 題　|　得分 '+QZ.score+'</div>';
+  s+='<div class="exam"><span class="topic">'+q.sec+(q.diff?'・'+q.diff:'')+'</span>'+(q.src?' <span class="src">'+esc(q.src)+'</span>':'');
+  s+='<div class="q">'+rep(q.q,true)+'</div>';
+  s+='<div class="eopts">'+q.opts.map((o,k)=>'<button class="eopt" data-k="'+k+'"><span class="k">（'+"ＡＢＣＤ"[k]+'）</span><span>'+rep(o,false)+'</span></button>').join("")+'</div>';
+  s+='<div class="expl"></div></div>';
+  s+='<div class="nav"><button class="btn ghost sm" id="qquit">結束</button><button class="btn primary" id="qnext" style="display:none">下一題 ▶</button></div>';
+  $("#quizBox").innerHTML=s;
+  document.querySelectorAll("#quizBox .eopt").forEach(b=>b.onclick=()=>qChoose(b,q));
+  $("#qquit").onclick=qQuit;
+  $("#qnext").onclick=()=>{QZ.i++;if(QZ.i<n)qRender();else qFinish();};
+}
+function qChoose(btn,q){
+  const k=+btn.dataset.k, ok=k===q.ans;
+  document.querySelectorAll("#quizBox .eopt").forEach(x=>x.onclick=null);
+  document.querySelectorAll("#quizBox .eopt")[q.ans].classList.add("correct");
+  if(!ok)btn.classList.add("wrong");
+  if(ok)QZ.score++;else QZ.wrong.push(q);
+  const e=$("#quizBox .expl");
+  let s='<span class="lbl">'+(ok?"✅ 答對了":"❌ 正解")+'</span>（'+"ＡＢＣＤ"[q.ans]+'）'+rep(q.opts[q.ans],false);
+  if(q.exp)s+='<div style="margin-top:6px">💡 '+rep(q.exp,false)+'</div>';
+  e.innerHTML=s;e.classList.add("show");
+  const nx=$("#qnext");nx.style.display="inline-block";nx.focus();
+}
+function qFinish(){
+  const n=QZ.list.length,pct=Math.round(QZ.score/n*100);
+  const emoji=pct>=90?"🏆":pct>=70?"🎉":pct>=50?"💪":"📖";
+  try{if(QZ.full){const key="nat_best_"+QZ.u+"_"+QZ.scope;const best=Math.max(+localStorage.getItem(key)||0,pct);localStorage.setItem(key,best);}}catch(e){}
+  const rv=QZ.wrong.length
+    ?'<div class="review"><h3 style="color:var(--muted);margin:14px 0 4px">📌 需複習（'+QZ.wrong.length+'）</h3>'+
+      QZ.wrong.map(q=>'<div class="r"><div>'+rep(q.q,true)+'</div><b style="color:var(--ok)">正解（'+"ＡＢＣＤ"[q.ans]+'）'+rep(q.opts[q.ans],false)+'</b>'+(q.exp?'<div style="color:var(--muted);margin-top:3px">'+rep(q.exp,false)+'</div>':'')+'</div>').join("")+'</div>'
+    :'<p style="color:var(--ok);font-weight:800;margin-top:12px">🌟 全部答對！</p>';
+  const wrong=QZ.wrong.slice();
+  $("#quizBox").innerHTML='<div class="scorebox"><div style="font-size:3rem">'+emoji+'</div><div class="big">'+QZ.score+' / '+n+'</div>'+
+    '<div style="font-weight:800;color:var(--muted)">答對率 '+pct+'%</div><div class="nav">'+
+    (wrong.length?'<button class="btn primary" id="againWrong">🔁 只測錯的</button>':'')+
+    '<button class="btn '+(wrong.length?'ghost':'primary')+'" id="againAll">↻ 再測一次</button>'+
+    '<button class="btn ghost" id="backList">⬅ 回題目列表</button></div>'+rv+'</div>';
+  QZ=null;
+  renderChips();
+  if(wrong.length)$("#againWrong").onclick=()=>qStart(wrong);
+  $("#againAll").onclick=()=>qStart();
+  $("#backList").onclick=qQuit;
+}
+$("#startBtn").onclick=()=>qStart();
+document.querySelectorAll("img[data-im]").forEach(el=>{
+  const s=IM[el.dataset.im];
+  if(s)el.src=s;
+  else{const td=el.closest("td");if(td&&td.classList.contains("thumb"))td.textContent="—";else el.remove();}
+});
+renderUnits();renderLearn();renderChips();renderList();
+
+/* ===== 全站搜尋 ===== */
+(function(){
+  const box=$("#sq"), go=$("#sgo"), clr=$("#sx"), out=$("#sres");
+  if(!box) return;
+  let IDX=null;
+
+  function build(){
+    const idx=[];
+    Object.keys(UNITS).forEach(u=>{
+      const pane=$("#learn-"+u); if(!pane) return;
+      let cur=null;
+      [...pane.children].forEach(el=>{
+        if(el.tagName==="H2"&&el.classList.contains("sec")){
+          cur={unit:u,unitName:UNITS[u].name,sec:el.textContent.trim(),el:el,text:""};
+          idx.push(cur);
+        } else if(cur){
+          cur.text+=" "+el.textContent.replace(/\s+/g," ");
+        }
+      });
+    });
+    return idx;
+  }
+
+  const norm=s=>String(s).toLowerCase();
+  const escH=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+  function mark(s,q){
+    const i=norm(s).indexOf(norm(q));
+    if(i<0) return escH(s);
+    return escH(s.slice(0,i))+"<mark>"+escH(s.slice(i,i+q.length))+"</mark>"+escH(s.slice(i+q.length));
+  }
+
+  function snip(text,q,pad){
+    const i=norm(text).indexOf(norm(q));
+    if(i<0) return "";
+    const a=Math.max(0,i-pad), b=Math.min(text.length,i+q.length+pad);
+    return (a>0?"…":"")+text.slice(a,b).trim()+(b<text.length?"…":"");
+  }
+
+  function jump(unitKey,secText){
+    if(unit!==unitKey){unit=unitKey;secSel="all";diffSel="all";qQuit();renderUnits();renderLearn();renderChips();renderList();}
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    const lt=document.querySelector('.tab[data-tab="learn"]'); if(lt)lt.classList.add("active");
+    document.querySelectorAll(".pane").forEach(p=>p.classList.remove("show"));
+    $("#pane-learn").classList.add("show");
+    const h=[...document.querySelectorAll("#learn-"+unitKey+" h2.sec")].find(x=>x.textContent.trim()===secText);
+    if(h){h.scrollIntoView({block:"start",behavior:"smooth"});h.classList.remove("secflash");void h.offsetWidth;h.classList.add("secflash");}
+  }
+
+  function run(){
+    const q=box.value.trim();
+    if(!q){out.hidden=true;clr.hidden=true;return;}
+    if(!IDX) IDX=build();
+    clr.hidden=false; out.hidden=false;
+
+    const hits=IDX.filter(s=>norm(s.sec).includes(norm(q))||norm(s.text).includes(norm(q)));
+
+    const qhits=[];
+    Object.keys(UNITS).forEach(u=>{
+      (UNITS[u].qs||[]).forEach(o=>{
+        const blob=[o.q,(o.opts||[]).join(" "),o.exp||""].join(" ");
+        if(norm(blob).includes(norm(q))) qhits.push({u:u,uName:UNITS[u].name,o:o});
+      });
+    });
+
+    let html='<div class="shead">「'+escH(q)+'」找到 學習重點 '+hits.length+' 節、題庫 '+qhits.length+' 題</div>';
+
+    if(hits.length){
+      let lastU="";
+      hits.slice(0,40).forEach(s=>{
+        if(s.unitName!==lastU){html+='<div class="sgrp">📚 '+escH(s.unitName)+'</div>';lastU=s.unitName;}
+        const sp=snip(s.text,q,38)||snip(s.sec,q,38)||s.text.slice(0,80).trim()+"…";
+        html+='<button class="sitem" data-u="'+s.unit+'" data-s="'+escH(s.sec)+'">'+
+              '<span class="swhere">'+escH(s.sec)+'</span>'+mark(sp,q)+'</button>';
+      });
+      if(hits.length>40) html+='<div class="snone">（還有 '+(hits.length-40)+' 節未列出，請輸入更精確的關鍵字）</div>';
+    }
+
+    if(qhits.length){
+      html+='<div class="sgrp">📝 題庫</div>';
+      qhits.slice(0,15).forEach(h=>{
+        const o=h.o, ans=(o.opts||[])[o.ans]||"";
+        html+='<div class="qcard">'+mark(String(o.q).replace(/⟦[^⟧]*⟧/g,"〔圖〕"),q)+
+              '<br><span class="qa">答：'+escH(String(ans).replace(/。$/,""))+'</span>'+
+              (o.exp?'<span class="qe">'+mark(String(o.exp).replace(/⟦[^⟧]*⟧/g,"〔圖〕"),q)+'</span>':'')+
+              '<span class="qe">—— '+escH(h.uName)+(o.src?'｜'+escH(o.src):'')+'</span></div>';
+      });
+      if(qhits.length>15) html+='<div class="snone">（還有 '+(qhits.length-15)+' 題未列出）</div>';
+    }
+
+    if(!hits.length&&!qhits.length) html+='<div class="snone">找不到「'+escH(q)+'」。試試較短的關鍵字，例如「比熱」而不是「比熱要怎麼算」。</div>';
+
+    out.innerHTML=html;
+    out.querySelectorAll(".sitem").forEach(b=>b.onclick=()=>jump(b.dataset.u,b.dataset.s));
+  }
+
+  go.onclick=run;
+  clr.onclick=()=>{box.value="";out.hidden=true;clr.hidden=true;box.focus();};
+  box.addEventListener("keydown",e=>{
+    if(e.key==="Enter"){e.preventDefault();run();}
+    if(e.key==="Escape"){box.value="";out.hidden=true;clr.hidden=true;}
+  });
+})();
+</script>
+</body>
+</html>
