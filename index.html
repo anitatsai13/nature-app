@@ -34,7 +34,31 @@ header .sub{color:var(--muted);font-size:.85rem;margin-top:4px;letter-spacing:.0
 .volhd .vp{font-weight:400;font-size:.8rem;color:var(--muted)}
 .volhd .vbar{flex:1 1 120px;min-width:90px;height:7px;background:var(--chip);border-radius:99px;overflow:hidden}
 .volhd .vbar i{display:block;height:100%;background:var(--sub,var(--brand));border-radius:99px}
-.tabs{display:flex;gap:8px;justify-content:center;margin:10px 0 14px}
+.tabs{display:flex;gap:8px;justify-content:center;margin:10px 0 14px;flex-wrap:wrap}
+.acct{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 13px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:.88rem}
+.acct-form{display:block}
+.acct .atitle{font-size:.84rem;color:var(--muted);margin-bottom:8px;line-height:1.6}
+.acct .arow{display:flex;gap:6px;flex-wrap:wrap}
+.acct input{flex:1 1 150px;min-width:0;padding:8px 11px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font-size:.9rem;font-family:inherit}
+.acct input:focus{outline:2px solid var(--brand);outline-offset:1px}
+.acct .abtns{display:flex;gap:6px;flex-wrap:wrap}
+.amsg{font-size:.82rem;margin-top:7px;color:var(--muted);min-height:1em}
+.amsg.bad{color:var(--bad);font-weight:800}
+.amsg.ok{color:var(--ok);font-weight:800}
+.wgrp{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:18px 0 6px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+.wgrp .wgn{font-weight:900;color:var(--brand)}
+.wrec{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--bad);border-radius:11px;padding:10px 13px;margin:8px 0;line-height:1.75}
+.wrec .wtop{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:5px}
+.wrec .wu{background:var(--gold);color:var(--brand);border-radius:6px;padding:1px 8px;font-size:.74rem;font-weight:800}
+.wrec .wt{margin-left:auto;color:var(--muted);font-size:.74rem}
+.wrec .wq{font-size:.93rem;margin:4px 0}
+.wrec .wa{display:flex;gap:14px;flex-wrap:wrap;font-size:.88rem;margin-top:5px;padding-top:5px;border-top:1px dashed var(--line)}
+.wrec .wbad{color:var(--bad)}
+.wrec .wok{color:var(--ok);font-weight:800}
+.lstat{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:9px;margin:4px 0 12px}
+.lstat div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 8px;text-align:center}
+.lstat b{display:block;font-size:1.5rem;color:var(--brand);line-height:1.3}
+.lstat span{font-size:.76rem;color:var(--muted)}
 .tab{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 18px;font-size:.95rem;cursor:pointer;font-weight:700}
 .tab.active{background:var(--brand2);border-color:var(--brand2);color:#fff}
 .pane{display:none}.pane.show{display:block}
@@ -192,6 +216,8 @@ footer{text-align:center;color:var(--muted);font-size:.75rem;margin-top:34px;let
 <div class="tabs">
   <button class="tab active" data-tab="learn">📚 學習重點</button>
   <button class="tab" data-tab="quiz">📝 測驗</button>
+  <button class="tab" data-tab="wrong">📕 錯題本</button>
+  <button class="tab" data-tab="log">📈 紀錄</button>
 </div>
 
 <div class="pane show" id="pane-learn">
@@ -208,6 +234,9 @@ footer{text-align:center;color:var(--muted);font-size:.75rem;margin-top:34px;let
   <div id="quizBox"></div>
   <div id="qlist"></div>
 </div>
+
+<div class="pane" id="pane-wrong"><div id="wbox"></div></div>
+<div class="pane" id="pane-log"><div id="lbox"></div></div>
 
 <footer>自然科學習網・生物／理化／地球科學・自學用教材整理</footer>
 </div>
@@ -1045,7 +1074,9 @@ let tocOpen=true;
 function renderToc(){
   const box=$("#toc"); if(!box) return;
   const sj=SUBJECTS.find(s=>s.k===unit);
-  if(!sj||!tocOpen){box.hidden=true;return;}
+  const at=document.querySelector(".tab.active");
+  const onLearn=!at||at.dataset.tab==="learn";
+  if(!sj||!tocOpen||!onLearn){box.hidden=true;return;}
   box.hidden=false;
   box.style.setProperty("--sub-t",sj.color);
   let h="",i=0;
@@ -1090,6 +1121,9 @@ document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
   document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");
   document.querySelectorAll(".pane").forEach(p=>p.classList.remove("show"));
   $("#pane-"+t.dataset.tab).classList.add("show");
+  renderToc();
+  if(t.dataset.tab==="wrong")renderWrong();
+  if(t.dataset.tab==="log")renderLog();
 });
 
 /* ===== 測驗 ===== */
@@ -1138,6 +1172,7 @@ function renderList(){
 }
 window.tglA=function(btn){btn.nextElementSibling.classList.toggle("show");};
 function qStart(list){
+  newRound();
   QZ={list:shuffle((list||pool()).slice()),i:0,score:0,wrong:[],full:!list,u:unit,scope:secSel+"_"+diffSel};
   if(!QZ.list.length){alert("此範圍沒有題目。");QZ=null;return;}
   $("#qlist").style.display="none";$("#startBtn").style.display="none";
@@ -1163,7 +1198,7 @@ function qChoose(btn,q){
   document.querySelectorAll("#quizBox .eopt").forEach(x=>x.onclick=null);
   document.querySelectorAll("#quizBox .eopt")[q.ans].classList.add("correct");
   if(!ok)btn.classList.add("wrong");
-  if(ok)QZ.score++;else QZ.wrong.push(q);
+  if(ok)QZ.score++;else{QZ.wrong.push(q);try{logMistake(q,k)}catch(e){console.warn("logMistake",e)}}
   const e=$("#quizBox .expl");
   let s='<span class="lbl">'+(ok?"✅ 答對了":"❌ 正解")+'</span>（'+"ＡＢＣＤ"[q.ans]+'）'+rep(q.opts[q.ans],false);
   if(q.exp)s+='<div style="margin-top:6px">💡 '+rep(q.exp,false)+'</div>';
@@ -1172,6 +1207,7 @@ function qChoose(btn,q){
 }
 function qFinish(){
   const n=QZ.list.length,pct=Math.round(QZ.score/n*100);
+  try{logRound(n,QZ.score,pct)}catch(e){console.warn("logRound",e)}
   const emoji=pct>=90?"🏆":pct>=70?"🎉":pct>=50?"💪":"📖";
   try{if(QZ.full){const key="nat_best_"+QZ.u+"_"+QZ.scope;const best=Math.max(+localStorage.getItem(key)||0,pct);localStorage.setItem(key,best);}}catch(e){}
   const rv=QZ.wrong.length
@@ -1197,6 +1233,239 @@ document.querySelectorAll("img[data-im]").forEach(el=>{
   else{const td=el.closest("td");if(td&&td.classList.contains("thumb"))td.textContent="—";else el.remove();}
 });
 renderUnits();renderLearn();renderChips();renderList();renderToc();
+
+/* ===== 帳號・錯題本・測驗紀錄 ===== */
+const SUPABASE_URL="https://cpjkraxbvdhnvjggophz.supabase.co";
+const SUPABASE_ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNwamtyYXhidmRobnZqZ2dvcGh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIxMjkzMjcsImV4cCI6MjA5NzcwNTMyN30.M2NXDpSLT29uIChIDtAVbpL8o5oGJK3BpGgr9L8Vp1s";
+const CLOUD=!!(SUPABASE_URL&&SUPABASE_ANON&&SUPABASE_URL.indexOf("http")===0);
+const APP_M="nature", APP_L="nature_log";
+const SKEY="nat_session_v1", MKEY="nat_mistakes_v1", LKEY="nat_log_v1";
+let SESSION=null, quizRound=null;
+
+function loadSession(){try{SESSION=JSON.parse(localStorage.getItem(SKEY)||"null")}catch(e){SESSION=null}}
+function saveSession(s){SESSION=s;try{s?localStorage.setItem(SKEY,JSON.stringify(s)):localStorage.removeItem(SKEY)}catch(e){}}
+function loggedIn(){return !!(SESSION&&SESSION.user)}
+function userEmail(){return loggedIn()?SESSION.user.email:""}
+function toEmail(a){a=(a||"").trim();return a.indexOf("@")>=0?a:a+"@class.app";}
+function acctName(){return userEmail().replace("@class.app","");}
+
+async function sb(path,opts){
+  opts=opts||{};
+  const h=Object.assign({"apikey":SUPABASE_ANON,"Content-Type":"application/json"},opts.headers||{});
+  if(SESSION&&SESSION.access_token&&!opts.noauth)h["Authorization"]="Bearer "+SESSION.access_token;
+  const r=await fetch(SUPABASE_URL+path,Object.assign({},opts,{headers:h}));
+  const txt=await r.text();let j=null;try{j=txt?JSON.parse(txt):null}catch(e){}
+  if(!r.ok)throw new Error((j&&(j.msg||j.error_description||j.error||j.message))||("HTTP "+r.status));
+  return j;
+}
+function setAuth(j){if(j&&j.access_token)saveSession({access_token:j.access_token,refresh_token:j.refresh_token,expires_at:Date.now()+((j.expires_in||3600)*1000),user:j.user});}
+async function doSignUp(e,p){const j=await sb("/auth/v1/signup",{method:"POST",noauth:true,body:JSON.stringify({email:toEmail(e),password:p})});setAuth(j);return j;}
+async function doSignIn(e,p){const j=await sb("/auth/v1/token?grant_type=password",{method:"POST",noauth:true,body:JSON.stringify({email:toEmail(e),password:p})});setAuth(j);return j;}
+async function doRefresh(){
+  if(!SESSION||!SESSION.refresh_token)return false;
+  try{const j=await sb("/auth/v1/token?grant_type=refresh_token",{method:"POST",noauth:true,body:JSON.stringify({refresh_token:SESSION.refresh_token})});setAuth(j);return true}
+  catch(e){saveSession(null);return false}
+}
+async function authOK(){if(!SESSION)return false;if(SESSION.expires_at-Date.now()<60000){if(!await doRefresh())return false}return loggedIn();}
+async function cloudLoadApp(app){if(!await authOK())return null;const j=await sb("/rest/v1/mistakes?select=data&user_id=eq."+SESSION.user.id+"&app=eq."+app);return (j&&j[0]&&j[0].data)||[];}
+async function cloudSaveApp(app,arr){if(!await authOK())return;await sb("/rest/v1/mistakes?on_conflict=user_id,app",{method:"POST",headers:{"Prefer":"resolution=merge-duplicates,return=minimal"},body:JSON.stringify({user_id:SESSION.user.id,app:app,data:arr,updated_at:new Date().toISOString()})});}
+
+function loadM(){try{return JSON.parse(localStorage.getItem(MKEY)||"[]")}catch(e){return []}}
+function saveM(a){try{localStorage.setItem(MKEY,JSON.stringify(a))}catch(e){}}
+function loadL(){try{return JSON.parse(localStorage.getItem(LKEY)||"[]")}catch(e){return []}}
+function saveL(a){try{localStorage.setItem(LKEY,JSON.stringify(a))}catch(e){}}
+const mKey=r=>(r.sub||"")+"|"+(r.round||"")+"|"+(r.qk||"");
+const lKey=r=>(r.t||"");
+function mergeBy(fn,a,b){const m=new Map();[...(a||[]),...(b||[])].forEach(r=>m.set(fn(r),r));return [...m.values()];}
+
+async function syncDown(){
+  if(!CLOUD||!loggedIn())return;
+  try{
+    const cm=await cloudLoadApp(APP_M), cl=await cloudLoadApp(APP_L);
+    const mm=mergeBy(mKey,loadM(),cm), ml=mergeBy(lKey,loadL(),cl);
+    saveM(mm);saveL(ml);
+    await cloudSaveApp(APP_M,mm);await cloudSaveApp(APP_L,ml);
+  }catch(e){console.warn("sync",e)}
+}
+function cloudMirror(){if(CLOUD&&loggedIn()){cloudSaveApp(APP_M,loadM()).catch(()=>{});cloudSaveApp(APP_L,loadL()).catch(()=>{});}}
+
+/* 由「重點名稱」反查所屬冊／單元 */
+let SEC_MAP=null;
+function secInfo(subK,sec){
+  if(!SEC_MAP){
+    SEC_MAP={};
+    SUBJECTS.forEach(sj=>{SEC_MAP[sj.k]={};sj.vols.forEach(v=>v.us.forEach(u=>u.ps.forEach(p=>{
+      SEC_MAP[sj.k][p.t]={vol:v.name,un:u.n,ut:u.t};})));});
+  }
+  return (SEC_MAP[subK]||{})[sec]||null;
+}
+function newRound(){quizRound=new Date().toISOString();}
+function logMistake(q,chosen){
+  const info=secInfo(unit,q.sec)||{};
+  const rec={sub:unit,subName:UNITS[unit].name,vol:info.vol||"",un:info.un||null,ut:info.ut||"",
+    sec:q.sec||"",diff:q.diff||"",src:q.src||"",
+    qk:String(q.q).slice(0,60),
+    correct:"\uff08"+"\uff21\uff22\uff23\uff24"[q.ans]+"\uff09"+q.opts[q.ans],
+    chosen:"\uff08"+"\uff21\uff22\uff23\uff24"[chosen]+"\uff09"+q.opts[chosen],
+    t:new Date().toISOString(),round:quizRound||new Date().toISOString()};
+  const a=loadM();a.push(rec);saveM(a);cloudMirror();
+}
+function logRound(n,score,pct){
+  const a=loadL();
+  a.push({t:quizRound||new Date().toISOString(),sub:unit,subName:UNITS[unit].name,
+    scope:(secSel==="all"?"\u5168\u90e8":secSel)+"\uff5c"+(diffSel==="all"?"\u4e0d\u9650\u96e3\u5ea6":diffSel),
+    n:n,score:score,pct:pct});
+  saveL(a);cloudMirror();
+}
+
+/* ---------- 帳號區塊 ---------- */
+function acctMsg(t,k){const m=$("#amsg");if(m){m.textContent=t;m.className="amsg"+(k?(" "+k):"")}}
+function acctHTML(){
+  if(!CLOUD)return "";
+  if(loggedIn())return '<div class="acct"><span>\ud83d\udc64 \u5df2\u767b\u5165\uff1a<b>'+esc(acctName())+
+    '</b>\u3000<span style="color:var(--ok)">\u96f2\u7aef\u540c\u6b65\u4e2d</span></span>'+
+    '<span class="abtns"><button class="btn ghost sm" onclick="acctSync()">\u21bb \u5f9e\u96f2\u7aef\u540c\u6b65</button>'+
+    '<button class="btn ghost sm" onclick="acctLogout()">\u767b\u51fa</button></span></div>';
+  return '<div class="acct acct-form"><div class="atitle">\ud83d\udc64 \u767b\u5165\u5f8c\uff0c\u932f\u984c\u8207\u7d00\u9304\u6703\u5b58\u5230\u96f2\u7aef\uff0c\u63db\u88dd\u7f6e\u4e5f\u770b\u5f97\u5230\uff08\u8207\u82f1\u6587\u5b78\u7fd2\u7db2\u540c\u4e00\u7d44\u5e33\u865f\uff09</div>'+
+    '<div class="arow"><input id="aem" type="text" placeholder="\u59d3\u540d\uff0f\u5ea7\u865f \u6216 Email" autocomplete="username">'+
+    '<input id="apw" type="password" placeholder="\u5bc6\u78bc\uff08\u81f3\u5c11 6 \u78bc\uff09" autocomplete="current-password">'+
+    '<button class="btn primary sm" onclick="acctLogin()">\u767b\u5165</button>'+
+    '<button class="btn ghost sm" onclick="acctReg()">\u8a3b\u518a</button></div>'+
+    '<div id="amsg" class="amsg"></div></div>';
+}
+window.acctLogin=async function(){
+  const e=$("#aem").value.trim(),p=$("#apw").value;
+  if(!e||!p)return acctMsg("\u8acb\u8f38\u5165\u5e33\u865f\u8207\u5bc6\u78bc","bad");
+  acctMsg("\u767b\u5165\u4e2d\u2026");
+  try{await doSignIn(e,p);await syncDown();renderWrong();renderLog();}
+  catch(err){acctMsg("\u767b\u5165\u5931\u6557\uff1a"+err.message,"bad");}
+};
+window.acctReg=async function(){
+  const e=$("#aem").value.trim(),p=$("#apw").value;
+  if(!e||p.length<6)return acctMsg("\u8acb\u8f38\u5165\u5e33\u865f\uff0c\u5bc6\u78bc\u81f3\u5c11 6 \u78bc","bad");
+  acctMsg("\u8a3b\u518a\u4e2d\u2026");
+  try{await doSignUp(e,p);
+    if(loggedIn()){await syncDown();renderWrong();renderLog();}
+    else acctMsg("\u8a3b\u518a\u5b8c\u6210\uff0c\u8acb\u518d\u6309\u4e00\u6b21\u300c\u767b\u5165\u300d","ok");}
+  catch(err){acctMsg("\u8a3b\u518a\u5931\u6557\uff1a"+err.message,"bad");}
+};
+window.acctLogout=function(){saveSession(null);renderWrong();renderLog();};
+window.acctSync=async function(){acctMsg("\u540c\u6b65\u4e2d\u2026");await syncDown();renderWrong();renderLog();};
+
+/* ---------- 錯題本 ---------- */
+let wSub="all";
+window.wSetSub=function(k){wSub=k;renderWrong();};
+window.wClear=function(){
+  if(!confirm("\u78ba\u5b9a\u6e05\u7a7a\u6240\u6709\u932f\u984c\uff1f"))return;
+  saveM([]);if(CLOUD&&loggedIn())cloudSaveApp(APP_M,[]).catch(()=>{});renderWrong();
+};
+window.wExport=function(){
+  const blob=new Blob([JSON.stringify({mistakes:loadM(),log:loadL()},null,1)],{type:"application/json"});
+  const u=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=u;a.download="\u81ea\u7136\u79d1\u932f\u984c\u672c.json";a.click();URL.revokeObjectURL(u);
+};
+window.wImport=function(){
+  const i=document.createElement("input");i.type="file";i.accept=".json,application/json";
+  i.onchange=function(){
+    const f=i.files[0];if(!f)return;const rd=new FileReader();
+    rd.onload=function(){try{
+      const j=JSON.parse(rd.result);
+      saveM(mergeBy(mKey,loadM(),j.mistakes||(Array.isArray(j)?j:[])));
+      saveL(mergeBy(lKey,loadL(),j.log||[]));
+      cloudMirror();renderWrong();renderLog();
+    }catch(e){alert("\u532f\u5165\u5931\u6557\uff1a"+e.message)}};
+    rd.readAsText(f);
+  };
+  i.click();
+};
+window.wRetest=function(k){
+  const qs=(UNITS[k]&&UNITS[k].qs)||[];
+  const keys=new Set(loadM().filter(r=>r.sub===k).map(r=>r.qk));
+  const pool=qs.filter(q=>keys.has(String(q.q).slice(0,60)));
+  if(!pool.length)return alert("\u9019\u4e9b\u932f\u984c\u5c0d\u61c9\u4e0d\u5230\u73fe\u6709\u984c\u76ee\u3002");
+  if(unit!==k){unit=k;secSel="all";diffSel="all";tocOpen=false;renderUnits();renderLearn();renderChips();renderList();renderToc();}
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  document.querySelector('.tab[data-tab="quiz"]').classList.add("active");
+  document.querySelectorAll(".pane").forEach(p=>p.classList.remove("show"));
+  $("#pane-quiz").classList.add("show");
+  qStart(pool);
+  window.scrollTo({top:0,behavior:"instant"});
+};
+function renderWrong(){
+  const host=$("#wbox");if(!host)return;
+  const all=loadM();
+  let h=acctHTML();
+  const cnt={};all.forEach(r=>{cnt[r.sub]=(cnt[r.sub]||0)+1;});
+  h+='<div class="row" style="justify-content:space-between;align-items:center">'+
+     '<span class="stat">\u5171 '+all.length+' \u7b46\u932f\u984c</span>'+
+     '<span class="abtns"><button class="btn ghost sm" onclick="wExport()">\u2b07 \u532f\u51fa</button>'+
+     '<button class="btn ghost sm" onclick="wImport()">\u2b06 \u532f\u5165</button>'+
+     '<button class="btn ghost sm" onclick="wClear()">\ud83d\uddd1 \u6e05\u7a7a</button></span></div>';
+  if(!all.length){
+    host.innerHTML=h+'<p class="stat" style="margin-top:24px;text-align:center">\u9084\u6c92\u6709\u932f\u984c\u3002\u53bb\u6e2c\u9a57\u5427\uff01\u7b54\u932f\u7684\u6703\u81ea\u52d5\u6536\u9032\u9019\u88e1 \ud83d\udcda</p>';
+    return;
+  }
+  h+='<div class="row">';
+  h+='<button class="chip'+(wSub==="all"?" active":"")+'" onclick="wSetSub(\'all\')">\u5168\u90e8\uff08'+all.length+'\uff09</button>';
+  Object.keys(UNITS).forEach(k=>{if(cnt[k])h+='<button class="chip'+(wSub===k?" active":"")+'" onclick="wSetSub(\''+k+'\')">'+esc(UNITS[k].icon+" "+UNITS[k].name)+'\uff08'+cnt[k]+'\uff09</button>';});
+  h+='</div>';
+  const shown=all.filter(r=>wSub==="all"||r.sub===wSub).slice().reverse();
+  /* 依科目分組，每組一顆重測鈕 */
+  const groups={};shown.forEach(r=>{(groups[r.sub]=groups[r.sub]||[]).push(r);});
+  Object.keys(groups).forEach(k=>{
+    h+='<div class="wgrp"><span class="wgn">'+esc((UNITS[k]?UNITS[k].icon+" "+UNITS[k].name:k))+'\u3000'+groups[k].length+' \u7b46</span>'+
+       '<button class="btn primary sm" onclick="wRetest(\''+k+'\')">\ud83d\udd01 \u91cd\u6e2c\u9019\u4e9b\u932f\u984c</button></div>';
+    groups[k].forEach(r=>{
+      h+='<div class="wrec"><div class="wtop">'+
+         (r.un?'<span class="wu">'+esc((r.vol?r.vol+" ":"")+"\u7b2c "+r.un+" \u55ae\u5143")+'</span>':'')+
+         '<span class="topic">'+esc(r.sec||"")+(r.diff?"\u30fb"+esc(r.diff):"")+'</span>'+
+         (r.src?'<span class="topic">'+esc(r.src)+'</span>':'')+
+         '<span class="wt">'+esc(String(r.t).slice(0,10))+'</span></div>'+
+         '<div class="wq">'+rep(r.qk,false)+'\u2026</div>'+
+         '<div class="wa"><span class="wbad">\u4f60\u9078 '+rep(r.chosen,false)+'</span>'+
+         '<span class="wok">\u6b63\u89e3 '+rep(r.correct,false)+'</span></div></div>';
+    });
+  });
+  host.innerHTML=h;
+}
+
+/* ---------- 測驗紀錄 ---------- */
+window.lClear=function(){
+  if(!confirm("\u78ba\u5b9a\u6e05\u7a7a\u6240\u6709\u6e2c\u9a57\u7d00\u9304\uff1f"))return;
+  saveL([]);if(CLOUD&&loggedIn())cloudSaveApp(APP_L,[]).catch(()=>{});renderLog();
+};
+function renderLog(){
+  const host=$("#lbox");if(!host)return;
+  const all=loadL().slice().sort((a,b)=>String(b.t).localeCompare(String(a.t)));
+  let h=acctHTML();
+  if(!all.length){
+    host.innerHTML=h+'<p class="stat" style="margin-top:24px;text-align:center">\u9084\u6c92\u6709\u6e2c\u9a57\u7d00\u9304\u3002\u6bcf\u505a\u5b8c\u4e00\u6b21\u6e2c\u9a57\u5c31\u6703\u8a18\u4e00\u7b46 \ud83d\udcc8</p>';
+    return;
+  }
+  const tot=all.reduce((n,r)=>n+r.n,0), got=all.reduce((n,r)=>n+r.score,0);
+  const avg=tot?Math.round(got/tot*100):0;
+  const d7=Date.now()-7*864e5, recent=all.filter(r=>new Date(r.t).getTime()>=d7).length;
+  h+='<div class="lstat"><div><b>'+all.length+'</b><span>\u6e2c\u9a57\u6b21\u6578</span></div>'+
+     '<div><b>'+tot+'</b><span>\u4f5c\u7b54\u984c\u6578</span></div>'+
+     '<div><b>'+avg+'%</b><span>\u5e73\u5747\u7b54\u5c0d\u7387</span></div>'+
+     '<div><b>'+recent+'</b><span>\u8fd1 7 \u5929</span></div></div>';
+  h+='<div class="row" style="justify-content:flex-end"><button class="btn ghost sm" onclick="lClear()">\ud83d\uddd1 \u6e05\u7a7a\u7d00\u9304</button></div>';
+  h+='<div class="mtabwrap"><table class="ctab"><tr><th>\u6642\u9593</th><th>\u79d1\u76ee</th><th>\u7bc4\u570d</th><th>\u5f97\u5206</th><th>\u7b54\u5c0d\u7387</th></tr>';
+  all.slice(0,200).forEach(r=>{
+    const t=new Date(r.t), ts=(t.getMonth()+1)+"/"+t.getDate()+" "+String(t.getHours()).padStart(2,"0")+":"+String(t.getMinutes()).padStart(2,"0");
+    const col=r.pct>=90?"var(--ok)":r.pct>=60?"var(--brand)":"var(--bad)";
+    h+='<tr><td class="c">'+esc(ts)+'</td><td class="c">'+esc((UNITS[r.sub]?UNITS[r.sub].icon+" ":"")+r.subName)+'</td>'+
+       '<td>'+esc(r.scope||"")+'</td><td class="c">'+r.score+" / "+r.n+'</td>'+
+       '<td class="c" style="color:'+col+';font-weight:900">'+r.pct+'%</td></tr>';
+  });
+  h+='</table></div>';
+  if(all.length>200)h+='<p class="stat">\uff08\u50c5\u986f\u793a\u6700\u8fd1 200 \u7b46\uff09</p>';
+  host.innerHTML=h;
+}
+
+loadSession();
+if(CLOUD&&loggedIn())syncDown().then(()=>{renderWrong();renderLog();});
+renderWrong();renderLog();
 
 /* ===== 全站搜尋 ===== */
 (function(){
