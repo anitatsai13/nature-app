@@ -127,6 +127,15 @@ h3.sub .pgt{color:var(--muted);font-size:.78rem;font-weight:400}
 .ctab.rt th{background:#fce9f2;color:#b23a6e;border-color:#efc3d8;padding:5px 12px}
 .ctab.rt td{border-color:#efc3d8;padding:5px 12px}
 .cb{display:inline-block;border:1.5px solid #4aa3b8;border-radius:7px;padding:2px 9px;margin:3px 2px;background:#fff;vertical-align:middle}
+.fig{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 8px;margin:7px 0;text-align:center}
+.fig svg{max-width:100%;height:auto;display:block;margin:0 auto}
+.fig .mt{font-size:.85rem;font-weight:800;color:var(--brand);margin-bottom:3px}
+.fig .cap{font-size:.76rem;color:var(--muted);margin-top:5px;line-height:1.5}
+.figrow{display:flex;gap:9px;flex-wrap:wrap;margin:7px 0}
+.figrow>.fig{flex:1 1 210px;margin:0;display:flex;flex-direction:column;justify-content:flex-start}
+.figrow>.fig svg{max-width:185px}
+.ctab .fig{margin:0;border:none;padding:2px}
+.ctab .fig svg{max-width:195px}
 .lb{display:inline-block;border-radius:5px;padding:0 7px;font-size:.74rem;font-weight:900;color:#fff;margin-right:5px;vertical-align:1px}
 .lb.r{background:#d94f5c}.lb.e{background:#3d7ea6}.lb.g{background:#2f8f5f}.lb.p{background:#7a5bb0}
 .cal{display:inline-block;color:#2b8f74;font-size:.76rem;font-weight:800;margin:0 4px}
@@ -702,11 +711,24 @@ const U8_2=`<div class="blk">
 </table></div>
 <div class="box key"><span class="bt">得分關鍵</span>
 <p>石灰的三角循環：</p>
-<div class="flow">
-<div class="fb"><b>CaO　氧化鈣</b>石灰、生石灰　—<i class="hl">加水</i>→</div>
-<div class="fb"><b>Ca(OH)₂　氫氧化鈣</b>熟石灰　—<i class="hl">水溶液通入 CO₂</i>→</div>
-<div class="fb"><b>CaCO₃　碳酸鈣</b>灰石　—<i class="hl">高溫分解</i>→ 回到 CaO</div>
-</div>
+<div class="fig"><svg viewBox="0 0 330 168" role="img" aria-label="氧化鈣、氫氧化鈣、碳酸鈣的循環">
+<rect x="112" y="6" width="106" height="34" rx="8" fill="#eaf4f8" stroke="#3d9bd4" stroke-width="1.5"/>
+<text x="165" y="21" font-size="11" fill="#3d9bd4" text-anchor="middle" font-weight="800">CaO 氧化鈣</text>
+<text x="165" y="34" font-size="9.5" fill="#5a6b62" text-anchor="middle">石灰、生石灰</text>
+<rect x="6" y="122" width="120" height="34" rx="8" fill="#eaf6ee" stroke="#2f8f5f" stroke-width="1.5"/>
+<text x="66" y="137" font-size="11" fill="#2f8f5f" text-anchor="middle" font-weight="800">Ca(OH)₂ 氫氧化鈣</text>
+<text x="66" y="150" font-size="9.5" fill="#5a6b62" text-anchor="middle">熟石灰</text>
+<rect x="204" y="122" width="120" height="34" rx="8" fill="#fdeee8" stroke="#e8663c" stroke-width="1.5"/>
+<text x="264" y="137" font-size="11" fill="#e8663c" text-anchor="middle" font-weight="800">CaCO₃ 碳酸鈣</text>
+<text x="264" y="150" font-size="9.5" fill="#5a6b62" text-anchor="middle">灰石</text>
+<path d="M 126 44 L 78 118" fill="none" stroke="#9aa8a0" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M 130 139 L 200 139" fill="none" stroke="#9aa8a0" stroke-width="1.6" marker-end="url(#ah)"/>
+<path d="M 254 118 L 206 44" fill="none" stroke="#9aa8a0" stroke-width="1.6" marker-end="url(#ah)"/>
+<defs><marker id="ah" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#9aa8a0"/></marker></defs>
+<text x="72" y="82" font-size="9.5" fill="#5a6b62" text-anchor="middle" transform="rotate(57 72 82)">加水</text>
+<text x="165" y="134" font-size="9.5" fill="#5a6b62" text-anchor="middle">水溶液通入 CO₂</text>
+<text x="248" y="82" font-size="9.5" fill="#5a6b62" text-anchor="middle" transform="rotate(-57 248 82)">高溫分解</text>
+</svg><div class="cap">澄清石灰水可用來檢驗二氧化碳</div></div>
 </div>
 <div class="box tip"><span class="bt">概念補給</span>在水溶液中幾乎能<b>完全解離</b>的酸稱為<i class="hl">強酸</i>，例如氯化氫；只能<b>部分解離</b>的酸稱為<i class="hl">弱酸</i>，例如醋酸。同樣的，鹼也可分為強鹼與弱鹼。</div>
 </div>`;
@@ -870,7 +892,29 @@ const U9_1=`<div class="blk">
 <p>④ <b>作圖</b></p>
 <div class="mtabwrap"><table class="ctab">
 <tr><th>　</th><th>反應溫度與反應時間的關係</th><th>反應溫度與反應速率的關係</th></tr>
-<tr><td class="h">圖形</td><td class="c">橫軸：反應溫度（℃）<br>縱軸：反應時間（秒）<br>曲線下降，標示 <i class="hl">非反比</i></td><td class="c">橫軸：反應溫度（℃）<br>縱軸：反應速率（1／秒）<br>曲線上升，標示 <i class="hl">非正比</i></td></tr>
+<tr><td class="h">圖形</td><td class="c"><div class="fig"><svg viewBox="0 0 220 145" role="img" aria-label="反應溫度與反應時間關係圖">
+
+<line x1="40" y1="118" x2="208" y2="118" stroke="#b9c8c0" stroke-width="1.5"/>
+<line x1="40" y1="16" x2="40" y2="118" stroke="#b9c8c0" stroke-width="1.5"/>
+<polygon points="208,118 202,115 202,121" fill="#b9c8c0"/>
+<polygon points="40,16 37,22 43,22" fill="#b9c8c0"/>
+<text x="126" y="137" font-size="10" fill="#5a6b62" text-anchor="middle">反應溫度（℃）</text>
+<text x="14" y="67" font-size="10" fill="#5a6b62" text-anchor="middle" transform="rotate(-90 14 67)">反應時間（秒）</text>
+<path d="M 56 28 C 84 92 112 110 200 114" fill="none" stroke="#e8663c" stroke-width="2.4"/>
+<rect x="104" y="24" width="46" height="17" rx="5" fill="#fdeee8" stroke="#e8663c"/>
+<text x="127" y="36" font-size="10" fill="#e8663c" text-anchor="middle" font-weight="700">非反比</text>
+</svg><div class="cap">溫度越高，反應時間越短</div></div></td><td class="c"><div class="fig"><svg viewBox="0 0 220 145" role="img" aria-label="反應溫度與反應速率關係圖">
+
+<line x1="40" y1="118" x2="208" y2="118" stroke="#b9c8c0" stroke-width="1.5"/>
+<line x1="40" y1="16" x2="40" y2="118" stroke="#b9c8c0" stroke-width="1.5"/>
+<polygon points="208,118 202,115 202,121" fill="#b9c8c0"/>
+<polygon points="40,16 37,22 43,22" fill="#b9c8c0"/>
+<text x="126" y="137" font-size="10" fill="#5a6b62" text-anchor="middle">反應溫度（℃）</text>
+<text x="14" y="67" font-size="10" fill="#5a6b62" text-anchor="middle" transform="rotate(-90 14 67)">反應速率（1／秒）</text>
+<path d="M 48 114 C 136 110 172 92 196 26" fill="none" stroke="#e8663c" stroke-width="2.4"/>
+<rect x="92" y="24" width="46" height="17" rx="5" fill="#fdeee8" stroke="#e8663c"/>
+<text x="115" y="36" font-size="10" fill="#e8663c" text-anchor="middle" font-weight="700">非正比</text>
+</svg><div class="cap">溫度越高，反應速率越快</div></div></td></tr>
 <tr><td class="h">說明</td><td>溫度越高，則<b>反應時間越短</b>，代表反應速率越快。</td><td>
 1. 反應速率＝<span class="fr"><i>生成物增加的量</i><i>反應時間</i></span>，因生成物增加的量（硫的沉澱量）<b>固定</b>，則<i class="hl">反應時間的倒數（1／秒）可代表反應速率</i>。<br>
 2. 溫度越高，則反應速率越快。
@@ -914,7 +958,18 @@ const U9_1=`<div class="blk">
 </td></tr>
 <tr><td class="h">⚠<br>催化劑</td><td>
 <p><span class="lb r">關係</span>加入<b>適當的</b>催化劑能加快反應速率。</p>
-<p><span class="lb e">解釋</span>催化劑可<i class="hl">降低反應所需的能量</i>（能量圖：無催化劑所需能量較多；加入催化劑所需能量較少）。</p>
+<p><span class="lb e">解釋</span>催化劑可<i class="hl">降低反應所需的能量</i>。</p><div class="fig"><svg viewBox="0 0 250 150" role="img" aria-label="催化劑降低反應所需能量的能量圖">
+<line x1="40" y1="124" x2="240" y2="124" stroke="#b9c8c0" stroke-width="1.5"/>
+<line x1="40" y1="14" x2="40" y2="124" stroke="#b9c8c0" stroke-width="1.5"/>
+<polygon points="40,14 37,20 43,20" fill="#b9c8c0"/>
+<text x="16" y="70" font-size="10" fill="#e8663c" text-anchor="middle" transform="rotate(-90 16 70)" font-weight="700">反應所需能量</text>
+<path d="M 46 100 C 84 100 88 26 122 26 C 156 26 162 78 230 78" fill="none" stroke="#e8663c" stroke-width="2.4"/>
+<path d="M 46 100 C 84 100 92 56 122 56 C 152 56 160 78 230 78" fill="none" stroke="#2f8f5f" stroke-width="2.4"/>
+<text x="60" y="114" font-size="10" fill="#5a6b62">反應物</text>
+<text x="200" y="94" font-size="10" fill="#5a6b62">生成物</text>
+<text x="128" y="20" font-size="9.5" fill="#e8663c" font-weight="700">無催化劑：所需能量較多</text>
+<text x="132" y="50" font-size="9.5" fill="#2f8f5f" font-weight="700">加入催化劑：所需能量較少</text>
+</svg><div class="cap">催化劑可降低反應所需的能量</div></div>
 <p><span class="lb p">特性</span></p>
 <p>1. 催化劑<b>會參與反應</b>，但反應前、後，催化劑的<i class="hl">質量、化學性質不變</i>。<br>
 2. <b>無法</b>使原本不能反應的物質發生反應。<br>
@@ -945,7 +1000,21 @@ const U9_2=`<div class="blk">
 <tr><th>反應初期</th><th>→ 一段時間後 →</th><th>平衡狀態</th></tr>
 <tr><td class="c">正反應速率 <i class="hl">＞</i> 逆反應速率</td><td class="c">正反應漸慢<br>逆反應漸快</td><td class="c">正反應速率 <i class="hl">＝</i> 逆反應速率</td></tr>
 </table></div>
-<p><span class="nt"><b>圖</b>以「反應速率－反應時間」作圖：正反應曲線由高往下降、逆反應曲線由低往上升，兩線交會後維持不變，即為<b>反應平衡</b>。</span></p>
+<div class="fig"><svg viewBox="0 0 230 145" role="img" aria-label="正逆反應速率與反應時間關係圖">
+
+<line x1="40" y1="118" x2="208" y2="118" stroke="#b9c8c0" stroke-width="1.5"/>
+<line x1="40" y1="16" x2="40" y2="118" stroke="#b9c8c0" stroke-width="1.5"/>
+<polygon points="208,118 202,115 202,121" fill="#b9c8c0"/>
+<polygon points="40,16 37,22 43,22" fill="#b9c8c0"/>
+<text x="126" y="137" font-size="10" fill="#5a6b62" text-anchor="middle">反應時間</text>
+<text x="14" y="67" font-size="10" fill="#5a6b62" text-anchor="middle" transform="rotate(-90 14 67)">反應速率</text>
+<path d="M 48 26 C 78 86 104 100 208 102" fill="none" stroke="#3d9bd4" stroke-width="2.4"/>
+<path d="M 48 116 C 78 110 104 104 208 102" fill="none" stroke="#d4548a" stroke-width="2.4"/>
+<line x1="150" y1="102" x2="208" y2="102" stroke="#9aa8a0" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="62" y="22" font-size="10" fill="#3d9bd4" font-weight="700">正反應</text>
+<text x="62" y="128" font-size="10" fill="#d4548a" font-weight="700">逆反應</text>
+<text x="205" y="94" font-size="10" fill="#5a6b62" text-anchor="end" font-weight="700">反應平衡</text>
+</svg><div class="cap">正反應漸慢、逆反應漸快，兩者相等時即達平衡</div></div>
 <p>　(2) ⚠ 達成平衡時，正、逆反應<i class="hl">仍持續進行</i>，此時呈<i class="hl">動態平衡</i>，且顏色、濃度等不再改變。<br>
 <span class="nt"><b>註</b>達成平衡時，各成分濃度<b>固定</b>但<b>不一定相等</b>，也不一定等於反應式中的係數比。</span></p>
 <div class="box tip"><span class="bt">概念補給</span>當有空氣內的成分參與反應，或反應會產生氣體時，則反應必須在<i class="hl">密閉系統</i>中才能達到平衡。</div>
@@ -1026,17 +1095,45 @@ const U10_1=`<div class="blk">
 <p>　(1) 原子種類及數目相同時，若<b>原子排列方式不同</b>，則化合物的化學及物理性質即不同。例如甲醚與乙醇的分子式均為 <b>C₂H₆O</b>：</p>
 <div class="mtabwrap"><table class="ctab">
 <tr><th>　</th><th>甲醚（CH₃OCH₃）</th><th>乙醇（C₂H₅OH）</th></tr>
-<tr><td class="h">結構差異</td><td class="c">氧原子夾在<b>兩個碳原子之間</b><br>C－O－C</td><td class="c">氧原子在<b>末端</b>，形成 OH 原子團<br>C－C－OH</td></tr>
+<tr><td class="h">結構式</td><td class="c"><div class="fig"><svg viewBox="0 0 175 110" role="img" aria-label="甲醚（CH₃OCH₃）結構式">
+<text x="45" y="32" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text><text x="125" y="32" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text>
+<line x1="45" y1="38" x2="45" y2="50" stroke="#7f8f87" stroke-width="1.6"/><line x1="125" y1="38" x2="125" y2="50" stroke="#7f8f87" stroke-width="1.6"/>
+<text x="13" y="60" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text><text x="45" y="60" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">C</text><text x="85" y="60" font-size="13" fill="#e8663c" text-anchor="middle" font-weight="700">O</text><text x="125" y="60" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">C</text><text x="157" y="60" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text>
+<line x1="21" y1="56" x2="37" y2="56" stroke="#7f8f87" stroke-width="1.6"/><line x1="53" y1="56" x2="77" y2="56" stroke="#7f8f87" stroke-width="1.6"/><line x1="93" y1="56" x2="117" y2="56" stroke="#7f8f87" stroke-width="1.6"/><line x1="133" y1="56" x2="149" y2="56" stroke="#7f8f87" stroke-width="1.6"/>
+<line x1="45" y1="66" x2="45" y2="78" stroke="#7f8f87" stroke-width="1.6"/><line x1="125" y1="66" x2="125" y2="78" stroke="#7f8f87" stroke-width="1.6"/>
+<text x="45" y="92" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text><text x="125" y="92" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text></svg></div><div style="font-size:.8rem;color:var(--muted)">氧原子夾在<b>兩個碳原子之間</b></div></td><td class="c"><div class="fig"><svg viewBox="0 0 155 110" role="img" aria-label="乙醇（C₂H₅OH）結構式">
+<text x="45" y="32" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text><text x="85" y="32" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text>
+<line x1="45" y1="38" x2="45" y2="50" stroke="#7f8f87" stroke-width="1.6"/><line x1="85" y1="38" x2="85" y2="50" stroke="#7f8f87" stroke-width="1.6"/>
+<text x="13" y="60" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text><text x="45" y="60" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">C</text><text x="85" y="60" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">C</text><text x="128" y="60" font-size="13" fill="#e8663c" text-anchor="middle" font-weight="700">OH</text>
+<line x1="21" y1="56" x2="37" y2="56" stroke="#7f8f87" stroke-width="1.6"/><line x1="53" y1="56" x2="77" y2="56" stroke="#7f8f87" stroke-width="1.6"/><line x1="93" y1="56" x2="113" y2="56" stroke="#7f8f87" stroke-width="1.6"/>
+<line x1="45" y1="66" x2="45" y2="78" stroke="#7f8f87" stroke-width="1.6"/><line x1="85" y1="66" x2="85" y2="78" stroke="#7f8f87" stroke-width="1.6"/>
+<text x="45" y="92" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text><text x="85" y="92" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text></svg></div><div style="font-size:.8rem;color:var(--muted)">氧原子在<b>末端</b>，形成 OH 原子團</div></td></tr>
 <tr><td class="h">沸點</td><td class="c">－24.8℃</td><td class="c">78℃</td></tr>
 <tr><td class="h">常溫常壓</td><td class="c"><i class="hl">氣態</i></td><td class="c"><i class="hl">液態</i></td></tr>
 <tr><td class="h">溶於水</td><td class="c">不易溶於水</td><td class="c">易溶於水</td></tr>
 </table></div>
 <p>　(2) 碳原子可彼此結合，也可與其他原子結合，結合方式更有<i class="hl">鏈狀</i>與<i class="hl">環狀</i>之分：</p>
-<div class="mtabwrap"><table class="ctab">
-<tr><th>三氯甲烷（CHCl₃）</th><th>丙烷（C₃H₈）</th><th>環丙烷（C₃H₆）</th></tr>
-<tr><td class="c">碳原子<b>和其他原子</b>結合</td><td class="c"><b>鏈狀</b><br>3 個碳排成一直鏈</td><td class="c"><b>環狀</b><br>3 個碳首尾相接成環</td></tr>
-<tr><td class="c" colspan="2">碳原子和碳原子互相連結後再和其他原子結合</td><td class="c">同左</td></tr>
-</table></div>
+<div class="figrow"><div class="fig"><div class="mt">三氯甲烷（CHCl₃）</div><svg viewBox="0 0 120 110" role="img" aria-label="三氯甲烷（CHCl₃）結構式">
+<text x="58" y="28" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">Cl</text>
+<line x1="58" y1="34" x2="58" y2="50" stroke="#7f8f87" stroke-width="1.6"/>
+<text x="20" y="60" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">Cl</text><text x="58" y="60" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">C</text><text x="96" y="60" font-size="13" fill="#e8663c" text-anchor="middle" font-weight="700">H</text>
+<line x1="32" y1="56" x2="50" y2="56" stroke="#7f8f87" stroke-width="1.6"/><line x1="66" y1="56" x2="88" y2="56" stroke="#7f8f87" stroke-width="1.6"/>
+<line x1="58" y1="66" x2="58" y2="80" stroke="#7f8f87" stroke-width="1.6"/>
+<text x="58" y="94" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">Cl</text></svg><div class="cap">碳原子和其他原子結合</div></div><div class="fig"><div class="mt">丙烷（C₃H₈）　鏈狀</div><svg viewBox="0 0 175 110" role="img" aria-label="丙烷（C₃H₈）　鏈狀結構式">
+<text x="45" y="32" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text><text x="85" y="32" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text><text x="125" y="32" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text>
+<line x1="45" y1="38" x2="45" y2="50" stroke="#7f8f87" stroke-width="1.6"/><line x1="85" y1="38" x2="85" y2="50" stroke="#7f8f87" stroke-width="1.6"/><line x1="125" y1="38" x2="125" y2="50" stroke="#7f8f87" stroke-width="1.6"/>
+<text x="13" y="60" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text><text x="45" y="60" font-size="13" fill="#3d9bd4" text-anchor="middle" font-weight="700">C</text><text x="85" y="60" font-size="13" fill="#3d9bd4" text-anchor="middle" font-weight="700">C</text><text x="125" y="60" font-size="13" fill="#3d9bd4" text-anchor="middle" font-weight="700">C</text><text x="157" y="60" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text>
+<line x1="21" y1="56" x2="37" y2="56" stroke="#7f8f87" stroke-width="1.6"/><line x1="53" y1="56" x2="77" y2="56" stroke="#7f8f87" stroke-width="1.6"/><line x1="93" y1="56" x2="117" y2="56" stroke="#7f8f87" stroke-width="1.6"/><line x1="133" y1="56" x2="149" y2="56" stroke="#7f8f87" stroke-width="1.6"/>
+<line x1="45" y1="66" x2="45" y2="78" stroke="#7f8f87" stroke-width="1.6"/><line x1="85" y1="66" x2="85" y2="78" stroke="#7f8f87" stroke-width="1.6"/><line x1="125" y1="66" x2="125" y2="78" stroke="#7f8f87" stroke-width="1.6"/>
+<text x="45" y="92" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text><text x="85" y="92" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text><text x="125" y="92" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text></svg><div class="cap">碳原子和碳原子互相連結後再和其他原子結合</div></div><div class="fig"><div class="mt">環丙烷（C₃H₆）　環狀</div><svg viewBox="0 0 140 110" role="img" aria-label="環丙烷（C₃H₆）　環狀結構式">
+<text x="70" y="24" font-size="13" fill="#3d9bd4" text-anchor="middle" font-weight="700">C</text><text x="45" y="74" font-size="13" fill="#3d9bd4" text-anchor="middle" font-weight="700">C</text><text x="95" y="74" font-size="13" fill="#3d9bd4" text-anchor="middle" font-weight="700">C</text>
+<line x1="66" y1="30" x2="47" y2="66" stroke="#7f8f87" stroke-width="1.6"/><line x1="74" y1="30" x2="93" y2="66" stroke="#7f8f87" stroke-width="1.6"/><line x1="53" y1="74" x2="87" y2="74" stroke="#7f8f87" stroke-width="1.6"/>
+<text x="100" y="18" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text><text x="42" y="18" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text>
+<line x1="76" y1="22" x2="92" y2="18" stroke="#7f8f87" stroke-width="1.6"/><line x1="64" y1="22" x2="50" y2="18" stroke="#7f8f87" stroke-width="1.6"/>
+<text x="16" y="90" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text><text x="45" y="98" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text>
+<line x1="38" y1="78" x2="24" y2="86" stroke="#7f8f87" stroke-width="1.6"/><line x1="45" y1="80" x2="45" y2="90" stroke="#7f8f87" stroke-width="1.6"/>
+<text x="124" y="90" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text><text x="95" y="98" font-size="13" fill="#33413a" text-anchor="middle" font-weight="700">H</text>
+<line x1="102" y1="78" x2="116" y2="86" stroke="#7f8f87" stroke-width="1.6"/><line x1="95" y1="80" x2="95" y2="90" stroke="#7f8f87" stroke-width="1.6"/></svg><div class="cap">三個碳首尾相接成環</div></div></div>
 </div>
 
 <div class="blk">
@@ -1207,9 +1304,18 @@ const U10_3=`<div class="blk">
 <div class="blk">
 <h4>三、合成聚合物</h4>
 <div class="mtabwrap"><table class="ctab">
-<tr><th>　</th><th>特性</th><th>舉例</th></tr>
-<tr><td class="h">鏈狀聚合物<br>（熱塑性聚合物）</td><td>加熱會<b>軟化</b>、冷卻後硬化，具有<i class="hl">可塑性</i>，<i class="hl">可回收再利用</i>。</td><td>寶特瓶（PET）、聚乙烯（PE）、聚氯乙烯（PVC）、保麗龍（PS）</td></tr>
-<tr><td class="h">網狀聚合物<br>（熱固性聚合物）</td><td><i class="hl">耐高溫</i>、不容易變形，<i class="hl">不易回收</i>，容易造成環境汙染問題。</td><td>輪胎、合成橡膠、各種樹脂</td></tr>
+<tr><th>　</th><th>圖示</th><th>特性</th><th>舉例</th></tr>
+<tr><td class="h">鏈狀聚合物<br>（熱塑性聚合物）</td><td class="c" style="width:130px"><svg viewBox="0 0 120 68" role="img" aria-label="鏈狀聚合物示意">
+<path d="M 8 14 C 30 4 46 24 68 14 C 88 5 100 20 114 14" fill="none" stroke="#3d9bd4" stroke-width="1.8"/>
+<path d="M 8 34 C 30 24 46 44 68 34 C 88 25 100 40 114 34" fill="none" stroke="#3d9bd4" stroke-width="1.8"/>
+<path d="M 8 54 C 30 44 46 64 68 54 C 88 45 100 60 114 54" fill="none" stroke="#3d9bd4" stroke-width="1.8"/>
+<circle cx="8" cy="14" r="3.2" fill="#d4548a"/><circle cx="38" cy="13" r="3.2" fill="#d4548a"/><circle cx="68" cy="14" r="3.2" fill="#d4548a"/><circle cx="98" cy="13" r="3.2" fill="#d4548a"/><circle cx="8" cy="34" r="3.2" fill="#d4548a"/><circle cx="38" cy="33" r="3.2" fill="#d4548a"/><circle cx="68" cy="34" r="3.2" fill="#d4548a"/><circle cx="98" cy="33" r="3.2" fill="#d4548a"/><circle cx="8" cy="54" r="3.2" fill="#d4548a"/><circle cx="38" cy="53" r="3.2" fill="#d4548a"/><circle cx="68" cy="54" r="3.2" fill="#d4548a"/><circle cx="98" cy="53" r="3.2" fill="#d4548a"/>
+</svg></td><td>加熱會<b>軟化</b>、冷卻後硬化，具有<i class="hl">可塑性</i>，<i class="hl">可回收再利用</i>。</td><td>寶特瓶（PET）、聚乙烯（PE）、聚氯乙烯（PVC）、保麗龍（PS）</td></tr>
+<tr><td class="h">網狀聚合物<br>（熱固性聚合物）</td><td class="c"><svg viewBox="0 0 120 68" role="img" aria-label="網狀聚合物示意">
+<line x1="10" y1="14" x2="110" y2="14" stroke="#3d9bd4" stroke-width="1.6"/><line x1="10" y1="34" x2="110" y2="34" stroke="#3d9bd4" stroke-width="1.6"/><line x1="10" y1="54" x2="110" y2="54" stroke="#3d9bd4" stroke-width="1.6"/>
+<line x1="10" y1="14" x2="10" y2="54" stroke="#3d9bd4" stroke-width="1.6"/><line x1="35" y1="14" x2="35" y2="54" stroke="#3d9bd4" stroke-width="1.6"/><line x1="60" y1="14" x2="60" y2="54" stroke="#3d9bd4" stroke-width="1.6"/><line x1="85" y1="14" x2="85" y2="54" stroke="#3d9bd4" stroke-width="1.6"/><line x1="110" y1="14" x2="110" y2="54" stroke="#3d9bd4" stroke-width="1.6"/>
+<circle cx="10" cy="14" r="3.2" fill="#d4548a"/><circle cx="35" cy="14" r="3.2" fill="#d4548a"/><circle cx="60" cy="14" r="3.2" fill="#d4548a"/><circle cx="85" cy="14" r="3.2" fill="#d4548a"/><circle cx="110" cy="14" r="3.2" fill="#d4548a"/><circle cx="10" cy="34" r="3.2" fill="#d4548a"/><circle cx="35" cy="34" r="3.2" fill="#d4548a"/><circle cx="60" cy="34" r="3.2" fill="#d4548a"/><circle cx="85" cy="34" r="3.2" fill="#d4548a"/><circle cx="110" cy="34" r="3.2" fill="#d4548a"/><circle cx="10" cy="54" r="3.2" fill="#d4548a"/><circle cx="35" cy="54" r="3.2" fill="#d4548a"/><circle cx="60" cy="54" r="3.2" fill="#d4548a"/><circle cx="85" cy="54" r="3.2" fill="#d4548a"/><circle cx="110" cy="54" r="3.2" fill="#d4548a"/>
+</svg></td><td><i class="hl">耐高溫</i>、不容易變形，<i class="hl">不易回收</i>，容易造成環境汙染問題。</td><td>輪胎、合成橡膠、各種樹脂</td></tr>
 </table></div>
 </div>
 
