@@ -15,6 +15,20 @@ header .sub{color:var(--muted);font-size:.85rem;margin-top:4px;letter-spacing:.0
 .units{display:flex;gap:8px;justify-content:center;margin:14px 0 4px;flex-wrap:wrap}
 .unit{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;padding:9px 18px;font-size:.98rem;cursor:pointer;font-weight:800}
 .unit.active{background:var(--sub-c,var(--brand));border-color:var(--sub-c,var(--brand));color:#fff}
+.unit .cx{margin-left:6px;font-size:.72rem;opacity:.85}
+.toc{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--sub-t,var(--brand));border-radius:12px;padding:11px 13px;margin:2px 0 12px}
+.toc .tv{display:flex;align-items:center;gap:8px;margin:11px 0 6px;font-size:.84rem;font-weight:900;color:var(--sub-t,var(--brand))}
+.toc .tv:first-child{margin-top:0}
+.toc .tv .vb{background:var(--sub-t,var(--brand));color:#fff;border-radius:7px;padding:1px 10px;font-size:.78rem}
+.toc .tv .vn{font-weight:400;font-size:.76rem;color:var(--muted)}
+.toc .tl{display:flex;flex-wrap:wrap;gap:6px}
+.toc .tu{display:inline-flex;align-items:center;gap:6px;background:var(--gold);border:1px solid var(--line);border-radius:9px;padding:5px 10px;font-size:.86rem;cursor:pointer;font-family:inherit;color:var(--ink);line-height:1.4}
+.toc .tu:hover{border-color:var(--sub-t,var(--brand));background:var(--chip)}
+.toc .tu .n{background:var(--sub-t,var(--brand));color:#fff;border-radius:6px;padding:0 6px;font-size:.73rem;font-weight:900;flex:none}
+.toc .tu .c{color:var(--muted);font-size:.73rem;white-space:nowrap}
+.toc .tu .c b{color:var(--ok)}
+.toc .tx{display:block;margin:12px auto 0;background:transparent;border:1px solid var(--line);border-radius:999px;padding:4px 16px;font-size:.78rem;color:var(--muted);cursor:pointer;font-family:inherit}
+.toc .tx:hover{border-color:var(--sub-t,var(--brand));color:var(--sub-t,var(--brand))}
 .volhd{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:24px 0 2px;font-weight:900;color:var(--sub,var(--brand))}
 .volhd .vb{background:var(--sub,var(--brand));color:#fff;border-radius:9px;padding:3px 13px;font-size:.92rem}
 .volhd .vp{font-weight:400;font-size:.8rem;color:var(--muted)}
@@ -173,6 +187,7 @@ footer{text-align:center;color:var(--muted);font-size:.75rem;margin-top:34px;let
     <button id="sx" class="sbtn ghost" hidden>✕ 清除</button>
   </div>
   <div id="sres" class="sres" hidden></div>
+  <div class="toc" id="toc" hidden></div>
 
 <div class="tabs">
   <button class="tab active" data-tab="learn">📚 學習重點</button>
@@ -1014,12 +1029,58 @@ function renderUnits(){
   Object.keys(UNITS).forEach(k=>{
     const b=document.createElement("button");
     b.className="unit"+(unit===k?" active":"");
-    b.textContent=(UNITS[k].icon?UNITS[k].icon+" ":"")+UNITS[k].name;
+    b.innerHTML=esc((UNITS[k].icon?UNITS[k].icon+" ":"")+UNITS[k].name)+
+      (unit===k?'<span class="cx">'+(tocOpen?"\u25b4":"\u25be")+'</span>':'');
     if(UNITS[k].color) b.style.setProperty("--sub-c",UNITS[k].color);
-    b.onclick=()=>{if(unit===k)return;unit=k;secSel="all";diffSel="all";qQuit();renderUnits();renderLearn();renderChips();renderList();};
+    b.onclick=()=>{
+      if(unit===k){tocOpen=!tocOpen;renderUnits();renderToc();return;}
+      unit=k;secSel="all";diffSel="all";tocOpen=true;qQuit();
+      renderUnits();renderLearn();renderChips();renderList();renderToc();
+    };
     box.appendChild(b);
   });
   $("#subT").textContent="學習重點＋題庫測驗｜"+UNITS[unit].name+"（"+UNITS[unit].qs.length+" 題）";
+}
+let tocOpen=true;
+function renderToc(){
+  const box=$("#toc"); if(!box) return;
+  const sj=SUBJECTS.find(s=>s.k===unit);
+  if(!sj||!tocOpen){box.hidden=true;return;}
+  box.hidden=false;
+  box.style.setProperty("--sub-t",sj.color);
+  let h="",i=0;
+  sj.vols.forEach(v=>{
+    h+='<div class="tv"><span class="vb">'+esc(v.name)+'</span><span class="vn">'+v.us.length+' 個單元</span></div><div class="tl">';
+    v.us.forEach(u=>{
+      const done=u.ps.filter(p=>p.c).length;
+      h+='<button class="tu" data-i="'+i+'" title="'+esc(u.t)+'">'+
+         '<span class="n">'+esc(typeof u.n==="number"?String(u.n):u.n)+'</span>'+esc(u.t)+
+         '<span class="c">'+(done?'<b>\u2713'+done+'</b>/':'')+u.ps.length+' 重點</span></button>';
+      i++;
+    });
+    h+='</div>';
+  });
+  h+='<button class="tx" id="tocX">收起目錄 \u25b4</button>';
+  box.innerHTML=h;
+  box.querySelectorAll(".tu").forEach(b=>b.onclick=()=>jumpUnit(+b.dataset.i));
+  $("#tocX").onclick=()=>{tocOpen=false;renderUnits();renderToc();};
+}
+function toLearnTab(){
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  const lt=document.querySelector('.tab[data-tab="learn"]'); if(lt)lt.classList.add("active");
+  document.querySelectorAll(".pane").forEach(p=>p.classList.remove("show"));
+  $("#pane-learn").classList.add("show");
+}
+function flashSec(h){
+  if(!h) return;
+  h.scrollIntoView({block:"start",behavior:"smooth"});
+  h.classList.remove("secflash"); void h.offsetWidth; h.classList.add("secflash");
+}
+function jumpUnit(i){
+  toLearnTab();
+  const hs=document.querySelectorAll("#learn-"+unit+" h2.sec");
+  tocOpen=false; renderUnits(); renderToc();
+  flashSec(hs[i]);
 }
 function renderLearn(){
   document.querySelectorAll(".lpane").forEach(p=>p.style.display="none");
@@ -1135,7 +1196,7 @@ document.querySelectorAll("img[data-im]").forEach(el=>{
   if(s)el.src=s;
   else{const td=el.closest("td");if(td&&td.classList.contains("thumb"))td.textContent="—";else el.remove();}
 });
-renderUnits();renderLearn();renderChips();renderList();
+renderUnits();renderLearn();renderChips();renderList();renderToc();
 
 /* ===== 全站搜尋 ===== */
 (function(){
@@ -1178,6 +1239,7 @@ renderUnits();renderLearn();renderChips();renderList();
 
   function jump(unitKey,secText){
     if(unit!==unitKey){unit=unitKey;secSel="all";diffSel="all";qQuit();renderUnits();renderLearn();renderChips();renderList();}
+    tocOpen=false;renderUnits();renderToc();
     document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
     const lt=document.querySelector('.tab[data-tab="learn"]'); if(lt)lt.classList.add("active");
     document.querySelectorAll(".pane").forEach(p=>p.classList.remove("show"));
