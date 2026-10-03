@@ -275,7 +275,9 @@ const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()
 const IM={};
 
 /* ===== 題庫（依冊分） ===== */
-const Q_BIO=[
+const Q_BIO=[{"q":"關於生殖過程中所歷經的細胞分裂，下列敘述何者<b>正確</b>？","opts":["無性生殖會歷經細胞分裂，但不會歷經減數分裂","有性生殖會歷經減數分裂，但不會歷經細胞分裂","無性生殖須先形成配子，所以一定要歷經減數分裂","有性生殖中精、卵結合後即為成熟個體，不需要再進行細胞分裂"],"ans":0,"sec":"生殖的方式","diff":"易","src":"重點演練2・是非","exp":"解題關鍵：<b>無性生殖不須產生配子，不會歷經減數分裂</b>，但仍要靠細胞分裂產生新個體，故(A)正確、(C)錯誤。有性生殖中精卵結合後，還要經由<i class=\"hl\">細胞分裂</i>才能逐漸發育為成熟個體，故(B)(D)錯誤。"},
+{"q":"行有性生殖的生物較能適應環境變化，主要原因為下列何者？","opts":["子代的變異性大","可快速增加子代數目","能將遺傳物質的組合完整保留並代代相傳","子代與親代的性狀表現完全相同"],"ans":0,"sec":"生殖的方式","diff":"易","src":"重點演練2","exp":"解題關鍵：行有性生殖的生物，子代<b>變異性大</b>，使族群適應環境變化的能力較強。(B)(C)(D)描述的都是<i class=\"hl\">無性生殖</i>的特徵。"},
+{"q":"下列生物所行的生殖方式中，何者的細胞<b>必須</b>經過減數分裂的過程？","opts":["渦蟲的斷裂生殖","酵母菌的出芽生殖","菊花的種子繁殖","馬鈴薯的營養器官繁殖"],"ans":2,"sec":"生殖的方式","diff":"中","src":"重點演練2","exp":"解題關鍵：<b>只有有性生殖需要配子，才會歷經減數分裂</b>。菊花的種子繁殖屬於<i class=\"hl\">有性生殖</i>，需經減數分裂產生配子並進行受精；(A)(B)(D)皆為無性生殖，不形成配子。"}
 ];
 const Q_EAR=[
 ];
@@ -2943,6 +2945,60 @@ const U13_4=`<div class="blk">
 </table></div>
 </div>`;
 
+const U6_2=`<div class="blk">
+<h4>一、生殖方式</h4>
+<p>1. <b>生殖的意義</b>：產生<i class="hl">新個體</i>、<i class="hl">種族延續</i>。</p>
+<p>2. <b>分類</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>類型</th><th>定義</th></tr>
+<tr><td class="h">無性生殖</td><td><i class="hl">不經由受精作用</i>（不須形成配子），以產生後代的生殖方式。</td></tr>
+<tr><td class="h">有性生殖</td><td><i class="hl">經由受精作用</i>（須形成配子），以產生後代的生殖方式。</td></tr>
+</table></div>
+<p>3. <b>無性生殖和有性生殖的比較</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>無性生殖</th><th colspan="2">有性生殖</th></tr>
+<tr><td class="h">受精作用</td><td class="c"><i class="hl">無</i></td><td class="c" colspan="2"><i class="hl">有</i>，形成受精卵</td></tr>
+<tr><td class="h" rowspan="2">交配行為</td><td class="c" rowspan="2">無</td><td class="h">植物</td><td class="c">無</td></tr>
+<tr><td class="h">動物</td><td class="c">體內受精：有<br>體外受精：無</td></tr>
+<tr><td class="h">與親代差異</td><td>遺傳物質組合與親代<i class="hl">完全相同</i></td><td colspan="2">遺傳物質組合與親代的<i class="hl">差異較大</i></td></tr>
+<tr><td class="h">優點</td><td>1. 完整保存親代的<b>性狀特徵</b>。<br>2. 環境條件佳時，可<b>快速增加後代</b>。</td><td colspan="2">可增加子代的<b>變異性</b>，後代族群<b>適應環境變異</b>的能力較強。</td></tr>
+<tr><td class="h">缺點</td><td>子代缺乏<b>遺傳多樣性</b>，一旦環境發生變異，則易造成族群滅亡。</td><td colspan="2">1. 子代變異性大，<b>無法完整保留</b>親代的性狀特徵。<br>2. 耗費較多的<b>時間、能量和養分</b>。</td></tr>
+<tr><td class="h">進行模式</td><td><div class="fig"><svg viewBox="0 0 196 56" role="img" aria-label="無性生殖的進行模式：親代經細胞分裂產生子代">
+<defs>
+<marker id="b1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#3d9bd4"/></marker>
+<marker id="b2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#8d9a93"/></marker>
+</defs>
+<g><rect x="18" y="24" width="32" height="20" rx="9" fill="#eef8f1" stroke="#bfe0cb" stroke-width="1.2"/><text x="34" y="38" font-size="10.5" fill="#5a6b62" text-anchor="middle">親代</text></g>
+<line x1="62" y1="34" x2="132" y2="34" stroke="#3d9bd4" stroke-width="2" marker-end="url(#b1)"/>
+<text x="97" y="25" font-size="8.5" fill="#3d9bd4" text-anchor="middle" font-weight="bold">細胞分裂</text>
+<g><rect x="146" y="24" width="32" height="20" rx="9" fill="#eef8f1" stroke="#bfe0cb" stroke-width="1.2"/><text x="162" y="38" font-size="10.5" fill="#5a6b62" text-anchor="middle">子代</text></g>
+</svg></div></td><td colspan="2"><div class="fig"><svg viewBox="0 0 196 118" role="img" aria-label="有性生殖的進行模式：雄親代與雌親代經減數分裂形成精子與卵，受精作用後形成受精卵，再經細胞分裂發育為子代">
+<defs>
+<marker id="b1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#3d9bd4"/></marker>
+<marker id="b2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#8d9a93"/></marker>
+</defs>
+<g><rect x="4.5" y="14" width="43" height="20" rx="9" fill="#eaf2fb" stroke="#bed4ea" stroke-width="1.2"/><text x="26" y="28" font-size="10.5" fill="#5a6b62" text-anchor="middle">雄親代</text></g>
+<g><rect x="4.5" y="62" width="43" height="20" rx="9" fill="#fdeef5" stroke="#f0c8dc" stroke-width="1.2"/><text x="26" y="76" font-size="10.5" fill="#5a6b62" text-anchor="middle">雌親代</text></g>
+<line x1="52" y1="24" x2="72" y2="24" stroke="#3d9bd4" stroke-width="2" marker-end="url(#b1)"/>
+<line x1="52" y1="72" x2="72" y2="72" stroke="#3d9bd4" stroke-width="2" marker-end="url(#b1)"/>
+<text x="62" y="15" font-size="8.5" fill="#3d9bd4" text-anchor="middle" font-weight="bold">減數分裂</text>
+<text x="62" y="63" font-size="8.5" fill="#3d9bd4" text-anchor="middle" font-weight="bold">減數分裂</text>
+<g><rect x="76" y="14" width="32" height="20" rx="9" fill="#eaf2fb" stroke="#bed4ea" stroke-width="1.2"/><text x="92" y="28" font-size="10.5" fill="#5a6b62" text-anchor="middle">精子</text></g>
+<g><rect x="76" y="62" width="32" height="20" rx="9" fill="#fdeef5" stroke="#f0c8dc" stroke-width="1.2"/><text x="92" y="76" font-size="10.5" fill="#5a6b62" text-anchor="middle">卵</text></g>
+<line x1="112" y1="28" x2="136" y2="42" stroke="#3d9bd4" stroke-width="2" marker-end="url(#b1)"/>
+<line x1="110" y1="68" x2="136" y2="54" stroke="#3d9bd4" stroke-width="2" marker-end="url(#b1)"/>
+<text x="117" y="52" font-size="8.5" fill="#3d9bd4" text-anchor="middle" font-weight="bold">受精作用</text>
+<g><rect x="140.5" y="38" width="43" height="20" rx="9" fill="#fdf3e8" stroke="#efcfa8" stroke-width="1.2"/><text x="162" y="52" font-size="10.5" fill="#5a6b62" text-anchor="middle">受精卵</text></g>
+<line x1="162" y1="58" x2="162" y2="86" stroke="#3d9bd4" stroke-width="2" marker-end="url(#b1)"/>
+<text x="156" y="75" font-size="8.5" fill="#3d9bd4" text-anchor="end" font-weight="bold">細胞分裂</text>
+<g><rect x="146" y="90" width="32" height="20" rx="9" fill="#eef8f1" stroke="#bfe0cb" stroke-width="1.2"/><text x="162" y="104" font-size="10.5" fill="#5a6b62" text-anchor="middle">子代</text></g>
+</svg></div></td></tr>
+<tr><td class="h">舉例</td><td>分裂生殖、出芽生殖、斷裂生殖、孢子繁殖、營養器官繁殖、組織培養</td><td colspan="2">植物的種子繁殖、企鵝產卵、象生出小象</td></tr>
+<tr><td class="h">應用</td><td class="c">複製生物、品種保存</td><td class="c" colspan="2">培育新品種</td></tr>
+</table></div>
+<div class="box key"><span class="bt">得分關鍵</span>判斷一種生殖方式屬於有性或無性，只看一件事：<i class="hl">有沒有經過受精作用（有沒有形成配子）</i>。有形成配子，就一定會歷經<b>減數分裂</b>。</div>
+</div>`;
+
 const SUBJECTS=[
 {k:"bio",name:"生物",icon:"\ud83c\udf3f",color:"#2c7a4b",vols:[
 {name:"第一冊",us:[
@@ -2975,9 +3031,10 @@ const SUBJECTS=[
 ]},
 {name:"第二冊",us:[
  {n:6,t:"生殖",ps:[
-  {n:1,t:"生殖作用與細胞分裂方式",p:90,tg:[],c:null},
-  {n:2,t:"無性生殖",p:93,tg:["實驗1"],c:null},
-  {n:3,t:"有性生殖",p:95,tg:["實驗2","實驗3"],c:null}]},
+  {n:1,t:"染色體與細胞分裂",p:90,tg:[],hot:5,un:1,c:null},
+  {n:2,t:"生殖的方式",p:92,tg:[],hot:4,un:1,c:U6_2},
+  {n:3,t:"無性生殖",p:93,tg:["實驗1"],hot:4,c:null},
+  {n:4,t:"有性生殖",p:95,tg:["實驗2","實驗3"],hot:5,c:null}]},
  {n:7,t:"遺傳",ps:[
   {n:1,t:"基因與遺傳",p:105,tg:[],c:null},
   {n:2,t:"遺傳法則",p:106,tg:[],c:null},
