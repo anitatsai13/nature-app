@@ -96,6 +96,7 @@ h2.sec .un{display:inline-block;background:var(--sub,var(--brand));color:#fff;bo
 .fml{display:block;background:#fbfdfe;border:1px solid var(--line);border-radius:8px;padding:6px 10px;margin:6px 0;font-size:.92rem;letter-spacing:.03em}
 .mtab td.ct{text-align:center;white-space:nowrap;background:#fbfdfe;font-size:.82rem;width:1%}
 .hot5{color:#d1462f;letter-spacing:1px}
+.ctab td.h .ar{display:block;color:#d1462f;font-size:.72rem;line-height:1;margin-top:3px;font-weight:400}
 .fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 4px;line-height:1.32}
 .fr i{font-style:normal;padding:1px 6px;white-space:nowrap}
 .fr i+i{border-top:1.6px solid currentColor}
@@ -136,6 +137,8 @@ h3.sub .pgt{color:var(--muted);font-size:.78rem;font-weight:400}
 .figrow>.fig svg{max-width:185px}
 .ctab .fig{margin:0;border:none;padding:2px}
 .ctab .fig svg{max-width:195px}
+.fig svg[width]{max-width:100%;height:auto}
+.ctab .fig svg[width]{max-width:none}
 .c-red{background:#fbe0e0!important;color:#b0342f;font-weight:800}
 .c-orange{background:#fde8cf!important;color:#b5651d;font-weight:800}
 .c-yellow{background:#fdf3cf!important;color:#8f7415;font-weight:800}
@@ -277,7 +280,28 @@ const IM={};
 /* ===== 題庫（依冊分） ===== */
 const Q_BIO=[{"q":"關於生殖過程中所歷經的細胞分裂，下列敘述何者<b>正確</b>？","opts":["無性生殖會歷經細胞分裂，但不會歷經減數分裂","有性生殖會歷經減數分裂，但不會歷經細胞分裂","無性生殖須先形成配子，所以一定要歷經減數分裂","有性生殖中精、卵結合後即為成熟個體，不需要再進行細胞分裂"],"ans":0,"sec":"生殖的方式","diff":"易","src":"重點演練2・是非","exp":"解題關鍵：<b>無性生殖不須產生配子，不會歷經減數分裂</b>，但仍要靠細胞分裂產生新個體，故(A)正確、(C)錯誤。有性生殖中精卵結合後，還要經由<i class=\"hl\">細胞分裂</i>才能逐漸發育為成熟個體，故(B)(D)錯誤。"},
 {"q":"行有性生殖的生物較能適應環境變化，主要原因為下列何者？","opts":["子代的變異性大","可快速增加子代數目","能將遺傳物質的組合完整保留並代代相傳","子代與親代的性狀表現完全相同"],"ans":0,"sec":"生殖的方式","diff":"易","src":"重點演練2","exp":"解題關鍵：行有性生殖的生物，子代<b>變異性大</b>，使族群適應環境變化的能力較強。(B)(C)(D)描述的都是<i class=\"hl\">無性生殖</i>的特徵。"},
-{"q":"下列生物所行的生殖方式中，何者的細胞<b>必須</b>經過減數分裂的過程？","opts":["渦蟲的斷裂生殖","酵母菌的出芽生殖","菊花的種子繁殖","馬鈴薯的營養器官繁殖"],"ans":2,"sec":"生殖的方式","diff":"中","src":"重點演練2","exp":"解題關鍵：<b>只有有性生殖需要配子，才會歷經減數分裂</b>。菊花的種子繁殖屬於<i class=\"hl\">有性生殖</i>，需經減數分裂產生配子並進行受精；(A)(B)(D)皆為無性生殖，不形成配子。"}
+{"q":"下列生物所行的生殖方式中，何者的細胞<b>必須</b>經過減數分裂的過程？","opts":["渦蟲的斷裂生殖","酵母菌的出芽生殖","菊花的種子繁殖","馬鈴薯的營養器官繁殖"],"ans":2,"sec":"生殖的方式","diff":"中","src":"重點演練2","exp":"解題關鍵：<b>只有有性生殖需要配子，才會歷經減數分裂</b>。菊花的種子繁殖屬於<i class=\"hl\">有性生殖</i>，需經減數分裂產生配子並進行受精；(A)(B)(D)皆為無性生殖，不形成配子。"},
+{"q":"關於植物的營養器官繁殖，下列敘述何者<b>正確</b>？","opts":["馬鈴薯利用塊莖、番薯利用塊根或莖進行營養器官繁殖","馬鈴薯和番薯皆是利用塊根進行營養器官繁殖","可利用營養器官繁殖的植物，無法再以有性生殖產生下一代","營養器官繁殖屬於有性生殖，過程中會形成配子"],"ans":0,"sec":"無性生殖","diff":"中","src":"重點演練3・是非","exp":"解題關鍵：<b>馬鈴薯是塊「莖」、番薯是塊「根」</b>，故(B)錯誤。以營養器官繁殖的植物<i class=\"hl\">仍可能開花結果</i>，再以種子繁殖（有性生殖）產生下一代，故(C)錯誤。營養器官繁殖不形成配子，屬於無性生殖，(D)錯誤。"},
+{"q":"果農為了<b>保持果樹的優良品種</b>，經常使用下列哪一種方法來繁殖果樹植株？","opts":["有性生殖","種子繁殖","營養器官繁殖","斷裂生殖"],"ans":2,"sec":"無性生殖","diff":"易","src":"重點演練3","exp":"解題關鍵：要<b>保留親代的優良性狀</b>，就要用無性生殖。營養器官繁殖屬於<i class=\"hl\">無性生殖</i>，子代可保有與親代相同的性狀特徵。(A)(B)為有性生殖，子代會產生變異；(D)斷裂生殖不適用於果樹。"},
+{"q":"下列四種生物可利用的生殖方式，何者配對<b>錯誤</b>？","opts":["水螅：出芽生殖","青黴菌：孢子繁殖","渦蟲：分裂生殖","落地生根：營養器官繁殖"],"ans":2,"sec":"無性生殖","diff":"易","src":"重點演練3","exp":"解題關鍵：渦蟲行的是<i class=\"hl\">斷裂生殖</i>（受外力斷裂成片段後各自長成新個體），不是分裂生殖。<b>分裂生殖是單細胞生物（變形蟲、草履蟲、細菌）</b>才有的方式。"},
+{"q":"阿儒將一片落地生根的葉片切成大小不同的兩片，分別進行培養。經一段時間後，兩片葉片各自長出一些小芽。關於長出小芽的過程中，細胞所進行的分裂名稱及此分裂的相關敘述，下列何者最合理？","opts":["均為減數分裂，且分裂過程中經一次染色體複製","均為減數分裂，且分裂過程中出現兩次連續分裂","均為細胞分裂，且分裂過程中經一次染色體複製","均為細胞分裂，且分裂過程中出現兩次連續分裂"],"ans":2,"sec":"無性生殖","diff":"中","src":"會考109補","exp":"解題關鍵：<b>葉是營養器官，以葉繁殖屬於營養器官繁殖，是無性生殖</b>，不須形成配子，所以<i class=\"hl\">只進行細胞分裂</i>。細胞分裂過程中染色體只複製一次、也只分裂一次（兩次連續分裂是減數分裂的特徵），故選(C)。"},
+{"q":"小玲取了某株植物的部分組織，放入培養基中進行繁殖，有關以此方式繁殖出的新植株，下列敘述何者最合理？","opts":["是由原植株的細胞經減數分裂產生","是由原植株的細胞經細胞分裂產生","新植株細胞內的基因為原植株細胞的一半","新植株細胞內的染色體為原植株細胞的一半"],"ans":1,"sec":"無性生殖","diff":"易","src":"會考108（通過率 71%）","exp":"解題關鍵：<b>組織培養屬於無性生殖</b>，親代與子代的遺傳物質組合<i class=\"hl\">完全相同</i>。無性生殖只進行細胞分裂，不進行減數分裂，所以基因與染色體數目都和原植株一樣，故選(B)。"},
+{"q":"關於青蛙的假交配與植物的授粉，下列敘述何者<b>正確</b>？","opts":["青蛙的假交配過程中，雄蛙並未將精子送入雌蛙體內，仍屬於體外受精","青蛙可利用假交配將精子送入雌蛙體內，進行體內受精","植物授粉後，雌蕊的柱頭會自行萌發出花粉管","植物的花粉管由子房向上長出，與柱頭會合後完成受精"],"ans":0,"sec":"有性生殖","diff":"中","src":"重點演練4・是非","exp":"解題關鍵：假交配時<b>雄蛙並沒有直接把精子送入雌蛙體內</b>，仍是在水中完成受精，故為<i class=\"hl\">體外受精</i>。植物授粉後，是由落在柱頭上的<i class=\"hl\">花粉</i>萌發出花粉管，向下延伸進入子房，不是柱頭或子房長出來的。"},
+{"q":"動物在生殖適應上，由體外受精演變成體內受精，此和種子植物在生殖方式上出現何種構造的意義相同？","opts":["維管束","種子","角質層","花粉管"],"ans":3,"sec":"有性生殖","diff":"中","src":"重點演練4","exp":"解題關鍵：體內受精是父方的精子<b>在母體內</b>與母方的卵結合，<i class=\"hl\">不需要依賴水</i>。種子植物利用<b>花粉管</b>把精細胞送到胚珠內與卵結合，意義相同——都讓受精作用擺脫對水的依賴。"},
+{"q":"下列哪一生物的胚胎發育位置是在<b>母體內</b>？","opts":["針鼴","陸龜","蝙蝠","鴿子"],"ans":2,"sec":"有性生殖","diff":"中","src":"重點演練4","exp":"解題關鍵：胚胎在母體內發育的是<i class=\"hl\">胎生</i>動物。(A)針鼴是<b>卵生哺乳類</b>；(B)陸龜為卵生爬蟲類；(C)蝙蝠是胎生哺乳類；(D)鴿子為卵生鳥類，故選(C)。"},
+{"q":"關於有性生殖的敘述，下列何者<b>正確</b>？","opts":["體外受精的成功率較體內受精的成功率高","卵生動物在胚胎發育時期會形成胎盤和臍帶","體內受精的動物單次產卵數會較體外受精的動物少","卵生動物一定進行體外受精"],"ans":2,"sec":"有性生殖","diff":"中","src":"重點演練4","exp":"解題關鍵：(A)<i class=\"hl\">體內</i>受精的成功率較高；(B)只有<b>胎生</b>動物才有胎盤和臍帶；(D)有的卵生動物會行體內受精，例如爬蟲類和鳥類。體內受精成功率高，所以單次產卵數較少，故選(C)。"},
+{"q":"下列為梅花行有性生殖的過程：<br>甲. 長出花粉管　乙. 花粉傳到雌蕊柱頭上<br>丙. 胚珠發育為種子，子房發育為果實<br>丁. 種子萌發長出新個體　戊. 精細胞進入胚珠和卵結合<br>其正確順序排列為何？","opts":["乙甲丙丁戊","乙戊甲丙丁","甲乙戊丁丙","乙甲戊丙丁"],"ans":3,"sec":"有性生殖","diff":"中","src":"重點演練4","exp":"解題關鍵：順序是<b>授粉 → 長花粉管 → 受精 → 果實種子發育 → 萌芽</b>。花粉先傳到柱頭（乙），萌發花粉管（甲），精細胞沿花粉管進入胚珠與卵結合（戊），受精後子房發育為果實、胚珠發育為種子（丙），最後種子萌發長出新個體（丁），故選(D)。"},
+{"q":"下列何者<b>不是</b>蟲媒花的特色？","opts":["花粉輕，容易隨風飄起","花朵大、花瓣顏色鮮豔","花朵內具有蜜腺","花朵香氣較為濃郁"],"ans":0,"sec":"有性生殖","diff":"易","src":"重點演練4","exp":"解題關鍵：(A)是<i class=\"hl\">風媒花</i>的特色——風媒花的花粉靠風力傳播，所以<b>數量多、重量輕、沒有黏性</b>。蟲媒花要靠昆蟲帶走花粉，所以花粉<b>較重、有黏性</b>，並以鮮豔的花瓣、香氣和蜜腺吸引昆蟲。"},
+{"q":"多數魚類在交配時，通常會同時釋放出大量的精子和卵，其原因為何？","opts":["使體內受精的過程更加順利","可增加精子和卵結合的機會","可提供更多養分給胚胎","因卵越多可游得越快"],"ans":1,"sec":"有性生殖","diff":"易","src":"重點演練4","exp":"解題關鍵：多數魚類為<i class=\"hl\">體外受精</i>，精子和卵在水中相遇才能結合，<b>受精成功率低</b>，所以在交配時同時釋出大量的精子和卵，以增加兩者結合的機會。"},
+{"q":"已知草莓的食用部位是由<b>花托</b>處膨大而來。若草莓上另有一種構造是由草莓的<b>子房</b>發育而成，則此構造應稱為下列何者？","opts":["胚珠","種子","果實","花粉"],"ans":2,"sec":"有性生殖","diff":"中","src":"會考112（通過率 36%）","exp":"解題關鍵：<b>受精後，子房發育成果實，胚珠發育成種子</b>。題目已說＊構造是由子房發育而成，所以＊就是<i class=\"hl\">果實</i>（草莓表面一粒一粒的才是真正的果實），故選(C)。"},
+{"q":"自花授粉是指植物的花粉黏附在<b>同一朵花</b>的雌蕊柱頭上。關於植物以自花授粉的方式生殖，下列何者最合理？","opts":["屬於有性生殖","不會產生果實","子代不具有繁殖能力","子代與親代的性狀皆完全相同"],"ans":0,"sec":"有性生殖","diff":"中","src":"會考109（通過率 51%）","exp":"解題關鍵：<b>只要經歷授粉、受精作用，就是有性生殖</b>，與花粉來自同一朵花或別朵花無關。自花授粉仍會受精、結果，子代也具繁殖能力，且因經過配子結合，性狀<i class=\"hl\">不會與親代完全相同</i>，故選(A)。"},
+{"q":"已知某地區的脊椎動物只有哺乳類、鳥類和爬蟲類。若小平依其調節體溫變化的不同，分成內溫動物及外溫動物兩群，則有關此地區中脊椎動物的生殖方式，下列敘述何者最合理？","opts":["內溫動物、外溫動物皆必為胎生","內溫動物必為胎生，外溫動物必為卵生","內溫動物、外溫動物皆必為體內受精","內溫動物必為體內受精，外溫動物必為體外受精"],"ans":2,"sec":"有性生殖","diff":"難","src":"會考109補","exp":"解題關鍵：哺乳類和鳥類是<b>內溫動物</b>，爬蟲類是<b>外溫動物</b>。(A)(B)多數哺乳類為胎生，但<i class=\"hl\">鳥類、多數爬蟲類和少數哺乳類（鴨嘴獸、針鼴）為卵生</i>；這三類動物<b>全部都行體內受精</b>，故選(C)。"},
+{"q":"關於試管嬰兒與人類生殖的過程，下列敘述何者<b>正確</b>？","opts":["試管嬰兒是精、卵在母體外結合，再將受精卵植入母體中發育，屬於有性生殖","試管嬰兒能在母體外發育成長，屬於一種無性生殖","人類生殖的過程中，精、卵結合和胚胎發育的地點皆為子宮","人類的精、卵在子宮相遇結合，受精卵再移到輸卵管著床"],"ans":0,"sec":"人類的生殖","diff":"中","src":"重點演練5・是非","exp":"解題關鍵：試管嬰兒仍有<b>精、卵結合</b>，所以是<i class=\"hl\">有性生殖</i>，只是受精在母體外進行，之後仍須植入母體發育。人類的精、卵是在<i class=\"hl\">輸卵管</i>結合成受精卵，形成胚胎後才到<i class=\"hl\">子宮</i>著床發育。"},
+{"q":"下列何者<b>不是</b>人類女性輸卵管的功能或特性？","opts":["輸送卵","與子宮相連接","胎兒產出的通道","受精作用發生的場所"],"ans":2,"sec":"人類的生殖","diff":"易","src":"重點演練5","exp":"解題關鍵：胎兒是由<i class=\"hl\">陰道</i>產出的，陰道才是產道。輸卵管的功能是<b>輸送卵</b>，也是<b>精卵受精的場所</b>，一端與子宮相連。"},
+{"q":"下列何者與「香蕉的<b>地下莖</b>冒出嫩芽並長成新植株」的生殖方式相似？","opts":["水螅利用精子和卵產生後代","阿姨生下一對長得一模一樣的雙胞胎","番石榴利用種子繁殖後代","草莓利用匍匐莖繁殖後代"],"ans":3,"sec":"實驗整理","diff":"易","src":"實驗立即練・觀察植物的營養器官繁殖","exp":"解題關鍵：由地下莖冒出嫩芽屬於<i class=\"hl\">營養器官繁殖</i>，是<b>無性生殖</b>。(A)(B)(C)都經過精卵結合，是有性生殖；(D)草莓的匍匐莖也是營養器官繁殖，故選(D)。"},
+{"q":"杏的果實剖面中，<b>甲為果肉、乙為種子</b>，試問甲與乙分別由植物的何種構造發育而來？","opts":["甲：雄蕊　乙：雌蕊","甲：花瓣　乙：子房","甲：子房　乙：胚珠","甲：胚珠　乙：卵"],"ans":2,"sec":"實驗整理","diff":"易","src":"實驗立即練・花、果實和種子的觀察","exp":"解題關鍵：植物的卵受精後，<b>子房會膨大發育成果實</b>（果肉即為果實的一部分），<b>胚珠則發育成種子</b>，故選(C)。"},
+{"q":"青蛙的染色體有 13 對，其中 1 對為<b>性染色體</b>。在不考慮突變的情況下，雌蛙卵巢內經<b>減數分裂</b>後的卵子，應有幾條性染色體？","opts":["1 條","2 條","13 條","26 條"],"ans":0,"sec":"染色體與細胞分裂","diff":"中","src":"會考113（通過率 48%）","exp":"解題關鍵：<b>減數分裂產生的子細胞，染色體套數為母細胞的一半</b>。青蛙體細胞有 13 對（26 條）染色體，經減數分裂後的卵子只剩 13 條，其中<i class=\"hl\">性染色體只有 1 條</i>（原本成對的性染色體分開了），故選(A)。"},
+{"q":"採收韭菜時，若從葉的底部割斷後，再以遮光罩將留下的根莖部遮蓋，使植株不易行光合作用，則長出的葉片會是質地軟嫩的黃色葉子，稱為韭黃。根據上述，下列推論何者最合理？","opts":["韭黃細胞是由韭菜細胞經減數分裂而來","韭菜葉片細胞經由突變而產生黃色葉子","韭黃與韭菜葉片細胞內的染色體數相同","韭黃與韭菜調控葉片顏色的基因不相同"],"ans":2,"sec":"染色體與細胞分裂","diff":"中","src":"會考111補","exp":"解題關鍵：韭黃是韭菜的<b>根莖部在遮光環境下，經營養器官繁殖</b>長出來的，屬於<i class=\"hl\">無性生殖</i>，只進行細胞分裂。所以細胞內的染色體數和基因都與原植株<b>相同</b>，顏色變黃是<b>缺少光照</b>造成的，與突變、基因差異都無關，故選(C)。"}
 ];
 const Q_EAR=[
 ];
@@ -2963,7 +2987,7 @@ const U6_2=`<div class="blk">
 <tr><td class="h">與親代差異</td><td>遺傳物質組合與親代<i class="hl">完全相同</i></td><td colspan="2">遺傳物質組合與親代的<i class="hl">差異較大</i></td></tr>
 <tr><td class="h">優點</td><td>1. 完整保存親代的<b>性狀特徵</b>。<br>2. 環境條件佳時，可<b>快速增加後代</b>。</td><td colspan="2">可增加子代的<b>變異性</b>，後代族群<b>適應環境變異</b>的能力較強。</td></tr>
 <tr><td class="h">缺點</td><td>子代缺乏<b>遺傳多樣性</b>，一旦環境發生變異，則易造成族群滅亡。</td><td colspan="2">1. 子代變異性大，<b>無法完整保留</b>親代的性狀特徵。<br>2. 耗費較多的<b>時間、能量和養分</b>。</td></tr>
-<tr><td class="h">進行模式</td><td><div class="fig"><svg viewBox="0 0 196 56" role="img" aria-label="無性生殖的進行模式：親代經細胞分裂產生子代">
+<tr><td class="h">進行模式</td><td><div class="fig"><svg width="196" viewBox="0 0 196 56" role="img" aria-label="無性生殖的進行模式：親代經細胞分裂產生子代">
 <defs>
 <marker id="b1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#3d9bd4"/></marker>
 <marker id="b2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#8d9a93"/></marker>
@@ -2972,7 +2996,7 @@ const U6_2=`<div class="blk">
 <line x1="62" y1="34" x2="132" y2="34" stroke="#3d9bd4" stroke-width="2" marker-end="url(#b1)"/>
 <text x="97" y="25" font-size="8.5" fill="#3d9bd4" text-anchor="middle" font-weight="bold">細胞分裂</text>
 <g><rect x="146" y="24" width="32" height="20" rx="9" fill="#eef8f1" stroke="#bfe0cb" stroke-width="1.2"/><text x="162" y="38" font-size="10.5" fill="#5a6b62" text-anchor="middle">子代</text></g>
-</svg></div></td><td colspan="2"><div class="fig"><svg viewBox="0 0 196 118" role="img" aria-label="有性生殖的進行模式：雄親代與雌親代經減數分裂形成精子與卵，受精作用後形成受精卵，再經細胞分裂發育為子代">
+</svg></div></td><td colspan="2"><div class="fig"><svg width="196" viewBox="0 0 196 118" role="img" aria-label="有性生殖的進行模式：雄親代與雌親代經減數分裂形成精子與卵，受精作用後形成受精卵，再經細胞分裂發育為子代">
 <defs>
 <marker id="b1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#3d9bd4"/></marker>
 <marker id="b2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#8d9a93"/></marker>
@@ -2997,6 +3021,493 @@ const U6_2=`<div class="blk">
 <tr><td class="h">應用</td><td class="c">複製生物、品種保存</td><td class="c" colspan="2">培育新品種</td></tr>
 </table></div>
 <div class="box key"><span class="bt">得分關鍵</span>判斷一種生殖方式屬於有性或無性，只看一件事：<i class="hl">有沒有經過受精作用（有沒有形成配子）</i>。有形成配子，就一定會歷經<b>減數分裂</b>。</div>
+</div>`;
+
+const U6_3=`<div class="blk">
+<h4>一、無性生殖</h4>
+<p>1. <b>無性生殖的方式</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>方式</th><th>生殖特性</th><th colspan="2">舉例</th><th>圖示</th></tr>
+<tr><td class="h">分裂<br>生殖</td><td>利用<i class="hl">細胞分裂</i>產生兩個新個體的方式。</td><td colspan="2">單細胞生物：<br>變形蟲、草履蟲、細菌</td><td><div class="fig"><svg width="124" viewBox="0 0 124 62" role="img" aria-label="變形蟲的分裂生殖：一個個體經細胞分裂成為兩個新個體">
+<defs>
+<marker id="n1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#8d9a93"/></marker>
+<marker id="n2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#3d9bd4"/></marker>
+</defs>
+<ellipse cx="22" cy="30" rx="15" ry="12.299999999999999" fill="#dceef8" stroke="#6aa8c8" stroke-width="1.3"/><circle cx="13.75" cy="20.7" r="4.95" fill="#dceef8" stroke="#6aa8c8" stroke-width="1.3"/><circle cx="31" cy="38.25" r="4.2" fill="#dceef8" stroke="#6aa8c8" stroke-width="1.3"/><circle cx="22" cy="30" r="4.5" fill="#8fc3dd"/>
+<line x1="44" y1="30" x2="62" y2="30" stroke="#8d9a93" stroke-width="1.6" marker-end="url(#n1)"/>
+<ellipse cx="84" cy="18" rx="11" ry="9.02" fill="#dceef8" stroke="#6aa8c8" stroke-width="1.3"/><circle cx="77.95" cy="11.18" r="3.6300000000000003" fill="#dceef8" stroke="#6aa8c8" stroke-width="1.3"/><circle cx="90.6" cy="24.05" r="3.08" fill="#dceef8" stroke="#6aa8c8" stroke-width="1.3"/><circle cx="84" cy="18" r="3.3" fill="#8fc3dd"/>
+<ellipse cx="100" cy="44" rx="11" ry="9.02" fill="#dceef8" stroke="#6aa8c8" stroke-width="1.3"/><circle cx="93.95" cy="37.18" r="3.6300000000000003" fill="#dceef8" stroke="#6aa8c8" stroke-width="1.3"/><circle cx="106.6" cy="50.05" r="3.08" fill="#dceef8" stroke="#6aa8c8" stroke-width="1.3"/><circle cx="100" cy="44" r="3.3" fill="#8fc3dd"/>
+<text x="62" y="58" font-size="8" fill="#5a6b62" text-anchor="middle">變形蟲</text>
+</svg></div></td></tr>
+<tr><td class="h">出芽<br>生殖</td><td>母體長出新的<i class="hl">芽體</i>，芽體持續生長到形狀和母體相似時，再脫離母體成為一個獨立的新個體。</td><td colspan="2">酵母菌、水螅</td><td><div class="fig"><svg width="110" viewBox="0 0 110 76" role="img" aria-label="水螅的出芽生殖：母體側面長出芽體">
+<line x1="40" y1="16" x2="40" y2="66" stroke="#2f8f5f" stroke-width="3"/>
+<line x1="40" y1="16" x2="24" y2="8.879999999999999" stroke="#2f8f5f" stroke-width="1.5"/><line x1="40" y1="16" x2="31" y2="7.62" stroke="#2f8f5f" stroke-width="1.5"/><line x1="40" y1="16" x2="40" y2="6" stroke="#2f8f5f" stroke-width="1.5"/><line x1="40" y1="16" x2="49" y2="7.62" stroke="#2f8f5f" stroke-width="1.5"/><line x1="40" y1="16" x2="56" y2="8.879999999999999" stroke="#2f8f5f" stroke-width="1.5"/>
+<line x1="40" y1="42" x2="66" y2="34" stroke="#2f8f5f" stroke-width="2.4"/>
+<line x1="66" y1="34" x2="64.4" y2="28.4" stroke="#2f8f5f" stroke-width="1.2"/><line x1="66" y1="34" x2="67.9" y2="26.9" stroke="#2f8f5f" stroke-width="1.2"/><line x1="66" y1="34" x2="72.1" y2="26.9" stroke="#2f8f5f" stroke-width="1.2"/><line x1="66" y1="34" x2="75.6" y2="28.4" stroke="#2f8f5f" stroke-width="1.2"/>
+<line x1="62" y1="40" x2="56" y2="46" stroke="#5a6b62" stroke-width="0.7"/>
+<text x="52" y="54" font-size="8" fill="#5a6b62" text-anchor="middle">芽體</text>
+<text x="90" y="68" font-size="8" fill="#5a6b62" text-anchor="middle">水螅</text>
+</svg></div></td></tr>
+<tr><td class="h">斷裂<br>生殖</td><td>生物個體受到<i class="hl">外力</i>的作用而斷裂成兩個或多個片段，這些片段可再發育成新個體。</td><td colspan="2">渦蟲、海參、海星、水綿</td><td><div class="fig"><svg width="126" viewBox="0 0 126 68" role="img" aria-label="渦蟲的斷裂生殖：個體受外力斷裂成片段，各片段再長成新個體">
+<defs>
+<marker id="n1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#8d9a93"/></marker>
+<marker id="n2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#3d9bd4"/></marker>
+</defs>
+<path d="M24,46 l-8,-6 l2,-20 l6,-9 l6,9 l2,20 z" fill="#f6dfb4" stroke="#c89a4e" stroke-width="1.2"/>
+<line x1="12" y1="34" x2="36" y2="34" stroke="#e8663c" stroke-width="1.1" stroke-dasharray="3 2"/>
+<line x1="44" y1="30" x2="62" y2="30" stroke="#8d9a93" stroke-width="1.6" marker-end="url(#n1)"/>
+<path d="M84,26 l-7,-5 l2,-12 l5,-5 l5,5 l2,12 z" fill="#f6dfb4" stroke="#c89a4e" stroke-width="1.1"/>
+<path d="M84,54 l-7,-5 l2,-12 l5,-5 l5,5 l2,12 z" fill="#f6dfb4" stroke="#c89a4e" stroke-width="1.1"/>
+<text x="110" y="40" font-size="8" fill="#5a6b62" text-anchor="middle">渦蟲</text>
+</svg></div></td></tr>
+<tr><td class="h">孢子<br>繁殖</td><td>生物產生大量<i class="hl">孢子</i>，孢子散播到溫暖潮溼的環境時，便能萌發成新個體。</td><td colspan="2">黴菌</td><td><div class="fig"><svg width="110" viewBox="0 0 110 74" role="img" aria-label="黴菌的孢子繁殖：菌絲頂端的孢子囊散出大量孢子">
+<line x1="10" y1="62" x2="100" y2="62" stroke="#a98f6a" stroke-width="2"/>
+<line x1="26" y1="62" x2="26" y2="26" stroke="#a98f6a" stroke-width="1.6"/><circle cx="26" cy="22" r="7" fill="#cbb089" stroke="#8d7450" stroke-width="1.1"/><line x1="50" y1="62" x2="50" y2="32" stroke="#a98f6a" stroke-width="1.6"/><circle cx="50" cy="28" r="7" fill="#cbb089" stroke="#8d7450" stroke-width="1.1"/><line x1="74" y1="62" x2="74" y2="26" stroke="#a98f6a" stroke-width="1.6"/><circle cx="74" cy="22" r="7" fill="#cbb089" stroke="#8d7450" stroke-width="1.1"/>
+<circle cx="16" cy="12" r="1.7" fill="#8d7450"/><circle cx="40" cy="8" r="1.7" fill="#8d7450"/><circle cx="62" cy="14" r="1.7" fill="#8d7450"/><circle cx="88" cy="10" r="1.7" fill="#8d7450"/><circle cx="50" cy="20" r="1.7" fill="#8d7450"/><circle cx="96" cy="24" r="1.7" fill="#8d7450"/>
+<text x="16" y="34" font-size="7.5" fill="#5a6b62" text-anchor="middle">孢子</text>
+<text x="90" y="70" font-size="8" fill="#5a6b62" text-anchor="middle">黴菌</text>
+</svg></div></td></tr>
+<tr><td class="h" rowspan="5">營養<br>器官<br>繁殖</td><td rowspan="5">植物利用根、莖、葉等<i class="hl">營養器官</i>進行繁殖。<span class="nt"><b>註</b>市售番薯和番薯葉，多是取一段番薯的莖直接種入土中，繁殖出新個體，此方式稱為<b>扦插</b>。</span></td><td class="h">根</td><td>塊根：番薯、蘿蔔</td><td rowspan="5"><div class="fig"><svg width="118" viewBox="0 0 118 78" role="img" aria-label="番薯以塊根進行營養器官繁殖，塊根上長出莖葉">
+<ellipse cx="58" cy="54" rx="30" ry="17" fill="#e8d2b4" stroke="#b48f62" stroke-width="1.3"/>
+<path d="M28,52 q-10,2 -14,7" fill="none" stroke="#b48f62" stroke-width="1.2"/>
+<path d="M88,56 q10,1 14,6" fill="none" stroke="#b48f62" stroke-width="1.2"/>
+<line x1="54" y1="38" x2="52" y2="18" stroke="#2f8f5f" stroke-width="2"/>
+<line x1="64" y1="40" x2="72" y2="24" stroke="#2f8f5f" stroke-width="2"/>
+<ellipse cx="44" cy="16" rx="8" ry="5" fill="#8fc98f" stroke="#2f8f5f" stroke-width="1"/><ellipse cx="60" cy="24" rx="8" ry="5" fill="#8fc98f" stroke="#2f8f5f" stroke-width="1"/><ellipse cx="80" cy="22" rx="8" ry="5" fill="#8fc98f" stroke="#2f8f5f" stroke-width="1"/><ellipse cx="58" cy="30" rx="8" ry="5" fill="#8fc98f" stroke="#2f8f5f" stroke-width="1"/>
+<text x="98" y="72" font-size="8" fill="#5a6b62" text-anchor="middle">番薯</text>
+</svg></div></td></tr>
+<tr><td class="h" rowspan="3">莖</td><td>塊莖：馬鈴薯、芋頭</td></tr>
+<tr><td>匍匐莖：草莓、番薯</td></tr>
+<tr><td>地下莖：竹子、香蕉</td></tr>
+<tr><td class="h">葉</td><td>落地生根、石蓮</td></tr>
+<tr><td class="h">組織<br>培養</td><td>將植物的組織切成小塊，放入富含營養物質和必要激素的<b>培養基</b>中，組織會進行<i class="hl">細胞分裂</i>，並且分化發育成新個體。</td><td colspan="2">蘭花、金線蓮</td><td><div class="fig"><svg width="104" viewBox="0 0 104 80" role="img" aria-label="組織培養：將植物組織放入培養瓶的培養基中，分化發育成新個體">
+<path d="M40,12 l0,16 l-20,38 a4,4 0 0 0 3,6 l58,0 a4,4 0 0 0 3,-6 l-20,-38 l0,-16 z" fill="#eef6fa" stroke="#7fa5b8" stroke-width="1.4"/>
+<path d="M28,54 l-5,10 a4,4 0 0 0 3,6 l58,0 a4,4 0 0 0 3,-6 l-5,-10 z" fill="#cfe6f2" stroke="#7fa5b8" stroke-width="1"/>
+<rect x="36" y="8" width="32" height="6" rx="2" fill="#cfd9de" stroke="#7fa5b8" stroke-width="1.1"/>
+<line x1="38" y1="56" x2="38" y2="42" stroke="#2f8f5f" stroke-width="1.4"/><ellipse cx="33" cy="42" rx="5" ry="3" fill="#8fc98f" stroke="#2f8f5f" stroke-width="0.9"/><ellipse cx="43" cy="45" rx="5" ry="3" fill="#8fc98f" stroke="#2f8f5f" stroke-width="0.9"/><line x1="52" y1="56" x2="52" y2="42" stroke="#2f8f5f" stroke-width="1.4"/><ellipse cx="47" cy="42" rx="5" ry="3" fill="#8fc98f" stroke="#2f8f5f" stroke-width="0.9"/><ellipse cx="57" cy="45" rx="5" ry="3" fill="#8fc98f" stroke="#2f8f5f" stroke-width="0.9"/><line x1="66" y1="56" x2="66" y2="42" stroke="#2f8f5f" stroke-width="1.4"/><ellipse cx="61" cy="42" rx="5" ry="3" fill="#8fc98f" stroke="#2f8f5f" stroke-width="0.9"/><ellipse cx="71" cy="45" rx="5" ry="3" fill="#8fc98f" stroke="#2f8f5f" stroke-width="0.9"/>
+<text x="52" y="78" font-size="8" fill="#5a6b62" text-anchor="middle">金線蓮</text>
+</svg></div></td></tr>
+<tr><td class="h">生物<br>複製</td><td>利用生物的<i class="hl">體細胞</i>製造出另一個相同的生物體。</td><td colspan="2">複製羊、複製牛、複製豬</td><td><div class="fig"><svg width="118" viewBox="0 0 118 76" role="img" aria-label="生物複製：利用體細胞製造出另一個相同的生物體，例如複製羊">
+<circle cx="44" cy="34" r="13" fill="#f6f3ee" stroke="#b9b3a8" stroke-width="1.2"/><circle cx="60" cy="30" r="14" fill="#f6f3ee" stroke="#b9b3a8" stroke-width="1.2"/><circle cx="76" cy="34" r="12" fill="#f6f3ee" stroke="#b9b3a8" stroke-width="1.2"/><circle cx="52" cy="44" r="12" fill="#f6f3ee" stroke="#b9b3a8" stroke-width="1.2"/><circle cx="68" cy="44" r="12" fill="#f6f3ee" stroke="#b9b3a8" stroke-width="1.2"/>
+<ellipse cx="92" cy="30" rx="10" ry="8" fill="#5f5a52"/>
+<ellipse cx="84" cy="23" rx="4" ry="3" fill="#4a463f"/>
+<circle cx="95" cy="28" r="1.6" fill="#fff"/>
+<line x1="48" y1="52" x2="48" y2="66" stroke="#5f5a52" stroke-width="2.6"/><line x1="60" y1="54" x2="60" y2="66" stroke="#5f5a52" stroke-width="2.6"/><line x1="72" y1="52" x2="72" y2="66" stroke="#5f5a52" stroke-width="2.6"/><line x1="80" y1="54" x2="80" y2="66" stroke="#5f5a52" stroke-width="2.6"/>
+<text x="60" y="74" font-size="8" fill="#5a6b62" text-anchor="middle">桃莉羊</text>
+</svg></div></td></tr>
+</table></div>
+<div class="box key"><span class="bt">得分關鍵</span>以上七種方式<b>全部都是無性生殖</b>，共同點是：<i class="hl">不形成配子、不經受精作用、只進行細胞分裂</i>，所以子代的遺傳物質組合與親代完全相同。</div>
+</div>`;
+
+const U6_4=`<div class="blk">
+<h4>一、動物的有性生殖</h4>
+<p>1. <b>受精方式</b>：分為<i class="hl">體外受精</i>和<i class="hl">體內受精</i>。</p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>體外受精</th><th>體內受精</th></tr>
+<tr><td class="h">特點</td><td>成熟的雌、雄性個體會將卵和精子<b>排放到水中</b>，在<i class="hl">體外</i>完成受精作用。</td><td>雄性個體會藉由<i class="hl">交配行為</i>，將精子直接送入雌性個體內，使精子與卵在<b>雌性個體內</b>結合。</td></tr>
+<tr><td class="h">受精場所</td><td class="c">體外（多在<i class="hl">水中</i>）</td><td class="c"><i class="hl">雌性個體內</i></td></tr>
+<tr><td class="h">雌性個體<br>單次產卵數</td><td class="c">較多<br><span class="nt">增加受精成功的機率</span></td><td class="c">較少</td></tr>
+<tr><td class="h">受精成功率</td><td class="c"><i class="hl">較低</i></td><td class="c"><i class="hl">較高</i></td></tr>
+<tr><td class="h">舉例</td><td>多數兩生類、多數魚類、珊瑚<span class="nt"><b>註</b>蛙類會行<b>假交配</b>。</span></td><td>昆蟲、爬蟲類、鳥類、哺乳類</td></tr>
+</table></div>
+<div class="box myth"><span class="bt">迷思問答</span>
+<p><b>Q　生活在水中的動物，一定是行體外受精？</b></p>
+<p><b>A</b>　不一定。少數魚類（大肚魚、孔雀魚、鯊魚）雄性能將精子送入雌性體內，行<i class="hl">體內受精</i>；另外，生活於水中的爬蟲類（海龜、海蛇等）、哺乳類（鯨豚、海豹、海牛等），也是行體內受精。</p>
+</div>
+<p>2. <b>胚胎發育的方式</b>：分為<i class="hl">卵生</i>和<i class="hl">胎生</i>。</p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>受精方式</th><th>胚胎<br>發育場所</th><th>養分<br>來源</th><th>卵大小</th><th>子代<br>存活率</th><th>單次<br>產卵量</th><th>舉例</th></tr>
+<tr><td class="h">卵生</td><td class="c">體內或體外</td><td class="c"><i class="hl">母體外</i></td><td class="c">卵</td><td class="c">較大</td><td class="c">較低</td><td class="c">較多</td><td>昆蟲、兩生類、鳥類、多數魚類和爬蟲類</td></tr>
+<tr><td class="h">胎生</td><td class="c">體內</td><td class="c"><i class="hl">母體內</i></td><td class="c">母體</td><td class="c">較小</td><td class="c">較高</td><td class="c">較少</td><td>多數哺乳類<span class="nt"><b>註</b>鴨嘴獸和針鼴為<b>卵生哺乳類</b>。</span></td></tr>
+</table></div>
+<div class="box tip"><span class="bt">小提示</span>
+<p>1. 親代護卵、育幼行為<b>完善</b> → 子代存活率<b>高</b> → 單次產卵量<b>少</b>，如鳥類、人類；<br>　 親代<b>無</b>護卵、育幼行為 → 子代存活率<b>低</b> → 單次產卵量<b>多</b>，以提高子代存活率，如珊瑚。</p>
+<p>2. 卵生動物中，<i class="hl">體外受精者卵無硬殼，體內受精者卵有硬殼</i>。</p>
+<p>3. <b>試管嬰兒</b>：父方的精子和母方的卵在母體外結合成受精卵，發育成胚胎後再植入母體子宮內繼續發育為胎兒，故試管嬰兒為<i class="hl">有性生殖、體外受精、胎生</i>。</p>
+</div>
+<p>3. <b>動物的生殖（繁殖）行為</b></p>
+<p>（1）<b>求偶行為</b>：用以吸引同種異性，以產生後代。</p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>求偶方式</th><th>氣味</th><th>顏色</th><th>聲音</th><th>發光</th><th>行為</th></tr>
+<tr><td class="h">舉例</td><td class="c">蛾類、哺乳類</td><td class="c">鮭魚體色變鮮豔<br>雄孔雀開屏</td><td class="c">雄蛙的鳴叫</td><td class="c">螢火蟲特定的<br>發光頻率</td><td class="c">雄、雌丹頂鶴<br>的求偶舞</td></tr>
+</table></div>
+<p>（2）<b>護卵及育幼行為</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>實際行為</th></tr>
+<tr><td class="h">蝦、蟹</td><td>雌蝦、雌蟹將受精卵黏附在<b>腹部</b>以護卵。</td></tr>
+<tr><td class="h">企鵝</td><td>母企鵝產卵後，由公、母企鵝<b>共同孵卵</b>，小企鵝出生後，公、母企鵝會吐出食糜餵食小企鵝。</td></tr>
+<tr><td class="h">臺灣獼猴</td><td>母猴會用<b>乳汁</b>哺育幼兒，細心照料，直到小獼猴長大獨立。</td></tr>
+</table></div>
+</div>
+
+<div class="blk">
+<h4>二、開花植物的有性生殖</h4>
+<p>1. 開花植物（<b>被子植物</b>）以<i class="hl">生殖器官</i>（花、果實、種子）進行有性生殖，稱為<i class="hl">種子繁殖</i>。<br>
+<span class="nt"><b>小提示</b>裸子植物的生殖器官為<b>毬果</b>和<b>種子</b>。</span></p>
+<p>2. <b>花的構造</b>：典型的花包括<i class="hl">萼片</i>、<i class="hl">花瓣</i>、<i class="hl">雄蕊</i>和<i class="hl">雌蕊</i>等四個部分，共同著生於<b>花托</b>上。</p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>功能與重要性</th><th>圖示</th></tr>
+<tr><td class="h">萼片</td><td>一般呈綠色，<i class="hl">能保護花瓣和花蕊</i>。</td><td rowspan="4"><div class="fig"><svg width="300" viewBox="0 0 300 206" role="img" aria-label="典型花的縱剖面構造：萼片、花瓣、雄蕊（花藥與花絲）、雌蕊（柱頭、花柱、子房與胚珠）共同著生於花托上">
+<defs>
+<marker id="p1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#e8663c"/></marker>
+<marker id="p2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#8d9a93"/></marker>
+<marker id="p3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#3d9bd4"/></marker>
+</defs>
+<path d="M126,150 q-70,-16 -84,-74 q46,16 76,52 z" fill="#f2a0a0" stroke="#d46a6a" stroke-width="1.3"/>
+<path d="M132,150 q70,-16 84,-74 q-46,16 -76,52 z" fill="#f2a0a0" stroke="#d46a6a" stroke-width="1.3"/>
+<path d="M124,152 q-40,-30 -46,-64 q30,22 50,52 z" fill="#f7b8b8" stroke="#d46a6a" stroke-width="1.1"/>
+<path d="M134,152 q40,-30 46,-64 q-30,22 -50,52 z" fill="#f7b8b8" stroke="#d46a6a" stroke-width="1.1"/>
+<path d="M126,156 q-30,2 -44,16 q26,4 44,-6 z" fill="#8fc98f" stroke="#4f9e62" stroke-width="1.2"/>
+<path d="M132,156 q30,2 44,16 q-26,4 -44,-6 z" fill="#8fc98f" stroke="#4f9e62" stroke-width="1.2"/>
+<path d="M112,154 q17,20 34,0 l-6,22 l-22,0 z" fill="#bfe0bf" stroke="#4f9e62" stroke-width="1.2"/>
+<line x1="129" y1="176" x2="129" y2="198" stroke="#4f9e62" stroke-width="3"/>
+<path d="M129,150 q-12.5,-28 -25,-58" fill="none" stroke="#e0c86a" stroke-width="1.6"/><ellipse cx="104" cy="88" rx="5" ry="7" fill="#f0d878" stroke="#c8ad4a" stroke-width="1.1" transform="rotate(-12.5 104 88)"/><path d="M129,150 q-6.5,-28 -13,-70" fill="none" stroke="#e0c86a" stroke-width="1.6"/><ellipse cx="116" cy="76" rx="5" ry="7" fill="#f0d878" stroke="#c8ad4a" stroke-width="1.1" transform="rotate(-6.5 116 76)"/><path d="M129,150 q6.5,-28 13,-70" fill="none" stroke="#e0c86a" stroke-width="1.6"/><ellipse cx="142" cy="76" rx="5" ry="7" fill="#f0d878" stroke="#c8ad4a" stroke-width="1.1" transform="rotate(6.5 142 76)"/><path d="M129,150 q12.5,-28 25,-58" fill="none" stroke="#e0c86a" stroke-width="1.6"/><ellipse cx="154" cy="88" rx="5" ry="7" fill="#f0d878" stroke="#c8ad4a" stroke-width="1.1" transform="rotate(12.5 154 88)"/>
+<ellipse cx="129" cy="140" rx="15" ry="17" fill="#cfe9cf" stroke="#4f9e62" stroke-width="1.4"/>
+<ellipse cx="129" cy="143" rx="6" ry="7" fill="#fff" stroke="#4f9e62" stroke-width="1.1"/>
+<circle cx="129" cy="143" r="2.4" fill="#4f9e62"/>
+<rect x="126" y="100" width="6" height="26" rx="3" fill="#bfe0bf" stroke="#4f9e62" stroke-width="1.2"/>
+<ellipse cx="129" cy="96" rx="9" ry="5" fill="#a8d8a8" stroke="#4f9e62" stroke-width="1.3"/>
+<line x1="138" y1="96" x2="196" y2="96" stroke="#9aa8a0" stroke-width="0.8"/><text x="216" y="99" font-size="9" fill="#5a6b62" text-anchor="middle">柱頭</text>
+<line x1="136" y1="112" x2="196" y2="112" stroke="#9aa8a0" stroke-width="0.8"/><text x="216" y="115" font-size="9" fill="#5a6b62" text-anchor="middle">花柱</text>
+<line x1="144" y1="140" x2="196" y2="140" stroke="#9aa8a0" stroke-width="0.8"/><text x="216" y="143" font-size="9" fill="#5a6b62" text-anchor="middle">子房</text>
+<path d="M236,88 q6,0 6,8 l0,40 q0,8 6,8 q-6,0 -6,8 l0,-56" fill="none" stroke="#9aa8a0" stroke-width="1"/>
+<text x="268" y="124" font-size="10" fill="#d4548a" text-anchor="middle">雌蕊</text>
+<line x1="160" y1="88" x2="196" y2="58" stroke="#9aa8a0" stroke-width="0.8"/><text x="216" y="61" font-size="9" fill="#5a6b62" text-anchor="middle">花藥</text>
+<line x1="150" y1="118" x2="196" y2="76" stroke="#9aa8a0" stroke-width="0.8"/><text x="216" y="79" font-size="9" fill="#5a6b62" text-anchor="middle">花絲</text>
+<path d="M236,50 q6,0 6,6 l0,10 q0,6 6,6 q-6,0 -6,6 l0,-16" fill="none" stroke="#9aa8a0" stroke-width="1"/>
+<text x="268" y="68" font-size="10" fill="#d4548a" text-anchor="middle">雄蕊</text>
+<line x1="56" y1="60" x2="92" y2="76" stroke="#9aa8a0" stroke-width="0.8"/><text x="38" y="58" font-size="9" fill="#5a6b62" text-anchor="middle">花瓣</text>
+<line x1="88" y1="166" x2="60" y2="172" stroke="#9aa8a0" stroke-width="0.8"/><text x="42" y="176" font-size="9" fill="#5a6b62" text-anchor="middle">萼片</text>
+<line x1="122" y1="182" x2="86" y2="192" stroke="#9aa8a0" stroke-width="0.8"/><text x="66" y="196" font-size="9" fill="#5a6b62" text-anchor="middle">花托</text>
+<line x1="120" y1="146" x2="62" y2="136" stroke="#9aa8a0" stroke-width="0.8"/><text x="44" y="139" font-size="9" fill="#5a6b62" text-anchor="middle">胚珠</text>
+</svg></div></td></tr>
+<tr><td class="h">花瓣</td><td>通常色彩鮮豔，<i class="hl">可吸引動物進行傳粉</i>。</td></tr>
+<tr><td class="h">雄蕊</td><td>1. 由<i class="hl">花絲</i>和<i class="hl">花藥</i>所構成。<br>2. 花藥會產生<b>花粉</b>（內含<i class="hl">精細胞</i>）。</td></tr>
+<tr><td class="h">雌蕊</td><td>1. <i class="hl">柱頭</i>可分泌黏液讓花粉附著。<br>2. 雌蕊基部膨大為<i class="hl">子房</i>，內含一個或多個<i class="hl">胚珠</i>。<br>3. 胚珠內含有<b>卵</b>。</td></tr>
+</table></div>
+<p>3. <b>開花植物有性生殖過程</b></p>
+<div class="fig"><svg width="580" viewBox="0 0 580 182" role="img" aria-label="開花植物有性生殖的過程：花藥的花粉經授粉落到柱頭，萌發花粉管進入子房與胚珠中的卵結合完成受精，之後子房發育成果實、胚珠發育成種子，種子萌發長成新植株">
+<defs>
+<marker id="p1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#e8663c"/></marker>
+<marker id="p2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#8d9a93"/></marker>
+<marker id="p3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#3d9bd4"/></marker>
+</defs>
+<g transform="translate(50,110)">
+<path d="M0,0 q-22,-6 -28,-26 q16,6 26,18 z" fill="#f2a0a0" stroke="#d46a6a" stroke-width="1"/>
+<path d="M4,0 q22,-6 28,-26 q-16,6 -26,18 z" fill="#f2a0a0" stroke="#d46a6a" stroke-width="1"/>
+<path d="M-8,6 q10,12 20,0 l-4,12 l-12,0 z" fill="#bfe0bf" stroke="#4f9e62" stroke-width="1"/>
+<line x1="2" y1="18" x2="2" y2="32" stroke="#4f9e62" stroke-width="2"/>
+<ellipse cx="2" cy="-8" rx="9" ry="10" fill="#cfe9cf" stroke="#4f9e62" stroke-width="1.1"/>
+<rect x="0" y="-32" width="4" height="18" rx="2" fill="#bfe0bf" stroke="#4f9e62" stroke-width="1"/>
+<ellipse cx="2" cy="-35" rx="7" ry="4" fill="#a8d8a8" stroke="#4f9e62" stroke-width="1.1"/>
+</g>
+<circle cx="26" cy="58" r="2.2" fill="#d8b24a"/><circle cx="32" cy="52" r="2.2" fill="#d8b24a"/><circle cx="38" cy="60" r="2.2" fill="#d8b24a"/>
+<text x="26" y="44" font-size="8" fill="#5a6b62" text-anchor="middle">花粉</text>
+<path d="M38,60 q18,-10 34,2" fill="none" stroke="#5a6b62" stroke-width="1.2" marker-end="url(#p2)"/>
+<path d="M92,100 q20,-12 40,0" fill="none" stroke="#e8663c" stroke-width="3" marker-end="url(#p1)"/>
+<text x="112" y="86" font-size="10" fill="#e8663c" text-anchor="middle">授粉</text>
+<g transform="translate(176,104)">
+<ellipse cx="0" cy="0" rx="17" ry="20" fill="#cfe9cf" stroke="#4f9e62" stroke-width="1.3"/>
+<ellipse cx="0" cy="4" rx="7" ry="8" fill="#fff" stroke="#4f9e62" stroke-width="1.1"/>
+<circle cx="0" cy="4" r="2.4" fill="#4f9e62"/>
+<rect x="-3" y="-48" width="6" height="30" rx="3" fill="#bfe0bf" stroke="#4f9e62" stroke-width="1.2"/>
+<ellipse cx="0" cy="-52" rx="10" ry="5" fill="#a8d8a8" stroke="#4f9e62" stroke-width="1.3"/>
+
+</g>
+<text x="176" y="156" font-size="8" fill="#5a6b62" text-anchor="middle">柱頭／子房／胚珠</text>
+<path d="M212,100 q20,-12 40,0" fill="none" stroke="#e8663c" stroke-width="3" marker-end="url(#p1)"/>
+<text x="232" y="86" font-size="10" fill="#e8663c" text-anchor="middle">受精</text>
+<g transform="translate(300,104)">
+<ellipse cx="0" cy="0" rx="17" ry="20" fill="#cfe9cf" stroke="#4f9e62" stroke-width="1.3"/>
+<ellipse cx="0" cy="4" rx="7" ry="8" fill="#fff" stroke="#4f9e62" stroke-width="1.1"/>
+<circle cx="0" cy="4" r="2.4" fill="#4f9e62"/>
+<rect x="-3" y="-48" width="6" height="30" rx="3" fill="#bfe0bf" stroke="#4f9e62" stroke-width="1.2"/>
+<ellipse cx="0" cy="-52" rx="10" ry="5" fill="#a8d8a8" stroke="#4f9e62" stroke-width="1.3"/>
+<circle cx="-7" cy="-56" r="3" fill="#e0c86a" stroke="#c8ad4a" stroke-width="0.9"/>
+<path d="M-6,-52 q-2,24 4,40 q2,6 2,12" fill="none" stroke="#e8a33c" stroke-width="2"/>
+<circle cx="0" cy="0" r="1.8" fill="#3d9bd4"/>
+</g>
+<line x1="286" y1="48" x2="250" y2="40" stroke="#9aa8a0" stroke-width="0.8"/><text x="232" y="43" font-size="8" fill="#5a6b62" text-anchor="middle">花粉</text>
+<line x1="292" y1="72" x2="254" y2="72" stroke="#9aa8a0" stroke-width="0.8"/><text x="234" y="75" font-size="8" fill="#5a6b62" text-anchor="middle">花粉管</text>
+<line x1="306" y1="104" x2="344" y2="96" stroke="#9aa8a0" stroke-width="0.8"/><text x="362" y="99" font-size="8" fill="#5a6b62" text-anchor="middle">卵</text>
+<line x1="314" y1="118" x2="344" y2="122" stroke="#9aa8a0" stroke-width="0.8"/><text x="368" y="125" font-size="8" fill="#5a6b62" text-anchor="middle">子房</text>
+<path d="M392,96 q14,-8 28,0" fill="none" stroke="#e8663c" stroke-width="2.4" marker-end="url(#p1)"/>
+<text x="406" y="84" font-size="8" fill="#e8663c" text-anchor="middle">發育成</text>
+<ellipse cx="450" cy="70" rx="22" ry="17" fill="#f08a7a" stroke="#c85a4a" stroke-width="1.2"/>
+<text x="450" y="74" font-size="9" fill="#fff" text-anchor="middle">果實</text>
+<path d="M392,126 q14,8 28,0" fill="none" stroke="#e8663c" stroke-width="2.4" marker-end="url(#p1)"/>
+<text x="406" y="148" font-size="8" fill="#e8663c" text-anchor="middle">發育成</text>
+<ellipse cx="450" cy="126" rx="18" ry="14" fill="#e5cfa0" stroke="#b8975c" stroke-width="1.2"/>
+<text x="450" y="130" font-size="9" fill="#5a6b62" text-anchor="middle">種子</text>
+<path d="M476,124 q14,-6 26,-16" fill="none" stroke="#e8663c" stroke-width="2.4" marker-end="url(#p1)"/>
+<text x="500" y="136" font-size="8" fill="#e8663c" text-anchor="middle">種子萌發</text>
+<line x1="534" y1="106" x2="534" y2="60" stroke="#4f9e62" stroke-width="2.4"/>
+<ellipse cx="523" cy="84" rx="10" ry="5" fill="#8fc98f" stroke="#4f9e62" stroke-width="1"/><ellipse cx="545" cy="72" rx="10" ry="5" fill="#8fc98f" stroke="#4f9e62" stroke-width="1"/><ellipse cx="523" cy="62" rx="10" ry="5" fill="#8fc98f" stroke="#4f9e62" stroke-width="1"/>
+<circle cx="534" cy="50" r="7" fill="#f2a0a0" stroke="#d46a6a" stroke-width="1.1"/>
+<text x="534" y="122" font-size="8" fill="#5a6b62" text-anchor="middle">新植株</text>
+</svg></div>
+<div class="mtabwrap"><table class="ctab">
+<tr><td class="h">授粉<br><span class="ar">▼</span></td><td>花粉藉由媒介，傳播到雌蕊的<i class="hl">柱頭</i>上。</td></tr>
+<tr><td class="h">受精<br><span class="ar">▼</span></td><td>授粉後，花粉會萌發出<i class="hl">花粉管</i>延伸進入子房，<b>精細胞</b>經由花粉管與胚珠中的<b>卵</b>結合。</td></tr>
+<tr><td class="h">果實、<br>種子發育<br><span class="ar">▼</span></td><td>受精後，<i class="hl">子房</i>會膨大發育成<i class="hl">果實</i>，<i class="hl">胚珠</i>發育為<i class="hl">種子</i>。</td></tr>
+<tr><td class="h">種子萌芽</td><td>種子外包覆<b>種皮</b>，內有<b>胚</b>和儲存養分的<b>子葉</b>；種子在適當環境中萌芽長成新個體。</td></tr>
+</table></div>
+<div class="box calc"><span class="bt">果實中的種子數量</span>果實中的種子數量 ＝ 子房中<i class="hl">受精的胚珠數量</i>。單胚珠的子房只有 1 個胚珠，可發育成 1 個種子；多胚珠的子房內有多個胚珠，可發育成多個種子。
+<div class="fig"><svg width="400" viewBox="0 0 400 96" role="img" aria-label="果實中的種子數量等於子房中受精的胚珠數量：單胚珠的子房發育成一個種子（櫻桃），多胚珠的子房發育成多個種子（番茄）">
+<defs>
+<marker id="p1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#e8663c"/></marker>
+<marker id="p2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#8d9a93"/></marker>
+<marker id="p3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#3d9bd4"/></marker>
+</defs>
+<g transform="translate(0,0)">
+<path d="M46,36 q-13,0 -13,16 q0,20 13,20 q13,0 13,-20 q0,-16 -13,-16 z" fill="#cfe9cf" stroke="#4f9e62" stroke-width="1.3"/>
+<rect x="43" y="14" width="6" height="24" rx="3" fill="#bfe0bf" stroke="#4f9e62" stroke-width="1.1"/>
+<ellipse cx="46" cy="12" rx="9" ry="4" fill="#a8d8a8" stroke="#4f9e62" stroke-width="1.2"/>
+<ellipse cx="46" cy="54" rx="6" ry="7" fill="#f0d878" stroke="#c8ad4a" stroke-width="1"/>
+<line x1="58" y1="54" x2="76" y2="54" stroke="#9aa8a0" stroke-width="0.8"/><text x="90" y="57" font-size="8" fill="#5a6b62" text-anchor="middle">胚珠</text>
+<line x1="34" y1="44" x2="16" y2="40" stroke="#9aa8a0" stroke-width="0.8"/><text x="10" y="43" font-size="8" fill="#5a6b62" text-anchor="start">子房</text>
+<path d="M104,54 q10,0 18,0" fill="none" stroke="#e8663c" stroke-width="2.4" marker-end="url(#p1)"/>
+<circle cx="150" cy="54" r="20" fill="#c62f4a" stroke="#8f2436" stroke-width="1.2"/>
+<ellipse cx="150" cy="54" rx="6" ry="8" fill="#e5cfa0" stroke="#b8975c" stroke-width="0.9"/>
+<text x="150" y="88" font-size="8.5" fill="#5a6b62" text-anchor="middle">櫻桃種子（單胚珠）</text>
+</g>
+<line x1="196" y1="8" x2="196" y2="90" stroke="#cfd9d4" stroke-width="1" stroke-dasharray="4 3"/>
+<g transform="translate(208,0)">
+<path d="M46,36 q-13,0 -13,16 q0,20 13,20 q13,0 13,-20 q0,-16 -13,-16 z" fill="#cfe9cf" stroke="#4f9e62" stroke-width="1.3"/>
+<rect x="43" y="14" width="6" height="24" rx="3" fill="#bfe0bf" stroke="#4f9e62" stroke-width="1.1"/>
+<ellipse cx="46" cy="12" rx="9" ry="4" fill="#a8d8a8" stroke="#4f9e62" stroke-width="1.2"/>
+<circle cx="41" cy="48" r="3.4" fill="#f0d878" stroke="#c8ad4a" stroke-width="0.9"/><circle cx="51" cy="48" r="3.4" fill="#f0d878" stroke="#c8ad4a" stroke-width="0.9"/><circle cx="41" cy="58" r="3.4" fill="#f0d878" stroke="#c8ad4a" stroke-width="0.9"/><circle cx="51" cy="58" r="3.4" fill="#f0d878" stroke="#c8ad4a" stroke-width="0.9"/><circle cx="46" cy="64" r="3.4" fill="#f0d878" stroke="#c8ad4a" stroke-width="0.9"/>
+<line x1="58" y1="54" x2="76" y2="54" stroke="#9aa8a0" stroke-width="0.8"/><text x="90" y="57" font-size="8" fill="#5a6b62" text-anchor="middle">胚珠</text>
+<line x1="34" y1="44" x2="16" y2="40" stroke="#9aa8a0" stroke-width="0.8"/><text x="10" y="43" font-size="8" fill="#5a6b62" text-anchor="start">子房</text>
+<path d="M104,54 q10,0 18,0" fill="none" stroke="#e8663c" stroke-width="2.4" marker-end="url(#p1)"/>
+<circle cx="150" cy="54" r="20" fill="#e8574a" stroke="#8f2436" stroke-width="1.2"/>
+<ellipse cx="143" cy="48" rx="3" ry="4" fill="#f5e6b0"/><ellipse cx="157" cy="48" rx="3" ry="4" fill="#f5e6b0"/><ellipse cx="143" cy="60" rx="3" ry="4" fill="#f5e6b0"/><ellipse cx="157" cy="60" rx="3" ry="4" fill="#f5e6b0"/><ellipse cx="150" cy="54" rx="3" ry="4" fill="#f5e6b0"/>
+<text x="150" y="88" font-size="8.5" fill="#5a6b62" text-anchor="middle">番茄種子（多胚珠）</text>
+</g>
+</svg></div>
+</div>
+<div class="box tip"><span class="bt">小提示</span>
+<p>1. 植物的受精場所在<i class="hl">胚珠</i>中。</p>
+<p>2. 種子植物藉由<i class="hl">花粉管</i>，使精、卵<b>不需要依賴水分</b>便可完成受精作用，因此種子植物能在乾燥環境下繁殖。</p>
+<p>3. 蘚苔植物和蕨類植物行有性生殖時，因<b>不具有花粉管</b>，精子需依賴環境中的<i class="hl">水</i>為媒介，才能和卵細胞完成受精作用，所以通常須生活在潮溼的環境中。</p>
+</div>
+<p>4. <b>花粉的傳播</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>種類</th><th>花朵大小、顏色</th><th>香氣、蜜腺</th><th>花粉特徵</th><th>例子</th></tr>
+<tr><td class="h">蟲媒花</td><td class="c">較大、較鮮豔</td><td class="c">有</td><td class="c">較少、較重、<i class="hl">有黏性</i></td><td class="c">朱槿、蘭花、百合</td></tr>
+<tr><td class="h">風媒花</td><td class="c">較小、較樸素</td><td class="c">無</td><td class="c">較多、較輕、<i class="hl">無黏性</i></td><td class="c">稻米、玉米、竹子</td></tr>
+</table></div>
+<div class="box tip"><span class="bt">延伸補充</span>
+<p>1. 生物媒介中，依傳粉者種類有<b>蟲媒花、鳥媒花、蝙蝠媒花</b>等。</p>
+<p>2. <b>水媒花</b>：生長在水中或水邊的植物，花粉藉由水的流動傳到雌蕊柱頭，如大茨藻、水馬齒。</p>
+</div>
+<p>5. <b>種子的傳播</b></p>
+<p>（1）種子可藉由不同方式傳播出去，在適宜的環境下萌發長成新個體。<br>
+<span class="nt"><b>例</b>風力傳播、水力傳播、動物傳播、自力傳播。</span></p>
+<p>（2）種子傳播可<i class="hl">擴張植物生長範圍</i>，同時避免種子在母株附近萌發，造成彼此間的<b>生存競爭</b>。</p>
+</div>`;
+const U6_5=`<div class="blk">
+<h4>一、女性生殖器官</h4>
+<div class="fig"><svg width="330" viewBox="0 0 330 184" role="img" aria-label="女性生殖器官：輸卵管、卵巢、子宮與陰道的位置">
+<defs>
+<marker id="p1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#e8663c"/></marker>
+<marker id="p2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#8d9a93"/></marker>
+<marker id="p3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#3d9bd4"/></marker>
+</defs>
+<path d="M132,54 q33,-22 66,0 q10,8 14,20 q-16,-16 -30,-12 q-18,6 -22,24 l-6,0 q-4,-18 -22,-24 q-16,-4 -30,12 q4,-12 14,-20 z" fill="#f3cfc6" stroke="#c98d80" stroke-width="1.3"/>
+<path d="M142,86 q23,16 46,0 l-7,44 q-2,10 -16,10 q-14,0 -16,-10 z" fill="#f3cfc6" stroke="#c98d80" stroke-width="1.4"/>
+<path d="M156,140 l18,0 l-2,32 l-14,0 z" fill="#f0bfb4" stroke="#c98d80" stroke-width="1.3"/>
+<ellipse cx="102" cy="76" rx="14" ry="10" fill="#efd9a8" stroke="#bf9a55" stroke-width="1.3"/>
+<ellipse cx="228" cy="76" rx="14" ry="10" fill="#efd9a8" stroke="#bf9a55" stroke-width="1.3"/>
+<line x1="126" y1="48" x2="88" y2="30" stroke="#9aa8a0" stroke-width="0.8"/><text x="66" y="26" font-size="9.5" fill="#3d9bd4" text-anchor="middle">輸卵管</text>
+<text x="66" y="40" font-size="8" fill="#5a6b62" text-anchor="middle">1. 輸送卵</text>
+<text x="66" y="51" font-size="8" fill="#5a6b62" text-anchor="middle">2. 受精的場所</text>
+<line x1="100" y1="86" x2="74" y2="104" stroke="#9aa8a0" stroke-width="0.8"/><text x="52" y="108" font-size="9.5" fill="#3d9bd4" text-anchor="middle">卵巢</text>
+<text x="52" y="121" font-size="8" fill="#5a6b62" text-anchor="middle">產生、儲存、排出卵</text>
+<text x="52" y="132" font-size="8" fill="#5a6b62" text-anchor="middle">並分泌雌性激素</text>
+<line x1="186" y1="110" x2="240" y2="104" stroke="#9aa8a0" stroke-width="0.8"/><text x="274" y="107" font-size="9.5" fill="#3d9bd4" text-anchor="middle">子宮</text>
+<text x="274" y="120" font-size="8" fill="#5a6b62" text-anchor="middle">胚胎著床、胎兒發育</text>
+<line x1="172" y1="160" x2="222" y2="158" stroke="#9aa8a0" stroke-width="0.8"/><text x="258" y="161" font-size="9.5" fill="#3d9bd4" text-anchor="middle">陰道</text>
+<text x="258" y="174" font-size="8" fill="#5a6b62" text-anchor="middle">精液進入、胎兒產出</text>
+</svg></div>
+</div>
+
+<div class="blk">
+<h4>二、人類生殖的過程</h4>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>說明</th><th>圖示</th></tr>
+<tr><td class="h">交配<br><span class="ar">▼</span></td><td>男性將精子送入女性體內。</td><td rowspan="3"><div class="fig"><svg width="300" viewBox="0 0 300 120" role="img" aria-label="受精與著床：卵自卵巢排出後在輸卵管與精子結合成受精卵，一邊分裂一邊移向子宮，到達子宮後埋入子宮內膜完成著床">
+<defs>
+<marker id="p1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#e8663c"/></marker>
+<marker id="p2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#8d9a93"/></marker>
+<marker id="p3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#3d9bd4"/></marker>
+</defs>
+<path d="M26,54 q40,-34 92,-16 q44,16 56,58" fill="none" stroke="#e7b9ae" stroke-width="15" stroke-linecap="round"/>
+<path d="M26,54 q40,-34 92,-16 q44,16 56,58" fill="none" stroke="#fbeeea" stroke-width="9" stroke-linecap="round"/>
+<path d="M176,96 q10,22 36,20 q34,-2 44,-34 q8,-26 -8,-44" fill="#f3cfc6" stroke="#c98d80" stroke-width="1.4"/>
+<circle cx="30" cy="48" r="7" fill="#f0d878" stroke="#c8ad4a" stroke-width="1.1"/>
+<text x="22" y="32" font-size="8" fill="#5a6b62" text-anchor="middle">卵</text>
+<circle cx="70" cy="30" r="6" fill="#f0d878" stroke="#c8ad4a" stroke-width="1.1"/>
+<g><circle cx="58" cy="22" r="2" fill="#3d9bd4"/><line x1="52" y1="20" x2="56" y2="22" stroke="#3d9bd4" stroke-width="0.9"/></g><g><circle cx="60" cy="36" r="2" fill="#3d9bd4"/><line x1="54" y1="34" x2="58" y2="36" stroke="#3d9bd4" stroke-width="0.9"/></g><g><circle cx="54" cy="29" r="2" fill="#3d9bd4"/><line x1="48" y1="27" x2="52" y2="29" stroke="#3d9bd4" stroke-width="0.9"/></g>
+<text x="66" y="14" font-size="8" fill="#3d9bd4" text-anchor="middle">精子</text>
+<text x="96" y="18" font-size="9" fill="#e8663c" text-anchor="middle">受精</text>
+<circle cx="110" cy="26" r="6" fill="#f6e3a8" stroke="#c8ad4a" stroke-width="1.1"/>
+<text x="126" y="16" font-size="8" fill="#5a6b62" text-anchor="middle">受精卵</text>
+<g><circle cx="136" cy="34" r="6.5" fill="#f6e3a8" stroke="#c8ad4a" stroke-width="1"/><line x1="136" y1="28" x2="136" y2="40" stroke="#c8ad4a" stroke-width="0.9"/></g>
+<g><circle cx="156" cy="46" r="7" fill="#f6e3a8" stroke="#c8ad4a" stroke-width="1"/><line x1="151" y1="41" x2="161" y2="51" stroke="#c8ad4a" stroke-width="0.9"/><line x1="161" y1="41" x2="151" y2="51" stroke="#c8ad4a" stroke-width="0.9"/></g>
+<circle cx="176" cy="66" r="8" fill="#f2cf8a" stroke="#c8ad4a" stroke-width="1"/>
+<circle cx="172" cy="62" r="2.4" fill="#e0b35c"/><circle cx="180" cy="62" r="2.4" fill="#e0b35c"/><circle cx="172" cy="70" r="2.4" fill="#e0b35c"/><circle cx="180" cy="70" r="2.4" fill="#e0b35c"/>
+<text x="196" y="60" font-size="8" fill="#5a6b62" text-anchor="middle">胚胎</text>
+<ellipse cx="208" cy="100" rx="9" ry="7" fill="#e08aa0" stroke="#b65877" stroke-width="1.1"/>
+<text x="228" y="112" font-size="9" fill="#d4548a" text-anchor="middle">著床</text>
+</svg></div></td></tr>
+<tr><td class="h">受精<br><span class="ar">▼</span></td><td>精子與卵在<i class="hl">輸卵管</i>相遇結合，形成<i class="hl">受精卵</i>。</td></tr>
+<tr><td class="h">胚胎<br>著床<br><span class="ar">▼</span></td><td>1. 受精卵一邊進行<b>細胞分裂</b>形成胚胎，一邊移向子宮。<br>2. 胚胎到達<i class="hl">子宮</i>後便埋入增厚的<i class="hl">子宮內膜</i>中，稱為<b>著床</b>。</td></tr>
+<tr><td class="h">胚胎<br>發育<br><span class="ar">▼</span></td><td>1. <i class="hl">胎盤</i>與<i class="hl">臍帶</i>（內有血管）的功能：<br>　（1）母體與胎兒在胎盤以<b>擴散作用</b>交換物質。<br>　（2）胎兒從母體獲得<b>養分</b>和<b>氧氣</b>，並將產生的<b>廢物</b>送入母體代為排出。<br>2. 胎兒被<i class="hl">羊膜</i>內的<i class="hl">羊水</i>包圍：可藉此<b>獲得保護</b>。</td><td rowspan="2"><div class="fig"><svg width="230" viewBox="0 0 230 180" role="img" aria-label="胎兒在子宮內的發育：胎盤附著於子宮壁，以臍帶與胎兒相連，胎兒被羊膜內的羊水包圍">
+<defs>
+<marker id="p1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#e8663c"/></marker>
+<marker id="p2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#8d9a93"/></marker>
+<marker id="p3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#3d9bd4"/></marker>
+</defs>
+<path d="M62,34 q52,-22 90,10 q30,28 20,78 q-10,46 -58,50 q-48,4 -60,-42 q-12,-54 8,-96 z" fill="#f3cfc6" stroke="#c98d80" stroke-width="2"/>
+<path d="M72,44 q46,-18 78,10 q26,24 17,68 q-9,40 -50,44 q-41,4 -52,-38 q-10,-46 7,-84 z" fill="#dff0f7" stroke="#8fc0d8" stroke-width="1.3"/>
+<path d="M66,40 q24,-14 50,-10 q-6,22 -26,30 q-18,8 -28,-4 z" fill="#d98b9e" stroke="#b05f76" stroke-width="1.3"/>
+<path d="M100,62 q10,20 2,36 q-8,16 4,24" fill="none" stroke="#c0718a" stroke-width="3.4"/>
+<circle cx="112" cy="128" r="21" fill="#f6ded2" stroke="#c98d80" stroke-width="1.4"/>
+<circle cx="104" cy="124" r="2" fill="#5a6b62"/><circle cx="118" cy="124" r="2" fill="#5a6b62"/>
+<path d="M105,134 q7,5 13,-1" fill="none" stroke="#5a6b62" stroke-width="1.1"/>
+<path d="M108,148 q-18,4 -20,-14 q-2,-16 14,-14 q18,-2 20,14 q2,18 -14,14 z" fill="#f6ded2" stroke="#c98d80" stroke-width="1.4"/>
+<line x1="92" y1="44" x2="160" y2="28" stroke="#9aa8a0" stroke-width="0.8"/><text x="186" y="31" font-size="9" fill="#3d9bd4" text-anchor="middle">胎盤</text>
+<line x1="132" y1="108" x2="170" y2="92" stroke="#9aa8a0" stroke-width="0.8"/><text x="196" y="95" font-size="9" fill="#3d9bd4" text-anchor="middle">羊水</text>
+<line x1="104" y1="104" x2="60" y2="92" stroke="#9aa8a0" stroke-width="0.8"/><text x="36" y="95" font-size="9" fill="#3d9bd4" text-anchor="middle">臍帶</text>
+<line x1="78" y1="140" x2="48" y2="150" stroke="#9aa8a0" stroke-width="0.8"/><text x="26" y="153" font-size="9" fill="#3d9bd4" text-anchor="middle">羊膜</text>
+<line x1="146" y1="150" x2="178" y2="158" stroke="#9aa8a0" stroke-width="0.8"/><text x="202" y="161" font-size="9" fill="#3d9bd4" text-anchor="middle">子宮</text>
+</svg></div></td></tr>
+<tr><td class="h">胎兒出生<br>（分娩）</td><td>1. 受精作用後 38～40 週，母體<b>子宮收縮</b>引起<b>陣痛</b>。<br>2. 子宮收縮推擠使胎兒由<i class="hl">陰道</i>產出，胎兒出生後胎盤和臍帶再脫落排出。</td></tr>
+</table></div>
+<div class="box tip"><span class="bt">小提示</span>
+<p>1. 母體與胎兒的<b>血液不直接相通</b>。</p>
+<p>2. <b>肚臍</b>：臍帶脫落後留下的痕跡，是<i class="hl">胎生動物</i>的特徵。</p>
+</div>
+<div class="box tip"><span class="bt">延伸補充</span>
+<p><b>雙胞胎</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>受精方式</th><th>子代基因</th><th>子代外觀</th><th>子代性別</th></tr>
+<tr><td class="h">同卵<br>雙生</td><td><i class="hl">一個受精卵</i>在發育初期分裂為二，並各自發育成一個胎兒</td><td class="c">完全相同</td><td class="c">相似</td><td class="c">相同</td></tr>
+<tr><td class="h">異卵<br>雙生</td><td>卵巢同時排出<i class="hl">兩個卵</i>並分別受精，兩個受精卵各自發育成胎兒</td><td class="c">不完全相同</td><td class="c">有差異</td><td class="c">不一定相同</td></tr>
+</table></div>
+</div>
+</div>`;
+const U6_6=`<div class="blk">
+<h4>一、觀察植物的營養器官繁殖</h4>
+<p>1. <b>營養器官繁殖</b>：植物利用營養器官（<i class="hl">根、莖、葉</i>）產生新個體。</p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>植物</th><th colspan="2">番薯</th><th>馬鈴薯</th><th>落地生根</th></tr>
+<tr><td class="h">營養器官<br>繁殖</td><td>以<i class="hl">塊根</i>繁殖<div class="fig"><svg width="110" viewBox="0 0 110 80" role="img" aria-label="番薯以塊根繁殖：塊根埋在土中長出莖葉">
+<rect x="4" y="58" width="102" height="14" rx="3" fill="#cbb089"/>
+<ellipse cx="42" cy="62" rx="20" ry="11" fill="#e0bb93" stroke="#a97f4e" stroke-width="1.2"/>
+<line x1="42" y1="52" x2="42" y2="30" stroke="#4f9e62" stroke-width="2"/>
+<ellipse cx="30" cy="30" rx="9" ry="5" fill="#8fc98f" stroke="#4f9e62" stroke-width="1"/><ellipse cx="54" cy="24" rx="9" ry="5" fill="#8fc98f" stroke="#4f9e62" stroke-width="1"/><ellipse cx="34" cy="18" rx="9" ry="5" fill="#8fc98f" stroke="#4f9e62" stroke-width="1"/>
+<line x1="62" y1="62" x2="82" y2="64" stroke="#9aa8a0" stroke-width="0.8"/><text x="96" y="67" font-size="8" fill="#5a6b62" text-anchor="middle">塊根</text>
+</svg></div></td><td>以<i class="hl">莖</i>繁殖（扦插）<div class="fig"><svg width="110" viewBox="0 0 110 80" role="img" aria-label="番薯以莖扦插繁殖：取一段莖直接種入土中">
+<rect x="4" y="58" width="102" height="14" rx="3" fill="#cbb089"/>
+<line x1="52" y1="64" x2="52" y2="22" stroke="#4f9e62" stroke-width="2.6"/>
+<ellipse cx="38" cy="36" rx="9" ry="5" fill="#8fc98f" stroke="#4f9e62" stroke-width="1"/><ellipse cx="68" cy="30" rx="9" ry="5" fill="#8fc98f" stroke="#4f9e62" stroke-width="1"/><ellipse cx="42" cy="22" rx="9" ry="5" fill="#8fc98f" stroke="#4f9e62" stroke-width="1"/>
+<path d="M80,36 q-10,6 -20,14" fill="none" stroke="#5a6b62" stroke-width="1.2" marker-end="url(#p2)"/>
+<defs>
+<marker id="p1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#e8663c"/></marker>
+<marker id="p2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#8d9a93"/></marker>
+<marker id="p3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#3d9bd4"/></marker>
+</defs>
+<text x="88" y="28" font-size="8" fill="#5a6b62" text-anchor="middle">扦插</text>
+</svg></div></td><td>以<i class="hl">塊莖</i>繁殖<br>由<b>芽眼</b>長出幼苗<div class="fig"><svg width="110" viewBox="0 0 110 80" role="img" aria-label="馬鈴薯以塊莖繁殖：由芽眼長出幼苗">
+<ellipse cx="54" cy="50" rx="34" ry="22" fill="#e8d2a8" stroke="#b4914e" stroke-width="1.3"/>
+<ellipse cx="38" cy="42" rx="3.4" ry="2.4" fill="#a9854a"/><ellipse cx="62" cy="56" rx="3.4" ry="2.4" fill="#a9854a"/><ellipse cx="70" cy="40" rx="3.4" ry="2.4" fill="#a9854a"/>
+<line x1="38" y1="42" x2="34" y2="24" stroke="#4f9e62" stroke-width="1.8"/>
+<ellipse cx="28" cy="20" rx="7" ry="4" fill="#8fc98f" stroke="#4f9e62" stroke-width="1"/>
+<line x1="70" y1="40" x2="88" y2="30" stroke="#9aa8a0" stroke-width="0.8"/><text x="96" y="27" font-size="8" fill="#5a6b62" text-anchor="middle">芽眼</text>
+<text x="54" y="76" font-size="8" fill="#5a6b62" text-anchor="middle">塊莖</text>
+</svg></div></td><td>以<i class="hl">葉</i>繁殖<br>由<b>葉緣缺刻</b>處長出幼苗<div class="fig"><svg width="110" viewBox="0 0 110 80" role="img" aria-label="落地生根以葉繁殖：由葉緣缺刻處長出幼苗">
+<path d="M22,40 q32,-26 66,0 q-32,26 -66,0 z" fill="#9fd09f" stroke="#4f9e62" stroke-width="1.4"/>
+<line x1="22" y1="40" x2="88" y2="40" stroke="#4f9e62" stroke-width="1"/>
+<g><line x1="30" y1="50" x2="30" y2="62" stroke="#4f9e62" stroke-width="1.2"/><ellipse cx="30" cy="64" rx="5" ry="3" fill="#7fc27f" stroke="#4f9e62" stroke-width="0.9"/></g><g><line x1="44" y1="50" x2="44" y2="62" stroke="#4f9e62" stroke-width="1.2"/><ellipse cx="44" cy="64" rx="5" ry="3" fill="#7fc27f" stroke="#4f9e62" stroke-width="0.9"/></g><g><line x1="58" y1="52" x2="58" y2="62" stroke="#4f9e62" stroke-width="1.2"/><ellipse cx="58" cy="64" rx="5" ry="3" fill="#7fc27f" stroke="#4f9e62" stroke-width="0.9"/></g><g><line x1="76" y1="52" x2="76" y2="62" stroke="#4f9e62" stroke-width="1.2"/><ellipse cx="76" cy="64" rx="5" ry="3" fill="#7fc27f" stroke="#4f9e62" stroke-width="0.9"/></g>
+<line x1="58" y1="62" x2="86" y2="70" stroke="#9aa8a0" stroke-width="0.8"/><text x="96" y="73" font-size="8" fill="#5a6b62" text-anchor="middle">幼苗</text>
+<text x="54" y="18" font-size="8" fill="#5a6b62" text-anchor="middle">葉緣缺刻</text>
+</svg></div></td></tr>
+</table></div>
+</div>
+
+<div class="blk">
+<h4>二、蛋的觀察</h4>
+<p>1. <b>雞蛋各部位的構造及功能</b></p>
+<div class="mtabwrap"><table class="ctab">
+<tr><th>　</th><th>功能</th><th>產生處</th><th>圖示</th></tr>
+<tr><td class="h">小白點</td><td>內含卵細胞的<i class="hl">細胞核</i>，受精後發育成新個體。</td><td class="c" rowspan="3">卵巢</td><td rowspan="7"><div class="fig"><svg width="320" viewBox="0 0 320 170" role="img" aria-label="雞蛋的構造：蛋殼、殼膜、氣室、蛋白、繫帶、卵黃膜、卵黃與小白點">
+<defs>
+<marker id="p1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#e8663c"/></marker>
+<marker id="p2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><polygon points="0,0 7,3.5 0,7" fill="#8d9a93"/></marker>
+<marker id="p3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0,0 6,3 0,6" fill="#3d9bd4"/></marker>
+</defs>
+<ellipse cx="150" cy="86" rx="92" ry="64" fill="#fdf6ea" stroke="#c9b48e" stroke-width="2"/>
+<ellipse cx="150" cy="86" rx="86" ry="58" fill="#e8f3fa" stroke="#9fc4d8" stroke-width="1.2"/>
+<path d="M64,86 q0,-30 16,-44 q-18,30 -16,44 q-2,16 16,44 q-16,-14 -16,-44 z" fill="#d8ecf6" stroke="#9fc4d8" stroke-width="1.1"/>
+<circle cx="152" cy="86" r="30" fill="#f2c94c" stroke="#c89a2a" stroke-width="1.4"/>
+<circle cx="152" cy="86" r="26" fill="#f6d45e"/>
+<circle cx="152" cy="62" r="4.5" fill="#fff" stroke="#c89a2a" stroke-width="1"/>
+<path d="M122,86 q-16,-8 -30,0 q14,8 30,0 z" fill="#eaf5fb" stroke="#9fc4d8" stroke-width="1.1"/>
+<path d="M182,86 q16,-8 30,0 q-14,8 -30,0 z" fill="#eaf5fb" stroke="#9fc4d8" stroke-width="1.1"/>
+<line x1="150" y1="24" x2="196" y2="12" stroke="#9aa8a0" stroke-width="0.8"/><text x="222" y="15" font-size="9" fill="#5a6b62" text-anchor="start">殼膜</text>
+<line x1="152" y1="58" x2="212" y2="36" stroke="#9aa8a0" stroke-width="0.8"/><text x="238" y="39" font-size="9" fill="#5a6b62" text-anchor="start">小白點</text>
+<line x1="170" y1="80" x2="224" y2="70" stroke="#9aa8a0" stroke-width="0.8"/><text x="250" y="73" font-size="9" fill="#5a6b62" text-anchor="start">卵黃</text>
+<line x1="176" y1="104" x2="224" y2="112" stroke="#9aa8a0" stroke-width="0.8"/><text x="250" y="115" font-size="9" fill="#5a6b62" text-anchor="start">卵黃膜</text>
+<line x1="78" y1="60" x2="40" y2="44" stroke="#9aa8a0" stroke-width="0.8"/><text x="34" y="41" font-size="9" fill="#5a6b62" text-anchor="end">蛋殼</text>
+<line x1="108" y1="118" x2="56" y2="134" stroke="#9aa8a0" stroke-width="0.8"/><text x="50" y="137" font-size="9" fill="#5a6b62" text-anchor="end">蛋白</text>
+<line x1="104" y1="86" x2="56" y2="96" stroke="#9aa8a0" stroke-width="0.8"/><text x="50" y="99" font-size="9" fill="#5a6b62" text-anchor="end">繫帶</text>
+<line x1="70" y1="86" x2="26" y2="72" stroke="#9aa8a0" stroke-width="0.8"/><text x="20" y="69" font-size="9" fill="#5a6b62" text-anchor="end">氣室</text>
+<path d="M258,124 q6,0 6,8 q0,8 6,8 q-6,0 -6,8 q0,8 -6,8" fill="none" stroke="#9aa8a0" stroke-width="1"/>
+<text x="292" y="140" font-size="9" fill="#d4548a" text-anchor="middle">卵細胞</text>
+<line x1="182" y1="86" x2="256" y2="128" stroke="#9aa8a0" stroke-width="0.8"/>
+<line x1="180" y1="108" x2="256" y2="152" stroke="#9aa8a0" stroke-width="0.8"/>
+</svg></div></td></tr>
+<tr><td class="h">卵黃</td><td>卵細胞的<i class="hl">細胞質</i>，提供胚胎發育所需<b>養分</b>。</td></tr>
+<tr><td class="h">卵黃膜</td><td>細胞膜</td></tr>
+<tr><td class="h">繫帶</td><td>固定卵細胞位置</td><td class="c" rowspan="3">輸卵管</td></tr>
+<tr><td class="h">蛋白</td><td>提供胚胎發育所需養分</td></tr>
+<tr><td class="h">蛋殼</td><td>保護</td></tr>
+<tr><td class="h">氣室</td><td>提供胚胎氧氣</td><td class="c">—</td></tr>
+</table></div>
+<div class="box tip"><span class="bt">小提示</span>
+<p>1. 蛋殼並非密閉狀態，蛋白的水分會慢慢從蛋殼上的小孔蒸發，使<i class="hl">蛋白體積縮小、氣室變大</i>，所以越不新鮮的蛋氣室越大，放在水裡就容易浮起來。</p>
+<p>2. 已交配的母雞產下<b>受精蛋（2n）</b>，可孵出小雞；未交配的母雞也能產下<b>未受精蛋（n）</b>，但不能孵出小雞。</p>
+</div>
+</div>
+
+<div class="blk">
+<h4>三、花的觀察</h4>
+<p>1. <b>觀察花的外形</b>：利用視覺、嗅覺觀察，若花朵顏色鮮豔、具有香氣，可初步判斷為<i class="hl">蟲媒花</i>。</p>
+<p>2. <b>觀察花粉</b><br>
+（1）花粉粒微小，通常須用<i class="hl">複式顯微鏡</i>觀察。<br>
+（2）花粉粒的外形、顏色和花紋會因植物種類的不同而有差異。</p>
+<p>3. <b>觀察子房與胚珠</b><br>
+（1）須切開雌蕊基部膨大處（<b>子房</b>），以觀察胚珠；可用<i class="hl">解剖顯微鏡</i>觀察。<br>
+（2）有些植物的花，子房中只有一個胚珠（<b>單胚珠</b>）；有些植物的花，子房中有多個胚珠（<b>多胚珠</b>）。</p>
+<div class="figrow"><div class="fig"><div class="mt">單胚珠</div><svg width="90" viewBox="0 0 90 80" role="img" aria-label="單胚珠的子房剖面">
+<path d="M45,20 q-15,0 -15,22 q0,24 15,24 q15,0 15,-24 q0,-22 -15,-22 z" fill="#f6cfd8" stroke="#c97f96" stroke-width="1.3"/>
+<rect x="42" y="4" width="6" height="18" rx="3" fill="#f0bfcc" stroke="#c97f96" stroke-width="1"/>
+<ellipse cx="45" cy="44" rx="7" ry="8" fill="#d4548a"/>
+<text x="12" y="34" font-size="8" fill="#5a6b62">子房</text>
+<text x="8" y="60" font-size="8" fill="#5a6b62">胚珠</text>
+<line x1="28" y1="31" x2="33" y2="34" stroke="#9aa8a0" stroke-width="0.8"/>
+<line x1="26" y1="57" x2="36" y2="48" stroke="#9aa8a0" stroke-width="0.8"/>
+</svg></div><div class="fig"><div class="mt">多胚珠</div><svg width="90" viewBox="0 0 90 80" role="img" aria-label="多胚珠的子房剖面">
+<path d="M45,20 q-15,0 -15,22 q0,24 15,24 q15,0 15,-24 q0,-22 -15,-22 z" fill="#f6cfd8" stroke="#c97f96" stroke-width="1.3"/>
+<rect x="42" y="4" width="6" height="18" rx="3" fill="#f0bfcc" stroke="#c97f96" stroke-width="1"/>
+<circle cx="38" cy="38" r="3.6" fill="#d4548a"/><circle cx="52" cy="38" r="3.6" fill="#d4548a"/><circle cx="38" cy="50" r="3.6" fill="#d4548a"/><circle cx="52" cy="50" r="3.6" fill="#d4548a"/><circle cx="45" cy="56" r="3.6" fill="#d4548a"/>
+<text x="12" y="34" font-size="8" fill="#5a6b62">子房</text>
+<text x="8" y="60" font-size="8" fill="#5a6b62">胚珠</text>
+<line x1="28" y1="31" x2="33" y2="34" stroke="#9aa8a0" stroke-width="0.8"/>
+<line x1="26" y1="57" x2="36" y2="48" stroke="#9aa8a0" stroke-width="0.8"/>
+</svg></div></div>
 </div>`;
 
 const SUBJECTS=[
@@ -3033,8 +3544,10 @@ const SUBJECTS=[
  {n:6,t:"生殖",ps:[
   {n:1,t:"染色體與細胞分裂",p:90,tg:[],hot:5,un:1,c:null},
   {n:2,t:"生殖的方式",p:92,tg:[],hot:4,un:1,c:U6_2},
-  {n:3,t:"無性生殖",p:93,tg:["實驗1"],hot:4,c:null},
-  {n:4,t:"有性生殖",p:95,tg:["實驗2","實驗3"],hot:5,c:null}]},
+  {n:3,t:"無性生殖",p:93,tg:["實驗1"],hot:4,c:U6_3},
+  {n:4,t:"有性生殖",p:95,tg:["實驗2","實驗3"],hot:5,c:U6_4},
+  {n:5,t:"人類的生殖",p:100,tg:[],hot:5,un:1,c:U6_5},
+  {n:6,t:"實驗整理",p:102,tg:["實驗1","實驗2","實驗3"],hot:3,un:1,c:U6_6}]},
  {n:7,t:"遺傳",ps:[
   {n:1,t:"基因與遺傳",p:105,tg:[],c:null},
   {n:2,t:"遺傳法則",p:106,tg:[],c:null},
