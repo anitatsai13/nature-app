@@ -17,9 +17,14 @@ const code = t.slice(s, e);
 try { new Function(code); ok('script 語法檢查通過（' + code.length + ' 字元）'); }
 catch (err) { ng('script 語法錯誤：' + err.message); process.exit(1); }
 
-/* 2. 亂碼 */
-const cyr = t.match(/[Ѐ-ӿͰ-Ͽ]/g);
-cyr ? ng('西里爾/希臘字母：' + [...new Set(cyr)].join('')) : ok('無西里爾／希臘亂碼');
+/* 2. 亂碼
+   西里爾字母一律是亂碼；希臘字母則要放行理化常用的符號（Δ 變化量、π、μ、Ω、θ、α、β、γ、λ、ρ…），
+   只攔截其餘的希臘字母（那通常才是打錯或貼錯造成的）。 */
+const SCI_GREEK = 'ΔπμΩθαβγλρΣφωεσν';
+const cyr = t.match(/[Ѐ-ӿ]/g);
+cyr ? ng('西里爾字母（亂碼）：' + [...new Set(cyr)].join('')) : ok('無西里爾亂碼');
+const gk = (t.match(/[Ͱ-Ͽ]/g) || []).filter(c => SCI_GREEK.indexOf(c) < 0);
+gk.length ? ng('非理化常用的希臘字母：' + [...new Set(gk)].join('')) : ok('希臘字母僅出現理化常用符號');
 const simp = t.match(/[们这个说时华动过来线济应为压题图纪义质变还产种够离]/g);
 simp ? ng('簡體字：' + [...new Set(simp)].join('')) : ok('無簡體字');
 
