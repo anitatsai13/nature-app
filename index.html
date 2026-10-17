@@ -77,6 +77,7 @@ header .sub{color:var(--muted);font-size:.85rem;margin-top:4px;letter-spacing:.0
 .pgl{font-weight:900;font-size:1rem}
 .pgst{font-size:.78rem;font-weight:800;padding:2px 9px;border-radius:99px;white-space:nowrap}
 .pgst.done{background:#e3f4e4;color:var(--ok)}.pgst.doing{background:#fff3dc;color:#b06f00}.pgst.todo{background:var(--chip);color:var(--muted)}
+.pgst.old{background:#edf1f6;color:#5b6f86}
 .pginfo{font-size:.83rem;color:var(--muted);font-weight:700}
 .pgmis{font-size:.83rem;font-weight:800;color:var(--bad);margin-left:auto}
 .pgmis.none{color:var(--muted);font-weight:700}
@@ -12831,16 +12832,15 @@ window.wImport=function(){
   i.click();
 };
 window.wRetest=function(k){
-  const qs=(UNITS[k]&&UNITS[k].qs)||[];
-  const keys=new Set(loadM().filter(r=>r.sub===k).map(r=>r.qk));
-  const pool=qs.filter(q=>keys.has(qKey(q)));
+  /* 每筆錯題用 qFind 找回「當初那一題」（題目 key＋重點＋當時的正解），同一題只出一次；找不到的略過 */
+  const rc=wRetestPool(k), pool=rc.pool;
   if(!pool.length)return alert("\u9019\u4e9b\u932f\u984c\u5c0d\u61c9\u4e0d\u5230\u73fe\u6709\u984c\u76ee\u3002");
   if(unit!==k){unit=k;secSel="all";diffSel="all";tocOpen=false;renderUnits();renderLearn();renderChips();renderList();renderToc();}
   document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
   document.querySelector('.tab[data-tab="quiz"]').classList.add("active");
   document.querySelectorAll(".pane").forEach(p=>p.classList.remove("show"));
   $("#pane-quiz").classList.add("show");
-  qStart(pool);
+  qStart(pool,"錯題重測"+(rc.miss?"（"+rc.miss+" 筆找不到原題，略過）":""));
   window.scrollTo({top:0,behavior:"instant"});
 };
 function renderWrong(){
@@ -12866,10 +12866,10 @@ function renderWrong(){
   const groups={};shown.forEach(r=>{(groups[r.sub]=groups[r.sub]||[]).push(r);});
   Object.keys(groups).forEach(k=>{
     h+='<div class="wgrp"><span class="wgn">'+esc((UNITS[k]?UNITS[k].icon+" "+UNITS[k].name:k))+'\u3000'+groups[k].length+' \u7b46</span>'+
-       '<button class="btn primary sm" onclick="wRetest(\''+k+'\')">\ud83d\udd01 \u91cd\u6e2c\u9019\u4e9b\u932f\u984c</button></div>';
+       '<button class="btn primary sm" onclick="wRetest(\''+k+'\')">\ud83d\udd01 \u91cd\u6e2c\u9019\u4e9b\u932f\u984c'+wRetestCount(k)+'</button></div>';
     groups[k].forEach(r=>{
       h+='<div class="wrec"><div class="wtop">'+
-         (r.un?'<span class="wu">'+esc((r.vol?r.vol+" ":"")+"\u7b2c "+r.un+" \u55ae\u5143")+'</span>':'')+
+         wUnitTag(r)+
          '<span class="topic">'+esc(r.sec||"")+(r.diff?"\u30fb"+esc(r.diff):"")+'</span>'+
          (r.src?'<span class="topic">'+esc(r.src)+'</span>':'')+
          '<span class="wt">'+esc(String(r.t).slice(0,10))+'</span></div>'+
@@ -12982,6 +12982,33 @@ function pgIndex(){
   });
   return PG_IDX;
 }
+/* 錯題本紀錄 → 原題：先比 qk（含舊版 key：未去掉附圖標記的前 60 字），撞 key 時再用重點、當時的正解分辨 */
+let QK_MAP=null;
+function qCorrect(q){return "（"+"ＡＢＣＤ"[q.ans]+"）"+q.opts[q.ans];}
+function qFind(r){
+  if(!r||!UNITS[r.sub])return null;
+  QK_MAP=QK_MAP||{};
+  const m=QK_MAP[r.sub]||(QK_MAP[r.sub]=(()=>{const o={};UNITS[r.sub].qs.forEach(q=>{const s=String(q.q);
+    [qKey(q),s.replace(/⟦[^⟧]*⟧/g,"").slice(0,60),s.slice(0,60)].forEach(k=>{const a=o[k]||(o[k]=[]);if(a.indexOf(q)<0)a.push(q);});});return o;})());
+  let c=m[r.qk]||[];
+  if(c.length>1){const x=c.filter(q=>qKey(q)===r.qk);if(x.length)c=x;}
+  if(c.length>1&&r.sec){const x=c.filter(q=>q.sec===r.sec);if(x.length)c=x;}
+  if(c.length>1&&r.correct){const x=c.filter(q=>qCorrect(q)===r.correct);if(x.length)c=x;}
+  return c[0]||null;
+}
+function wRetestPool(k){
+  const pool=[],seen=new Set();let miss=0;
+  loadM().filter(r=>r.sub===k).forEach(r=>{const q=qFind(r);if(!q){miss++;return;}if(!seen.has(q)){seen.add(q);pool.push(q);}});
+  return {pool:pool,miss:miss};
+}
+function wRetestCount(k){const rc=wRetestPool(k);return "（"+rc.pool.length+" 題"+(rc.miss?"，"+rc.miss+" 筆找不到原題":"")+"）";}
+/* 錯題本每筆的「冊・單元」標籤：依原題目前所在單元（舊紀錄的 un 對同名重點「實驗整理」會歸錯） */
+function wUnitTag(r){
+  const q=qFind(r),X=pgIndex()[r.sub],h=q&&X&&X.byKey[qKey(q)];
+  const vol=h?h.o.vol:r.vol,n=h?h.o.u.n:r.un;
+  if(!n)return "";
+  return '<span class="wu">'+esc((vol?vol+" ":"")+(typeof n==="number"?"第 "+n+" 單元":n))+'</span>';
+}
 function progQ(sub,q,ok){const X=pgIndex()[sub];if(!X)return;const k=qKey(q),h=X.byKey[k];if(h)progLog(h.o.g,h.o.id,k,ok);}
 function pgUnitLabel(o){return typeof o.u.n==="number"?"單元 "+o.u.n+"・"+o.u.t:o.u.t;}
 /* 群組＝科目×冊，依 SUBJECTS 順序；沒有題目的單元／冊不列 */
@@ -13002,27 +13029,74 @@ function pgOldBest(o){
     if(secs.some(s=>k.indexOf("nat_best_"+sub+"_"+s+"_")===0)){const v=+localStorage.getItem(k)||0;if(v>best)best=v;}}}catch(e){}
   return best;
 }
-/* 錯題本每一筆依 科目＋qk 歸到「群組｜單元」；fixed＝錯了之後又答對過 */
+/* 功能上線前的紀錄（只在畫面上計算，不寫進進度、不上雲端，所以不會重複計算）
+   1. 錯題本（PG_SINCE 之前）：每筆＝那一題答過一次、答錯。
+   2. 舊測驗紀錄（nat_log_v1，PG_SINCE 之前）：範圍＝「重點或全部｜難度」，測驗一定出整個範圍；
+      若題數 n 等於該範圍目前的題數、且該次（round＝t）的錯題都在範圍內 → 範圍內每題都答過一次，
+      該次錯題本裡有的算錯、其餘算對（時間＝該次測驗）。
+      題數不符（題庫後來改過）→ 不推逐題，只算該重點所在單元「練習過」（舊紀錄 m 次・最佳 x%）。
+   3. nat_best_*（沒有時間）：只當「練習過」的證據（見 pgOldBest）。 */
+const PG_SINCE=Date.parse("2026-10-17T03:09:00Z");
+function pgBefore(t){const v=Date.parse(t);return !isNaN(v)&&v<PG_SINCE;}
+function pgLegacy(){
+  const I=pgIndex(),L={},ev={},stat={mis:0,logs:0,whole:0};
+  const add=(o,k,ok,t)=>{const u=L[o.g+"|"+o.id]||(L[o.g+"|"+o.id]={q:{}}),r=u.q[k]||(u.q[k]=[0,0,"",""]);
+    r[0]++;if(ok){r[1]++;if(t>r[3])r[3]=t;}if(t>r[2])r[2]=t;};
+  const byRound={};
+  loadM().filter(r=>pgBefore(r.t)).forEach(r=>{
+    const q=qFind(r),X=I[r.sub],h=q&&X&&X.byKey[qKey(q)];
+    const rk=r.sub+"|"+(r.round||"");(byRound[rk]||(byRound[rk]=[])).push(q);
+    if(!h)return;stat.mis++;add(h.o,qKey(q),false,String(r.t));});
+  loadL().filter(l=>l&&pgBefore(l.t)&&I[l.sub]).forEach(l=>{
+    stat.logs++;
+    const sc=String(l.scope||""),i=sc.lastIndexOf("｜"),sec=i<0?sc:sc.slice(0,i),dif=i<0?"":sc.slice(i+1);
+    const allSec=sec==="全部",allDif=!dif||dif==="不限難度";
+    const items=[];I[l.sub].units.forEach(o=>o.items.forEach(x=>{if((allSec||x.q.sec===sec)&&(allDif||x.q.diff===dif))items.push({o:o,x:x});}));
+    const rm=byRound[l.sub+"|"+l.t]||[];
+    const inScope=rm.every(q=>q&&items.some(y=>y.x.q===q));
+    if(!items.length||!inScope)return;
+    if(+l.n===items.length){
+      stat.whole++;const wrong=new Set(rm);
+      items.forEach(y=>{if(!wrong.has(y.x.q))add(y.o,y.x.k,true,String(l.t));});
+    }else if(!allSec){
+      new Set(items.map(y=>y.o)).forEach(o=>{const k=o.g+"|"+o.id,e=ev[k]||(ev[k]={n:0,best:0,last:""});
+        e.n++;if(+l.pct>e.best)e.best=+l.pct;if(String(l.t)>e.last)e.last=String(l.t);});
+    }
+  });
+  return {L:L,ev:ev,stat:stat};
+}
+/* 進度＋舊紀錄：次數相加、時間取最新 */
+function pgCombine(a,b){
+  const o=JSON.parse(JSON.stringify(a||{}));
+  Object.keys(b||{}).forEach(k=>{const ua=o[k]||(o[k]={q:{}}),ma=ua.q||(ua.q={}),mb=(b[k]&&b[k].q)||{};
+    Object.keys(mb).forEach(i=>{const x=ma[i],y=mb[i];
+      ma[i]=x?[x[0]+y[0],x[1]+y[1],(x[2]||"")>(y[2]||"")?x[2]:y[2],(x[3]||"")>(y[3]||"")?x[3]:y[3]]:y.slice();});});
+  return o;
+}
+/* 錯題本每一筆依原題歸到「群組｜單元」；fixed＝錯了之後又答對過（進度或舊紀錄） */
 function progMisIndex(P){
   const I=pgIndex(),idx={},stat={all:0,placed:0,lost:0};
   loadM().forEach(r=>{stat.all++;
-    const X=I[r.sub],h=X&&X.byKey[r.qk];if(!h){stat.lost++;return;}stat.placed++;
-    const key=h.o.g+"|"+h.o.id,m=idx[key]||(idx[key]={});
-    const it=m[r.qk]||(m[r.qk]={k:r.qk,q:h.q,n:0,last:""});
+    const q=qFind(r),X=I[r.sub],h=q&&X&&X.byKey[qKey(q)];if(!h){stat.lost++;return;}stat.placed++;
+    const k=qKey(q),key=h.o.g+"|"+h.o.id,m=idx[key]||(idx[key]={});
+    const it=m[k]||(m[k]={k:k,q:q,n:0,last:""});
     it.n++;const t=String(r.t||"");if(t>it.last)it.last=t;});
   Object.keys(idx).forEach(key=>{const u=(P[key]&&P[key].q)||{};
     Object.values(idx[key]).forEach(it=>{const a=u[it.k];it.fixed=!!(a&&a[3])&&a[3]>it.last;});});
   return {idx:idx,stat:stat};
 }
-function progLessonStat(o,P,MI){
+function progLessonStat(o,P,MI,LG){
   const key=o.g+"|"+o.id,u=(P[key]&&P[key].q)||{};
   let seen=0,tries=0,right=0,last="";
   o.items.forEach(x=>{const r=u[x.k];if(r&&r[0]){seen++;tries+=r[0];right+=r[1];if(r[2]>last)last=r[2];}});
   const mis=Object.values(MI.idx[key]||{}).sort((x,y)=>(x.fixed-y.fixed)||(y.n-x.n)||(x.last<y.last?1:x.last>y.last?-1:0));
   mis.forEach(m=>{if(m.last>last)last=m.last;});
-  const n=o.items.length,pending=mis.filter(m=>!m.fixed).length,old=pgOldBest(o);
-  const st=(n&&seen>=n)?"done":(seen||old||mis.length)?"doing":"todo";
-  return {key:key,label:pgUnitLabel(o),n:n,seen:seen,tries:tries,right:right,last:last,mis:mis,pending:pending,old:old,st:st};
+  const ev=(LG&&LG.ev[key])||null, lq=LG&&LG.L[key]&&LG.L[key].q;
+  const legacy=!!ev||!!(lq&&Object.keys(lq).length);
+  if(ev&&ev.last>last)last=ev.last;
+  const n=o.items.length,pending=mis.filter(m=>!m.fixed).length,old=Math.max(pgOldBest(o),ev?ev.best:0);
+  const st=(n&&seen>=n)?"done":(seen||old||ev||mis.length)?"doing":"todo";
+  return {key:key,label:pgUnitLabel(o),n:n,seen:seen,tries:tries,right:right,last:last,mis:mis,pending:pending,old:old,ev:ev,legacy:legacy,st:st};
 }
 function progFmt(iso){if(!iso)return "";const d=new Date(iso);return isNaN(d)?"":(d.getMonth()+1)+"/"+d.getDate();}
 function pgPlain(s,n){
@@ -13047,14 +13121,16 @@ function renderProgress(){
   const host=$("#pbox");if(!host)return;
   const G=pgGroups();
   if(!G.length){host.innerHTML='<p class="stat" style="margin-top:24px;text-align:center">題庫還沒有題目，先到「學習重點」複習吧 🌱</p>';return;}
-  const P=progLoad(),MI=progMisIndex(P),MS=MI.stat,I=pgIndex();
+  const LG=pgLegacy(),P=pgCombine(progLoad(),LG.L),MI=progMisIndex(P),MS=MI.stat,I=pgIndex(),LS=LG.stat;
   if(!progGroup||!G.some(x=>x.id===progGroup))progGroup=(G.find(x=>x.sub===unit)||G[0]).id;
   let h='<div class="stat" style="margin:4px 0 10px">每答一題就會記錄。<b>完成</b>＝這個單元每一題都答過至少一次；<b>練習中</b>＝已開始但還沒全部答過；錯題「已訂正」＝錯了之後又答對過。'+
     (CLOUD?(loggedIn()?'　☁ 已登入，進度會同步到雲端。':'　在「錯題本」分頁登入後，進度也會同步到雲端。'):'')+'</div>';
   if(MS.all)h+='<div class="stat" style="margin:-4px 0 10px">📕 已讀入錯題本 '+MS.all+' 筆，'+MS.placed+' 筆已歸到各單元'+(MS.lost?'（'+MS.lost+' 筆的題目已不在題庫，略過）':'')+'。</div>';
+  if(LS.mis||LS.logs)h+='<div class="stat" style="margin:-4px 0 10px">📜 已納入功能上線前的紀錄：錯題本 '+LS.mis+' 筆、舊測驗 '+LS.logs+' 次'+
+    (LS.logs?'（其中 '+LS.whole+' 次能確認逐題對錯；其餘只算「練習過」）':'')+'。</div>';
   const lost=Object.keys(I).reduce((n,k)=>n+I[k].lost,0);
   if(lost)h+='<div class="stat" style="margin:-4px 0 10px">（題庫有 '+lost+' 題對應不到單元，未列入）</div>';
-  const S={}, st=o=>S[o.g+"|"+o.id]||(S[o.g+"|"+o.id]=progLessonStat(o,P,MI));
+  const S={}, st=o=>S[o.g+"|"+o.id]||(S[o.g+"|"+o.id]=progLessonStat(o,P,MI,LG));
   h+='<div class="pgcards">'+G.map((g,gi)=>{
     let d=0,i=0,pend=0;
     g.units.forEach(o=>{const s=st(o);if(s.st==="done")d++;else if(s.st==="doing")i++;pend+=s.pending;});
@@ -13069,9 +13145,10 @@ function renderProgress(){
     const s=st(o);
     const badge=s.st==="done"?'<span class="pgst done">✅ 完成</span>':s.st==="doing"?'<span class="pgst doing">🟡 練習中</span>':'<span class="pgst todo">⬜ 未開始</span>';
     const info=['已答 '+s.seen+'／'+s.n+' 題','答對率 '+(s.tries?Math.round(s.right/s.tries*100)+'%':'—')];
-    if(s.old&&!s.tries)info.push('舊紀錄最佳 '+s.old+'%');
+    if(s.ev)info.push('舊紀錄 '+s.ev.n+' 次・最佳 '+s.old+'%');
+    else if(s.old&&!s.tries)info.push('舊紀錄最佳 '+s.old+'%');
     if(s.last)info.push('最近 '+progFmt(s.last));
-    h+='<details class="pgles"'+(s.pending?' open':'')+'><summary><span class="pgl">'+esc(s.label)+'</span>'+badge+
+    h+='<details class="pgles"'+(s.pending?' open':'')+'><summary><span class="pgl">'+esc(s.label)+'</span>'+badge+(s.legacy?'<span class="pgst old">含舊紀錄</span>':'')+
       '<span class="pgbar sm"><i style="width:'+(s.n?Math.round(s.seen/s.n*100):0)+'%"></i></span>'+
       '<span class="pginfo">'+info.join('　')+'</span>'+
       '<span class="pgmis'+(s.mis.length?'':' none')+'">'+(s.mis.length?'❌ 錯題 '+s.mis.length+(s.pending?'（待訂正 '+s.pending+'）':'（都已訂正）'):'沒有錯題')+'</span></summary>'+
